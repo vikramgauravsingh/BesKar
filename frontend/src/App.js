@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import './App.css';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || window.location.origin;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 
 // Smooth scroll hook
 const useSmoothScroll = () => {
