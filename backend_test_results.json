@@ -1,0 +1,34 @@
+{
+  "summary": {
+    "total_tests": 4,
+    "passed_tests": 4,
+    "success_rate": "100.0%",
+    "timestamp": "2026-01-28T05:42:40.685758"
+  },
+  "test_results": [
+    {
+      "test": "Health Check",
+      "success": true,
+      "details": "Status: 200, Response: {'status': 'healthy', 'message': 'This is the way'}",
+      "timestamp": "2026-01-28T05:42:40.661922"
+    },
+    {
+      "test": "Contact Form Submission",
+      "success": true,
+      "details": "Contact saved with ID: 6979a1d0ac103d5990671075",
+      "timestamp": "2026-01-28T05:42:40.680563"
+    },
+    {
+      "test": "Contact Form Validation",
+      "success": true,
+      "details": "Properly rejected invalid data",
+      "timestamp": "2026-01-28T05:42:40.683299"
+    },
+    {
+      "test": "Get Contacts",
+      "success": true,
+      "details": "Retrieved 1 contacts",
+      "timestamp": "2026-01-28T05:42:40.685600"
+    }
+  ]
+}
