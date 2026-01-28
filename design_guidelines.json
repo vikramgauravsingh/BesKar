@@ -1,0 +1,136 @@
+{
+  "design_system": {
+    "typography": {
+      "font_family": {
+        "heading": "Outfit, sans-serif",
+        "body": "Manrope, sans-serif",
+        "mono": "JetBrains Mono, monospace"
+      },
+      "scale": {
+        "h1": "text-6xl md:text-8xl font-bold tracking-tighter",
+        "h2": "text-4xl md:text-6xl font-semibold tracking-tight",
+        "h3": "text-2xl md:text-4xl font-medium",
+        "body": "text-base md:text-lg leading-relaxed text-slate-400"
+      }
+    },
+    "colors": {
+      "theme": "dark",
+      "palette": {
+        "background": {
+          "default": "#020617",
+          "paper": "#0f172a",
+          "subtle": "#1e293b"
+        },
+        "primary": {
+          "main": "#3d4f5f",
+          "light": "#94a3b8",
+          "dark": "#1e293b",
+          "contrast": "#ffffff"
+        },
+        "accent": {
+          "cyan": "#38bdf8",
+          "steel": "#64748b",
+          "glow": "rgba(56, 189, 248, 0.5)"
+        },
+        "text": {
+          "primary": "#f8fafc",
+          "secondary": "#94a3b8",
+          "muted": "#64748b"
+        }
+      }
+    },
+    "visual_enhancers": {
+      "radius": "rounded-none md:rounded-sm",
+      "shadows": {
+        "glow": "0 0 20px rgba(56, 189, 248, 0.15)",
+        "card": "0 4px 6px -1px rgba(0, 0, 0, 0.5)"
+      },
+      "borders": {
+        "subtle": "border border-slate-800",
+        "highlight": "border border-slate-600"
+      },
+      "glassmorphism": {
+        "default": "bg-slate-950/50 backdrop-blur-xl border border-white/10"
+      }
+    }
+  },
+  "layout_strategies": {
+    "grid_system": "Bento Grid (Mode A: Tetris)",
+    "spacing": "Generous (p-8 to p-32)",
+    "container": "max-w-7xl mx-auto px-4 md:px-8",
+    "sections": {
+      "hero": "Full screen, centered alignment, magnetic scroll",
+      "features": "Asymmetric grid, tracing beam borders",
+      "stats": "Large typography, animated counters",
+      "contact": "Minimalist form, glass background"
+    }
+  },
+  "motion": {
+    "library": "framer-motion",
+    "scroll": "lenis (smooth scrolling mandatory)",
+    "animations": {
+      "fade_up": {
+        "initial": { "opacity": 0, "y": 20 },
+        "whileInView": { "opacity": 1, "y": 0 },
+        "viewport": { "once": true }
+      },
+      "stagger": {
+        "container": { "staggerChildren": 0.1 }
+      },
+      "hover": {
+        "scale": 1.02,
+        "transition": { "duration": 0.2 }
+      }
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-slate-100 text-slate-900 hover:bg-white rounded-sm px-8 py-3 font-medium transition-all",
+      "outline": "border border-slate-700 text-slate-300 hover:border-slate-500 hover:text-white rounded-sm px-8 py-3 transition-all"
+    },
+    "cards": {
+      "feature": "group relative overflow-hidden bg-slate-900/50 border border-slate-800 p-8 hover:border-slate-600 transition-colors"
+    },
+    "inputs": {
+      "default": "bg-slate-950 border-slate-800 focus:border-slate-500 text-white rounded-sm"
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_bg": "https://images.unsplash.com/photo-1644670574807-4f5f78f3965d?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "nexus_preview": "https://images.unsplash.com/photo-1660836814985-8523a0d713b5?crop=entropy&cs=srgb&fm=jpg&q=85",
+      "osint_preview": "https://images.unsplash.com/photo-1675627453084-505806a00406?crop=entropy&cs=srgb&fm=jpg&q=85"
+    },
+    "icons": "lucide-react (Shield, Lock, Globe, Activity, CheckCircle, Server)"
+  },
+  "instructions_to_main_agent": [
+    "Implement Lenis smooth scrolling immediately in the root layout.",
+    "Use the 'Outfit' font for all headings and 'Manrope' for body text. Import from Google Fonts.",
+    "The 'Beskar' theme means using the steel blue (#3d4f5f) as a subtle structural color, not a primary button color. Use White/Off-white for primary actions to create contrast against the dark background.",
+    "For the 'Tracing Beam' effect on cards: Use a motion div that follows the border path or a simple gradient border that rotates.",
+    "The 'Impact Stats' section should use massive typography (text-8xl) for the numbers.",
+    "Ensure the Contact Form uses Shadcn components but styled to match the dark/glass theme.",
+    "Do not use standard 'card' shadows. Use 'glow' effects (colored drop-shadows) sparingly.",
+    "The tagline 'This is the way' should be prominent in the Hero section, perhaps with a slow fade-in animation."
+  ],
+  "universal_guidelines": [
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯📚🎭🎬🎪🎉🎊🎁🎀🎂🍰🎈🎨🎰💰💵💳🏦💎🪙💸🤑📊📈📉💹🔢🏆🥇 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Main agent relies on these image URLs. Missing categories (especially sponsor logos) = main agent will use placeholder text which is FORBIDDEN",
+    "Prioritize using pre-existing components from src/components/ui when applicable",
+    "Create new components that match the style and conventions of existing components when needed",
+    "Examine existing components to understand the project's component patterns before creating new ones",
+    "Components MUST use named exports (export const ComponentName = ...)",
+    "Pages MUST use default exports (export default function PageName() {...})",
+    "Use sonner for toasts. Sonner component are located in /app/src/components/ui/sonner.tsx"
+  ]
+}
