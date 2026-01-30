@@ -1,34 +1,34 @@
 {
   "summary": {
     "total_tests": 4,
-    "passed_tests": 0,
-    "success_rate": "0.0%",
-    "timestamp": "2026-01-30T05:20:33.594787"
+    "passed_tests": 4,
+    "success_rate": "100.0%",
+    "timestamp": "2026-01-30T05:21:09.111853"
   },
   "test_results": [
     {
       "test": "Health Check",
-      "success": false,
-      "details": "Status code: 404",
-      "timestamp": "2026-01-30T05:20:33.485587"
+      "success": true,
+      "details": "Status: 200, Response: {'status': 'healthy', 'message': 'This is the way'}",
+      "timestamp": "2026-01-30T05:21:09.085954"
     },
     {
       "test": "Support Email Endpoint",
-      "success": false,
-      "details": "Status code: 404",
-      "timestamp": "2026-01-30T05:20:33.519397"
+      "success": true,
+      "details": "Email: support@beskarit.com",
+      "timestamp": "2026-01-30T05:21:09.087539"
     },
     {
       "test": "Contact Form Submission",
-      "success": false,
-      "details": "Status code: 404, Response: {\"error\":\"Route not found\"}\n",
-      "timestamp": "2026-01-30T05:20:33.556479"
+      "success": true,
+      "details": "Contact saved with ID: 697c3fc50d43f264d6cfe980",
+      "timestamp": "2026-01-30T05:21:09.106554"
     },
     {
       "test": "Contact Form Validation",
-      "success": false,
-      "details": "Expected 422, got 404",
-      "timestamp": "2026-01-30T05:20:33.593828"
+      "success": true,
+      "details": "Properly rejected invalid data",
+      "timestamp": "2026-01-30T05:21:09.111666"
     }
   ]
 }
