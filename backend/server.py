@@ -81,6 +81,8 @@ async def send_notification_email(form: ContactForm):
     </html>
     """
     
+    # Note: In Resend testing mode, emails can only be sent to verified email addresses
+    # Once you verify a domain at resend.com/domains, change SENDER_EMAIL and SUPPORT_EMAIL
     params = {
         "from": SENDER_EMAIL,
         "to": [SUPPORT_EMAIL],
@@ -94,7 +96,11 @@ async def send_notification_email(form: ContactForm):
         logger.info(f"Notification email sent successfully. ID: {email.get('id')}")
         return email.get("id")
     except Exception as e:
-        logger.error(f"Failed to send notification email: {str(e)}")
+        error_msg = str(e)
+        if "verify a domain" in error_msg.lower() or "testing emails" in error_msg.lower():
+            logger.warning(f"Resend in testing mode - verify domain at resend.com/domains to send to {SUPPORT_EMAIL}")
+        else:
+            logger.error(f"Failed to send notification email: {error_msg}")
         return None
 
 
