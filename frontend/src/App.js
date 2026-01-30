@@ -28,7 +28,8 @@ import {
   Briefcase,
   Target,
   Zap,
-  Mail
+  Mail,
+  ArrowLeft
 } from 'lucide-react';
 import './App.css';
 
@@ -81,7 +82,7 @@ const useCounter = (end, duration = 2000, inView) => {
 };
 
 // Navigation Component
-const Navigation = () => {
+const Navigation = ({ currentPage, setCurrentPage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
@@ -99,6 +100,19 @@ const Navigation = () => {
     { name: 'Contact', href: '#contact' },
   ];
 
+  const handleNavClick = (e, href) => {
+    if (currentPage !== 'home') {
+      e.preventDefault();
+      setCurrentPage('home');
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
   return (
     <nav 
       data-testid="main-navigation"
@@ -107,7 +121,12 @@ const Navigation = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3" data-testid="logo-link">
+        <a 
+          href="#" 
+          className="flex items-center gap-3" 
+          data-testid="logo-link"
+          onClick={(e) => { e.preventDefault(); setCurrentPage('home'); window.scrollTo(0, 0); }}
+        >
           <img 
             src="https://customer-assets.emergentagent.com/job_04619072-dd18-466a-b051-872e26ea17cf/artifacts/8uottcra_logo.png" 
             alt="Beskar IT" 
@@ -123,6 +142,7 @@ const Navigation = () => {
               href={item.href} 
               className="nav-link text-slate-400 hover:text-white transition-colors font-medium"
               data-testid={`nav-${item.name.toLowerCase()}`}
+              onClick={(e) => handleNavClick(e, item.href)}
             >
               {item.name}
             </a>
@@ -131,6 +151,7 @@ const Navigation = () => {
             href="#contact" 
             className="btn-primary bg-slate-100 text-slate-900 hover:bg-white px-6 py-2.5 font-medium transition-colors"
             data-testid="nav-cta"
+            onClick={(e) => handleNavClick(e, '#contact')}
           >
             Get Started
           </a>
@@ -158,7 +179,7 @@ const Navigation = () => {
               key={item.name}
               href={item.href} 
               className="block py-3 text-slate-300 hover:text-white transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => { handleNavClick(e, item.href); setMobileMenuOpen(false); }}
             >
               {item.name}
             </a>
@@ -166,7 +187,7 @@ const Navigation = () => {
           <a 
             href="#contact" 
             className="block mt-4 bg-slate-100 text-slate-900 text-center py-3 font-medium"
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={(e) => { handleNavClick(e, '#contact'); setMobileMenuOpen(false); }}
           >
             Get Started
           </a>
@@ -282,6 +303,17 @@ const HeroSection = () => {
 
 // Product Detail Modal
 const ProductDetailModal = ({ product, isOpen, onClose }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
   if (!isOpen || !product) return null;
 
   return (
@@ -290,7 +322,7 @@ const ProductDetailModal = ({ product, isOpen, onClose }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+        className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
         onClick={onClose}
         data-testid={`modal-${product.id}`}
       >
@@ -472,6 +504,10 @@ const ProductsSection = () => {
     }
   ];
 
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+  };
+
   return (
     <section 
       id="products" 
@@ -504,7 +540,7 @@ const ProductsSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              onClick={() => setSelectedProduct(product)}
+              onClick={() => handleProductClick(product)}
               data-testid={`product-${product.id}`}
             >
               <div className="aspect-video relative overflow-hidden">
@@ -682,6 +718,12 @@ const ComplianceSection = () => {
       items: ["ISO 42001", "NIST AI RMF", "EU AI Act"],
       icon: Zap,
       description: "Frameworks for artificial intelligence governance"
+    },
+    { 
+      category: "Unified Framework", 
+      items: ["USPCF"],
+      icon: Layers,
+      description: "Unified Security & Privacy Control Framework - 63 controls across 11 domains mapped to HIPAA, PCI DSS, GDPR, ISO 27001, SOC 2"
     },
     { 
       category: "Privacy Regulations", 
@@ -926,13 +968,13 @@ const ContactSection = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setStatus({ type: 'success', message: `Thank you for reaching out. We'll contact you at ${SUPPORT_EMAIL} soon.` });
+        setStatus({ type: 'success', message: data.message || `Thank you for reaching out. Our team at ${SUPPORT_EMAIL} will be in touch soon.` });
         setFormState({ name: '', email: '', company: '', message: '' });
       } else {
-        setStatus({ type: 'error', message: 'Something went wrong. Please try again.' });
+        setStatus({ type: 'error', message: data.detail || 'Something went wrong. Please try again.' });
       }
     } catch (error) {
-      setStatus({ type: 'error', message: 'Unable to send message. Please try again later.' });
+      setStatus({ type: 'error', message: `Unable to send message. Please email us directly at ${SUPPORT_EMAIL}` });
     }
 
     setIsSubmitting(false);
@@ -1084,8 +1126,261 @@ const ContactSection = () => {
   );
 };
 
+// Privacy Policy Page
+const PrivacyPolicyPage = ({ setCurrentPage }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="min-h-screen pt-32 pb-20" data-testid="privacy-policy-page">
+      <div className="max-w-4xl mx-auto px-6">
+        <button 
+          onClick={() => setCurrentPage('home')}
+          className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-8 transition-colors"
+          data-testid="back-to-home"
+        >
+          <ArrowLeft size={20} />
+          Back to Home
+        </button>
+
+        <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4">Privacy Policy</h1>
+        <p className="text-beskar-cyan mb-8">Effective Date: August 4, 2025</p>
+
+        <div className="prose prose-invert prose-slate max-w-none space-y-8 text-slate-300">
+          <p>
+            At Beskar IT, we are committed to protecting the privacy and security of your personal data. This Privacy Policy explains how we collect, use, disclose, and protect your personal data when you use our cybersecurity consulting services, including Vulnerability Assessment & Penetration Testing (VAPT), Secure Code Reviews, and other offerings. We adhere to the principles of the General Data Protection Regulation (GDPR) (EU) 2016/679 and other applicable data protection laws.
+          </p>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">1. Who We Are (Data Controller)</h2>
+            <p>Beskar IT, located at One Tidal Basin Road, London UK, is the data controller responsible for your personal data collected and processed under this Privacy Policy.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">2. Types of Data We Collect</h2>
+            <p>We may collect and process the following categories of personal data:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Contact Information:</strong> Name, job title, company name, email address, phone number, and postal address.</li>
+              <li><strong>Professional Information:</strong> Details related to your role, company size, industry, and business needs.</li>
+              <li><strong>Technical Data (during service delivery):</strong>
+                <ul className="list-disc pl-6 mt-2 space-y-1">
+                  <li>For VAPT: IP addresses, system configurations, network diagrams, application logs</li>
+                  <li>For Secure Code Reviews: Source code, application architecture details, development environment configurations</li>
+                  <li>General Security Assessments: Information about your IT infrastructure, security policies, and incident response procedures</li>
+                </ul>
+              </li>
+              <li><strong>Communication Data:</strong> Records of our communications with you, including emails, meeting notes, and support inquiries.</li>
+              <li><strong>Website Usage Data:</strong> Information about your interaction with our website collected via cookies and similar technologies.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">3. How We Collect Your Data</h2>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Directly from You:</strong> When you contact us for inquiries, request a quote, sign up for our services, attend our seminars, or provide information during service delivery.</li>
+              <li><strong>From Your Organization:</strong> Your employer or organization may provide us with your contact and professional information to facilitate our services.</li>
+              <li><strong>From Publicly Available Sources:</strong> We may collect information from public business directories or professional networking sites.</li>
+              <li><strong>Through Our Website:</strong> Via contact forms, subscription forms, and website analytics tools.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">4. Legal Basis for Processing</h2>
+            <p>We process your personal data based on the following legal bases under GDPR:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Performance of a Contract:</strong> To fulfill our contractual obligations with you or your organization.</li>
+              <li><strong>Legitimate Interests:</strong> To pursue our legitimate business interests, provided these do not override your fundamental rights and freedoms.</li>
+              <li><strong>Legal Obligation:</strong> To comply with applicable laws, regulations, or legal processes.</li>
+              <li><strong>Consent:</strong> Where required by law, we will obtain your explicit consent for specific processing activities.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">5. How We Use Your Data</h2>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Service Delivery:</strong> To provide, manage, and deliver our cybersecurity consulting services.</li>
+              <li><strong>Communication:</strong> To respond to your inquiries, provide customer support, and send you service-related updates.</li>
+              <li><strong>Business Operations:</strong> For internal record-keeping, billing, and administrative purposes.</li>
+              <li><strong>Marketing & Business Development:</strong> To send you information about our services, events, and insights.</li>
+              <li><strong>Service Improvement:</strong> To analyze and improve the quality, effectiveness, and security of our services.</li>
+              <li><strong>Compliance & Legal:</strong> To comply with legal obligations and protect our rights.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">6. Data Sharing and Disclosure</h2>
+            <p>We may share your personal data with:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Service Providers:</strong> Third-party vendors who assist us in delivering our services.</li>
+              <li><strong>Affiliates:</strong> Other entities within the Beskar IT group.</li>
+              <li><strong>Legal & Regulatory Authorities:</strong> When required by law or legal process.</li>
+              <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets.</li>
+            </ul>
+            <p className="mt-4">We do not sell your personal data to third parties.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">7. International Data Transfers</h2>
+            <p>When we transfer your personal data to countries outside of the European Economic Area (EEA), we ensure appropriate safeguards are in place, such as Standard Contractual Clauses (SCCs) approved by the European Commission.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">8. Data Retention</h2>
+            <p>We retain your personal data only for as long as necessary to fulfill the purposes for which it was collected, including for satisfying any legal, accounting, or reporting requirements.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">9. Data Security</h2>
+            <p>We implement robust technical and organizational measures to protect your personal data from unauthorized access, disclosure, alteration, or destruction. These measures include encryption, access controls, regular security assessments, and employee training.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">10. Your Data Protection Rights (GDPR)</h2>
+            <p>Under GDPR, you have the following rights:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Right to Access:</strong> Request a copy of the personal data we hold about you.</li>
+              <li><strong>Right to Rectification:</strong> Request correction of inaccurate or incomplete personal data.</li>
+              <li><strong>Right to Erasure:</strong> Request the deletion of your personal data under certain circumstances.</li>
+              <li><strong>Right to Restriction of Processing:</strong> Request that we limit the way we use your personal data.</li>
+              <li><strong>Right to Data Portability:</strong> Receive your personal data in a structured, commonly used format.</li>
+              <li><strong>Right to Object:</strong> Object to the processing of your personal data.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">11. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy or our data practices, please contact us at:</p>
+            <p className="mt-2">
+              <strong>Beskar IT</strong><br />
+              One Tidal Basin Road, London UK<br />
+              Email: <a href={`mailto:${SUPPORT_EMAIL}`} className="text-beskar-cyan hover:underline">{SUPPORT_EMAIL}</a>
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Terms of Service Page
+const TermsOfServicePage = ({ setCurrentPage }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="min-h-screen pt-32 pb-20" data-testid="terms-of-service-page">
+      <div className="max-w-4xl mx-auto px-6">
+        <button 
+          onClick={() => setCurrentPage('home')}
+          className="inline-flex items-center gap-2 text-slate-400 hover:text-white mb-8 transition-colors"
+          data-testid="back-to-home"
+        >
+          <ArrowLeft size={20} />
+          Back to Home
+        </button>
+
+        <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4">Terms & Conditions</h1>
+        <p className="text-beskar-cyan mb-8">Effective Date: August 4, 2025</p>
+
+        <div className="prose prose-invert prose-slate max-w-none space-y-8 text-slate-300">
+          <p>
+            Welcome to Beskar IT! These Terms & Conditions ("Terms") govern your access to and use of the services provided by Beskar IT ("we," "us," or "our"), including but not limited to Cybersecurity Consulting, Vulnerability Assessment & Penetration Testing (VAPT), Secure Code Reviews, Strategic Security Advisory, Incident Response & Resilience, and Educational & Awareness Programs (collectively, the "Services").
+          </p>
+          <p>
+            By accessing or using our Services, you agree to be bound by these Terms. If you do not agree to these Terms, you may not access or use our Services.
+          </p>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">1. Acceptance of Terms</h2>
+            <p>By engaging Beskar IT for Services, you acknowledge that you have read, understood, and agree to be bound by these Terms, as well as our Privacy Policy. These Terms constitute a legally binding agreement between you (the "Client") and Beskar IT.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">2. Description of Services</h2>
+            <p>Beskar IT provides professional cybersecurity consulting services as outlined in our service descriptions and specific proposals or statements of work ("SOW") agreed upon with the Client. Each SOW will detail the scope, deliverables, timelines, and fees for the specific Services to be rendered.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">3. Client Responsibilities</h2>
+            <p>The Client agrees to:</p>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Provide Necessary Access:</strong> Grant Beskar IT timely and secure access to systems, networks, applications, documentation, and personnel as required.</li>
+              <li><strong>Accuracy of Information:</strong> Ensure all information, data, and access credentials provided are accurate, complete, and authorized.</li>
+              <li><strong>Cooperation:</strong> Cooperate fully and promptly with Beskar IT during the delivery of Services.</li>
+              <li><strong>Legal Compliance:</strong> Ensure that operations and data provided comply with all applicable laws and regulations.</li>
+              <li><strong>Backup Data:</strong> Maintain appropriate backups of all data and systems before any testing or review activities.</li>
+              <li><strong>Authorization for Testing:</strong> Provide explicit written authorization for penetration testing on specified targets.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">4. Confidentiality</h2>
+            <p>Both Beskar IT and the Client agree to keep confidential all non-public information disclosed by one party to the other during the course of the Services. This includes technical data, business plans, financial information, customer lists, and any vulnerabilities or security findings.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">5. Intellectual Property</h2>
+            <ul className="list-disc pl-6 space-y-2">
+              <li><strong>Beskar IT Property:</strong> All methodologies, tools, templates, reports, and intellectual property developed or used by Beskar IT remain our sole property.</li>
+              <li><strong>Client Property:</strong> All Client data, systems, and intellectual property remain the sole property of the Client.</li>
+              <li><strong>Deliverables:</strong> Upon full payment, the Client will have a non-exclusive, non-transferable license to use the deliverables for internal business purposes.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">6. Payment Terms</h2>
+            <ul className="list-disc pl-6 space-y-2">
+              <li>Fees for Services will be as specified in the applicable SOW.</li>
+              <li>Invoices will be issued according to the payment schedule outlined in the SOW.</li>
+              <li>Payments are due within 30 days from the invoice date, unless otherwise specified.</li>
+              <li>Beskar IT reserves the right to charge interest on overdue amounts and suspend services for non-payment.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">7. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, Beskar IT shall not be liable for any indirect, incidental, special, consequential, or punitive damages. In no event shall the aggregate liability of Beskar IT exceed the total fees paid by the Client for the specific Services giving rise to the claim in the twelve (12) months preceding the event.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">8. Indemnification</h2>
+            <p>You agree to defend, indemnify, and hold harmless Beskar IT, its affiliates, and their respective officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, and expenses arising from your access to or use of the Services.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">9. Termination</h2>
+            <p>Either party may terminate an SOW or the provision of Services for material breach of these Terms, provided written notice of the breach is given and the breaching party fails to cure such breach within 30 days. Upon termination, the Client shall pay for all Services rendered up to the effective date of termination.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">10. Governing Law and Dispute Resolution</h2>
+            <p>These Terms shall be governed by and construed in accordance with the laws of H'ble HC UP, India. Any dispute shall be resolved through good faith negotiations, and if unresolved within 90 days, submitted to binding arbitration.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">11. Changes to These Terms</h2>
+            <p>We reserve the right to modify or replace these Terms at any time. If a revision is material, we will provide at least 90 days' notice prior to any new terms taking effect.</p>
+          </section>
+
+          <section>
+            <h2 className="font-heading text-2xl font-semibold text-white">12. Contact Us</h2>
+            <p>If you have any questions about these Terms, please contact us at:</p>
+            <p className="mt-2">
+              <strong>Beskar IT</strong><br />
+              One Tidal Basin Road, London UK<br />
+              Email: <a href={`mailto:${SUPPORT_EMAIL}`} className="text-beskar-cyan hover:underline">{SUPPORT_EMAIL}</a>
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Footer
-const Footer = () => {
+const Footer = ({ setCurrentPage }) => {
   return (
     <footer className="py-16 border-t border-slate-800" data-testid="footer">
       <div className="max-w-7xl mx-auto px-6">
@@ -1139,7 +1434,7 @@ const Footer = () => {
               <li><span className="text-slate-500">ISO 27001 / ISO 42001</span></li>
               <li><span className="text-slate-500">SOC 2 / SOC 3</span></li>
               <li><span className="text-slate-500">GDPR / CCPA / DPDPA</span></li>
-              <li><span className="text-slate-500">PCI DSS / HIPAA</span></li>
+              <li><span className="text-slate-500">PCI DSS / HIPAA / USPCF</span></li>
             </ul>
           </div>
         </div>
@@ -1149,8 +1444,20 @@ const Footer = () => {
             © {new Date().getFullYear()} Beskar IT. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <a href="#" className="text-slate-600 hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="text-slate-600 hover:text-white transition-colors">Terms of Service</a>
+            <button 
+              onClick={() => setCurrentPage('privacy')} 
+              className="text-slate-600 hover:text-white transition-colors"
+              data-testid="footer-privacy-link"
+            >
+              Privacy Policy
+            </button>
+            <button 
+              onClick={() => setCurrentPage('terms')} 
+              className="text-slate-600 hover:text-white transition-colors"
+              data-testid="footer-terms-link"
+            >
+              Terms of Service
+            </button>
             <a href={`mailto:${SUPPORT_EMAIL}`} className="text-slate-600 hover:text-white transition-colors">Contact</a>
           </div>
         </div>
@@ -1162,19 +1469,35 @@ const Footer = () => {
 // Main App Component
 function App() {
   useSmoothScroll();
+  const [currentPage, setCurrentPage] = useState('home');
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'privacy':
+        return <PrivacyPolicyPage setCurrentPage={setCurrentPage} />;
+      case 'terms':
+        return <TermsOfServicePage setCurrentPage={setCurrentPage} />;
+      default:
+        return (
+          <>
+            <HeroSection />
+            <ProductsSection />
+            <ServicesSection />
+            <ComplianceSection />
+            <ImpactSection />
+            <ContactSection />
+          </>
+        );
+    }
+  };
 
   return (
     <div className="grain">
-      <Navigation />
+      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
       <main>
-        <HeroSection />
-        <ProductsSection />
-        <ServicesSection />
-        <ComplianceSection />
-        <ImpactSection />
-        <ContactSection />
+        {renderPage()}
       </main>
-      <Footer />
+      <Footer setCurrentPage={setCurrentPage} />
     </div>
   );
 }
