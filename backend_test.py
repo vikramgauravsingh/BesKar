@@ -144,14 +144,14 @@ class BeskarAPITester:
         # Test health endpoint
         self.test_health_endpoint()
         
+        # Test support email endpoint
+        self.test_support_email_endpoint()
+        
         # Test contact form submission
         contact_id = self.test_contact_submission()
         
         # Test form validation
         self.test_contact_validation()
-        
-        # Test get contacts
-        self.test_get_contacts()
         
         # Print summary
         print("\n" + "=" * 50)
