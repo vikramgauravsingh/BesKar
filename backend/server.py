@@ -10,6 +10,9 @@ load_dotenv()
 
 app = FastAPI(title="Beskar IT API")
 
+# Support email for all notifications
+SUPPORT_EMAIL = "support@beskarit.com"
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -47,15 +50,21 @@ def submit_contact(form: ContactForm):
             "company": form.company,
             "message": form.message,
             "created_at": datetime.now(timezone.utc).isoformat(),
+            "notification_email": SUPPORT_EMAIL,
         }
         result = contacts_collection.insert_one(contact_data)
         return {
             "success": True,
-            "message": "Thank you for reaching out. We'll be in touch soon.",
+            "message": f"Thank you for reaching out. Our team at {SUPPORT_EMAIL} will be in touch soon.",
             "id": str(result.inserted_id),
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/support-email")
+def get_support_email():
+    return {"email": SUPPORT_EMAIL}
 
 
 @app.get("/api/contacts")
