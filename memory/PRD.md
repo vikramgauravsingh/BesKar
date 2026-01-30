@@ -49,6 +49,7 @@ Update website with products listed in GitHub repository (Nexus and OSINT). All 
 - ✅ **Privacy Policy Page**: Full policy from beskarit.com
 - ✅ **Terms of Service Page**: Full terms from beskarit.com
 - ✅ **Backend API**: Contact form, health check, support email endpoint
+- ✅ **Resend Email Integration**: Email notifications on contact form submission (requires domain verification)
 
 ## P0/P1/P2 Features Remaining
 
