@@ -1,62 +1,80 @@
-# Beskar IT Website PRD
+# Beskar IT Website - Product Requirements Document
 
 ## Original Problem Statement
-Generate a website for Beskar IT (beskarit.com) featuring products from GitHub repo (Nexus and OSINT), inspired by sanas.ai design. Single-page marketing site with:
-- Steel blue/slate accent colors with dark theme
-- Smooth scroll animations
-- Simple contact form (stores in database)
-- Company tagline: "This is the way"
+Update website with products listed in GitHub repository (Nexus and OSINT). All messages and notifications to support@beskarit.com.
 
-## Architecture
-- **Frontend**: React 18 + Tailwind CSS + Framer Motion
+## User Choices & Inputs
+- Create new product listing page and update products
+- Both overview cards + detailed pages, hide pricing
+- Update all contact/notification emails to support@beskarit.com
+- Keep existing design
+- Add additional services: auditing, compliance frameworks (ISO27001, ISO42001, SOC2, SOC3, PCI, HIPAA, GDPR, SAMA, CCPA, DPDPA, USPCF), VAPT, secure code reviews, CSPM
+
+## Architecture & Tech Stack
+- **Frontend**: React 18, TailwindCSS, Framer Motion, Lucide Icons
 - **Backend**: FastAPI (Python)
 - **Database**: MongoDB
-- **Design**: Dark theme with steel blue (#3d4f5f) accents, Outfit + Manrope fonts
+- **Hosting**: Kubernetes container
 
 ## User Personas
-1. **Enterprise CISOs** - Looking for compliance and security solutions
-2. **Compliance Officers** - Need help aligning multiple frameworks
-3. **Security Teams** - Interested in threat intelligence tools (Nexus, OSINT)
+1. **Security Officers** - Looking for GRC and compliance solutions
+2. **Threat Hunters** - Need OSINT and threat intelligence tools
+3. **DevSecOps Teams** - Require vulnerability scanning and code review
+4. **CISOs/Executives** - Need dashboards and audit preparation support
 
-## Core Requirements
-- [x] Hero section with company branding and tagline
-- [x] Products showcase (Nexus & OSINT)
-- [x] Services section (compliance frameworks)
-- [x] Impact stats with animated counters
-- [x] Contact form with MongoDB storage
-- [x] Responsive design
-- [x] Smooth scroll navigation
+## Core Requirements (Static)
+- Product showcase with detailed feature pages
+- Services section highlighting consulting capabilities
+- Compliance frameworks coverage display
+- Contact form with email to support@beskarit.com
+- Privacy Policy and Terms of Service pages
 
-## What's Been Implemented (Jan 28, 2026)
-- ✅ Complete single-page website with 5 sections
-- ✅ Hero with "This is the way" tagline and CTAs
-- ✅ Nexus (Threat Intelligence Platform) product card
-- ✅ OSINT (Open Source Intelligence Tool) product card
-- ✅ Compliance frameworks: ISO 27001, ISO 42001, GDPR, CCPA, DPDP Act, HIPAA, HITRUST, PCI DSS
-- ✅ Impact stats: 70%+ Phishing Reduction, 30% Admin Savings, 100% Proactive Defense
-- ✅ Contact form saving to MongoDB
-- ✅ Smooth scroll navigation with Lenis
-- ✅ Responsive mobile design
-- ✅ Dark theme with steel blue accents
-- ✅ Framer Motion animations
+## What's Been Implemented
 
-## Prioritized Backlog
-### P0 (Critical)
-- All completed ✅
+### Jan 2026 - Initial Update
+- ✅ **Products Section**: GRC Nexus, Beskar OSINT Toolkit, LiteSabre Scanner, Amidala CSPM
+- ✅ **Product Detail Modals**: Clickable cards with full feature descriptions
+- ✅ **Services Section**: Security Auditing, VAPT, Secure Code Review, CSPM, Framework Implementation, Managed Security
+- ✅ **Compliance Frameworks Section**: 
+  - Information Security (ISO 27001/27002/27017/27018/27701)
+  - AI & Technology (ISO 42001, NIST AI RMF, EU AI Act)
+  - Unified Framework (USPCF - 63 controls across 11 domains)
+  - Privacy (GDPR, CCPA, DPDPA, LGPD, POPIA)
+  - Healthcare (HIPAA, HITRUST, HITECH)
+  - Financial (PCI DSS, SOX, GLBA, FFIEC)
+  - SOC Reports (SOC 1, 2, 3)
+  - Regional (SAMA, NESA, PDPL, CBK)
+  - Government (NIST 800-53, FedRAMP, CMMC, CIS)
+- ✅ **Contact Integration**: All forms/emails updated to support@beskarit.com
+- ✅ **Privacy Policy Page**: Full policy from beskarit.com
+- ✅ **Terms of Service Page**: Full terms from beskarit.com
+- ✅ **Backend API**: Contact form, health check, support email endpoint
+
+## P0/P1/P2 Features Remaining
+
+### P0 (Critical) - DONE
+- ✅ Product display with detailed modals
+- ✅ Contact form working
+- ✅ All emails to support@beskarit.com
 
 ### P1 (Important)
-- Blog/News section
-- Case studies page
-- Client testimonials carousel
+- Individual product demo request flow
+- Email notification integration for contact form submissions
+- USPCF detailed control browser/viewer
 
 ### P2 (Nice to Have)
-- Live chat integration
-- Calendar booking for demos
-- Newsletter subscription
-- Analytics dashboard for contact leads
+- Blog/resources section
+- Live chat widget
+- Calendly scheduling integration
+- Case studies/testimonials section
 
 ## Next Tasks
-1. Add more product details pages
-2. Implement testimonials carousel
-3. Add blog/news section
-4. SEO optimization
+1. Add email notification service for contact form (SendGrid/Resend)
+2. Create individual product landing pages with demo booking
+3. Add blog/resources section for thought leadership
+4. Implement analytics tracking
+
+## Testing Status
+- Backend: 100% pass rate
+- Frontend: 100% pass rate
+- All bugs fixed from iteration 2 and 3
