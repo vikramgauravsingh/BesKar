@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import { 
   Shield, 
   Lock, 
@@ -1498,6 +1500,8 @@ function App() {
         {renderPage()}
       </main>
       <Footer setCurrentPage={setCurrentPage} />
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
