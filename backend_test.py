@@ -114,25 +114,25 @@ class BeskarAPITester:
             self.log_test("Contact Form Validation", False, f"Request failed: {str(e)}")
             return False
 
-    def test_get_contacts(self):
-        """Test GET /api/contacts endpoint"""
+    def test_support_email_endpoint(self):
+        """Test GET /api/support-email endpoint"""
         try:
-            response = requests.get(f"{self.base_url}/api/contacts", timeout=10)
+            response = requests.get(f"{self.base_url}/api/support-email", timeout=10)
             
             if response.status_code == 200:
                 data = response.json()
-                if "contacts" in data and isinstance(data["contacts"], list):
-                    self.log_test("Get Contacts", True, f"Retrieved {len(data['contacts'])} contacts")
+                if data.get("email") == "support@beskarit.com":
+                    self.log_test("Support Email Endpoint", True, f"Email: {data.get('email')}")
                     return True
                 else:
-                    self.log_test("Get Contacts", False, f"Unexpected response format: {data}")
+                    self.log_test("Support Email Endpoint", False, f"Unexpected email: {data.get('email')}")
                     return False
             else:
-                self.log_test("Get Contacts", False, f"Status code: {response.status_code}")
+                self.log_test("Support Email Endpoint", False, f"Status code: {response.status_code}")
                 return False
                 
         except Exception as e:
-            self.log_test("Get Contacts", False, f"Request failed: {str(e)}")
+            self.log_test("Support Email Endpoint", False, f"Request failed: {str(e)}")
             return False
 
     def run_all_tests(self):
