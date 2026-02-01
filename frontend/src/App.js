@@ -1409,6 +1409,16 @@ const Footer = ({ setCurrentPage }) => {
               <Mail className="w-4 h-4" />
               {SUPPORT_EMAIL}
             </a>
+            <a 
+              href="https://linkedin.com/company/beskar-it/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-beskar-cyan transition-colors flex items-center gap-2 mt-3"
+              data-testid="footer-linkedin"
+            >
+              <Linkedin className="w-4 h-4" />
+              LinkedIn
+            </a>
           </div>
 
           <div>
