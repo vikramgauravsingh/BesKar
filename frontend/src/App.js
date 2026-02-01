@@ -31,7 +31,8 @@ import {
   Target,
   Zap,
   Mail,
-  ArrowLeft
+  ArrowLeft,
+  Linkedin
 } from 'lucide-react';
 import './App.css';
 
