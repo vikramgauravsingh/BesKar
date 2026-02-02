@@ -1410,7 +1410,7 @@ const Footer = ({ setCurrentPage }) => {
               {SUPPORT_EMAIL}
             </a>
             <a 
-              href="https://linkedin.com/company/beskar-it/"
+              href="https://www.linkedin.com/company/beskar-it"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-beskar-cyan transition-colors flex items-center gap-2 mt-3"
