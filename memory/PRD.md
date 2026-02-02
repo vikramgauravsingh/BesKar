@@ -1,28 +1,33 @@
 # Beskar IT Website - PRD
 
 ## Original Problem Statement
-Add LinkedIn button with URL: https://www.linkedin.com/company/beskar-it
+1. Add LinkedIn button with URL: https://www.linkedin.com/company/beskar-it
+2. Update contact form email sending API with Brevo key, send responses to support@beskarit.com
 
 ## What's Been Implemented
-- **2026-02-02**: Updated LinkedIn button URL in footer from `https://linkedin.com/company/beskar-it/` to `https://www.linkedin.com/company/beskar-it`
+- **2026-02-02**: Updated LinkedIn button URL in footer
+- **2026-02-02**: Migrated email service from Resend to Brevo (Sendinblue) for contact form notifications
 
 ## Architecture
 - **Frontend**: React.js with Tailwind CSS, Framer Motion animations
-- **Backend**: FastAPI with MongoDB
-- **Features**: Landing page, contact form, compliance frameworks display, services showcase
+- **Backend**: FastAPI with MongoDB, Brevo for transactional emails
+- **Features**: Landing page, contact form with email notifications, compliance frameworks display
 
 ## Core Features
 - Hero section with company tagline
 - Products section (GRC Nexus, OSINT Toolkit, LiteSabre Scanner, Amidala CSPM)
-- Services section (Security Auditing, VAPT, Code Review, CSPM, Framework Implementation, Managed Security)
+- Services section
 - Compliance frameworks showcase
-- Impact stats section
-- Contact form with email notifications via Resend
-- Privacy Policy and Terms of Service pages
+- Contact form sends notifications to support@beskarit.com via Brevo
 - Footer with email and LinkedIn social links
 
+## Email Configuration
+- Provider: Brevo (Sendinblue)
+- Recipient: support@beskarit.com
+- Sender: notifications@beskarit.com
+
 ## Backlog
-- None currently
+- None
 
 ## Next Tasks
-- No pending tasks
+- None
