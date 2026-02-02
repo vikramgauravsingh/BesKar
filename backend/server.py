@@ -5,9 +5,9 @@ from pymongo import MongoClient
 from datetime import datetime, timezone
 from dotenv import load_dotenv
 import os
-import asyncio
 import logging
-import resend
+import sib_api_v3_sdk
+from sib_api_v3_sdk.rest import ApiException
 
 load_dotenv()
 
@@ -20,15 +20,18 @@ app = FastAPI(title="Beskar IT API")
 # Support email for all notifications
 SUPPORT_EMAIL = "support@beskarit.com"
 
-# Resend configuration
-RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
-SENDER_EMAIL = os.environ.get("SENDER_EMAIL", "onboarding@resend.dev")
+# Brevo (Sendinblue) configuration
+BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
+SENDER_EMAIL = os.environ.get("SENDER_EMAIL", "notifications@beskarit.com")
+SENDER_NAME = os.environ.get("SENDER_NAME", "Beskar IT")
 
-if RESEND_API_KEY:
-    resend.api_key = RESEND_API_KEY
-    logger.info("Resend API configured successfully")
+# Configure Brevo API
+configuration = sib_api_v3_sdk.Configuration()
+if BREVO_API_KEY:
+    configuration.api_key['api-key'] = BREVO_API_KEY
+    logger.info("Brevo API configured successfully")
 else:
-    logger.warning("RESEND_API_KEY not configured - email notifications disabled")
+    logger.warning("BREVO_API_KEY not configured - email notifications disabled")
 
 app.add_middleware(
     CORSMiddleware,
@@ -53,10 +56,10 @@ class ContactForm(BaseModel):
     message: str
 
 
-async def send_notification_email(form: ContactForm):
-    """Send email notification to support team"""
-    if not RESEND_API_KEY:
-        logger.warning("Email notification skipped - RESEND_API_KEY not configured")
+def send_notification_email(form: ContactForm):
+    """Send email notification to support team using Brevo"""
+    if not BREVO_API_KEY:
+        logger.warning("Email notification skipped - BREVO_API_KEY not configured")
         return None
     
     html_content = f"""
@@ -81,26 +84,22 @@ async def send_notification_email(form: ContactForm):
     </html>
     """
     
-    # Note: In Resend testing mode, emails can only be sent to verified email addresses
-    # Once you verify a domain at resend.com/domains, change SENDER_EMAIL and SUPPORT_EMAIL
-    params = {
-        "from": SENDER_EMAIL,
-        "to": [SUPPORT_EMAIL],
-        "subject": f"New Contact: {form.name} - {form.company or 'Individual'}",
-        "html": html_content,
-        "reply_to": form.email
-    }
+    api_instance = sib_api_v3_sdk.TransactionalEmailsApi(sib_api_v3_sdk.ApiClient(configuration))
+    
+    send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
+        to=[{"email": SUPPORT_EMAIL, "name": "Beskar IT Support"}],
+        sender={"email": SENDER_EMAIL, "name": SENDER_NAME},
+        reply_to={"email": form.email, "name": form.name},
+        subject=f"New Contact: {form.name} - {form.company or 'Individual'}",
+        html_content=html_content
+    )
     
     try:
-        email = await asyncio.to_thread(resend.Emails.send, params)
-        logger.info(f"Notification email sent successfully. ID: {email.get('id')}")
-        return email.get("id")
-    except Exception as e:
-        error_msg = str(e)
-        if "verify a domain" in error_msg.lower() or "testing emails" in error_msg.lower():
-            logger.warning(f"Resend in testing mode - verify domain at resend.com/domains to send to {SUPPORT_EMAIL}")
-        else:
-            logger.error(f"Failed to send notification email: {error_msg}")
+        api_response = api_instance.send_transac_email(send_smtp_email)
+        logger.info(f"Notification email sent successfully. Message ID: {api_response.message_id}")
+        return api_response.message_id
+    except ApiException as e:
+        logger.error(f"Failed to send notification email: {e}")
         return None
 
 
@@ -122,8 +121,8 @@ async def submit_contact(form: ContactForm):
         }
         result = contacts_collection.insert_one(contact_data)
         
-        # Send email notification asynchronously
-        email_id = await send_notification_email(form)
+        # Send email notification
+        email_id = send_notification_email(form)
         
         return {
             "success": True,
