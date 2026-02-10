@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="Beskar IT API")
 
 # Support email for all notifications
-SUPPORT_EMAIL = "support@beskarit.com"
+SUPPORT_EMAIL = os.environ.get("SUPPORT_EMAIL", "support@beskarIT.com")
 
 # Brevo (Sendinblue) configuration
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
