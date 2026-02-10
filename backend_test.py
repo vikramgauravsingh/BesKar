@@ -121,11 +121,12 @@ class BeskarAPITester:
             
             if response.status_code == 200:
                 data = response.json()
-                if data.get("email") == "support@beskarit.com":
+                # Updated to check for the correct support email as per requirements
+                if data.get("email") == "support@beskarIT.com":
                     self.log_test("Support Email Endpoint", True, f"Email: {data.get('email')}")
                     return True
                 else:
-                    self.log_test("Support Email Endpoint", False, f"Unexpected email: {data.get('email')}")
+                    self.log_test("Support Email Endpoint", False, f"Expected support@beskarIT.com, got: {data.get('email')}")
                     return False
             else:
                 self.log_test("Support Email Endpoint", False, f"Status code: {response.status_code}")
