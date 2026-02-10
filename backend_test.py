@@ -86,6 +86,78 @@ class BeskarAPITester:
             self.log_test("Contact Form Submission", False, f"Request failed: {str(e)}")
             return None
 
+    def test_brevo_email_integration(self):
+        """Test Brevo API email integration"""
+        test_data = {
+            "name": "Brevo Test User",
+            "email": "brevo.test@example.com",
+            "company": "Brevo Test Company",
+            "message": "Testing Brevo API integration for email notifications"
+        }
+        
+        try:
+            response = requests.post(
+                f"{self.base_url}/api/contact",
+                json=test_data,
+                headers={"Content-Type": "application/json"},
+                timeout=15  # Longer timeout for email processing
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                # Check if email was sent via Brevo API
+                if data.get("email_sent") is True:
+                    self.log_test("Brevo Email Integration", True, f"Email sent successfully via Brevo API")
+                    return True
+                elif data.get("email_sent") is False:
+                    self.log_test("Brevo Email Integration", False, "Email sending failed - check Brevo API configuration")
+                    return False
+                else:
+                    self.log_test("Brevo Email Integration", False, f"email_sent field missing in response: {data}")
+                    return False
+            else:
+                self.log_test("Brevo Email Integration", False, f"Status code: {response.status_code}, Response: {response.text}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Brevo Email Integration", False, f"Request failed: {str(e)}")
+            return False
+
+    def test_contact_response_message(self):
+        """Test that contact form response contains correct support email"""
+        test_data = {
+            "name": "Message Test User",
+            "email": "message.test@example.com", 
+            "company": "Message Test Company",
+            "message": "Testing response message format"
+        }
+        
+        try:
+            response = requests.post(
+                f"{self.base_url}/api/contact",
+                json=test_data,
+                headers={"Content-Type": "application/json"},
+                timeout=10
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                message = data.get("message", "")
+                # Check if the response message contains the correct support email
+                if "support@beskarIT.com" in message:
+                    self.log_test("Contact Response Message", True, f"Response contains correct support email: {message}")
+                    return True
+                else:
+                    self.log_test("Contact Response Message", False, f"Response message doesn't contain support@beskarIT.com: {message}")
+                    return False
+            else:
+                self.log_test("Contact Response Message", False, f"Status code: {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Contact Response Message", False, f"Request failed: {str(e)}")
+            return False
+
     def test_contact_validation(self):
         """Test contact form validation with invalid data"""
         invalid_data = {
