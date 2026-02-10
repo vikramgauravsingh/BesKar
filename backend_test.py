@@ -223,6 +223,12 @@ class BeskarAPITester:
         # Test contact form submission
         contact_id = self.test_contact_submission()
         
+        # Test Brevo email integration
+        self.test_brevo_email_integration()
+        
+        # Test contact response message format
+        self.test_contact_response_message()
+        
         # Test form validation
         self.test_contact_validation()
         
