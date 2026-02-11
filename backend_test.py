@@ -208,6 +208,27 @@ class BeskarAPITester:
             self.log_test("Support Email Endpoint", False, f"Request failed: {str(e)}")
             return False
 
+    def test_get_contacts_endpoint(self):
+        """Test GET /api/contacts endpoint"""
+        try:
+            response = requests.get(f"{self.base_url}/api/contacts", timeout=10)
+            
+            if response.status_code == 200:
+                data = response.json()
+                if "contacts" in data and isinstance(data["contacts"], list):
+                    self.log_test("Get Contacts Endpoint", True, f"Returned {len(data['contacts'])} contacts")
+                    return True
+                else:
+                    self.log_test("Get Contacts Endpoint", False, f"Unexpected response format: {data}")
+                    return False
+            else:
+                self.log_test("Get Contacts Endpoint", False, f"Status code: {response.status_code}")
+                return False
+                
+        except Exception as e:
+            self.log_test("Get Contacts Endpoint", False, f"Request failed: {str(e)}")
+            return False
+
     def run_all_tests(self):
         """Run all backend API tests"""
         print("🚀 Starting Beskar IT Backend API Tests")
