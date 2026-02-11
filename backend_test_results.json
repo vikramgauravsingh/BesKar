@@ -1,46 +1,46 @@
 {
   "summary": {
     "total_tests": 6,
-    "passed_tests": 6,
-    "success_rate": "100.0%",
-    "timestamp": "2026-02-10T05:15:17.187249"
+    "passed_tests": 3,
+    "success_rate": "50.0%",
+    "timestamp": "2026-02-11T00:40:58.770872"
   },
   "test_results": [
     {
       "test": "Health Check",
       "success": true,
       "details": "Status: 200, Response: {'status': 'healthy', 'message': 'This is the way'}",
-      "timestamp": "2026-02-10T05:15:15.703418"
+      "timestamp": "2026-02-11T00:40:58.559007"
     },
     {
       "test": "Support Email Endpoint",
-      "success": true,
-      "details": "Email: support@beskarIT.com",
-      "timestamp": "2026-02-10T05:15:15.737351"
+      "success": false,
+      "details": "Expected support@beskarIT.com, got: support@beskarit.com",
+      "timestamp": "2026-02-11T00:40:58.600049"
     },
     {
       "test": "Contact Form Submission",
       "success": true,
-      "details": "Contact saved with ID: 698abee3f14f77d6a4eb71af",
-      "timestamp": "2026-02-10T05:15:16.203850"
+      "details": "Contact saved with ID: 698bd01ae0dc15a9ec9ba48b",
+      "timestamp": "2026-02-11T00:40:58.642888"
     },
     {
       "test": "Brevo Email Integration",
-      "success": true,
-      "details": "Email sent successfully via Brevo API",
-      "timestamp": "2026-02-10T05:15:16.724260"
+      "success": false,
+      "details": "Email sending failed - check Brevo API configuration",
+      "timestamp": "2026-02-11T00:40:58.686388"
     },
     {
       "test": "Contact Response Message",
-      "success": true,
-      "details": "Response contains correct support email: Thank you for reaching out. Our team at support@beskarIT.com will be in touch soon.",
-      "timestamp": "2026-02-10T05:15:17.153110"
+      "success": false,
+      "details": "Response message doesn't contain support@beskarIT.com: Thank you for reaching out. Our team at support@beskarit.com will be in touch soon.",
+      "timestamp": "2026-02-11T00:40:58.726949"
     },
     {
       "test": "Contact Form Validation",
       "success": true,
       "details": "Properly rejected invalid data",
-      "timestamp": "2026-02-10T05:15:17.186506"
+      "timestamp": "2026-02-11T00:40:58.770131"
     }
   ]
 }
