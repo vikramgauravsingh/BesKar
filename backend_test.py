@@ -241,6 +241,9 @@ class BeskarAPITester:
         # Test support email endpoint
         self.test_support_email_endpoint()
         
+        # Test get contacts endpoint
+        self.test_get_contacts_endpoint()
+        
         # Test contact form submission
         contact_id = self.test_contact_submission()
         
