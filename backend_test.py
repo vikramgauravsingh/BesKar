@@ -144,11 +144,11 @@ class BeskarAPITester:
                 data = response.json()
                 message = data.get("message", "")
                 # Check if the response message contains the correct support email
-                if "support@beskarIT.com" in message:
+                if "support@beskarit.com" in message:
                     self.log_test("Contact Response Message", True, f"Response contains correct support email: {message}")
                     return True
                 else:
-                    self.log_test("Contact Response Message", False, f"Response message doesn't contain support@beskarIT.com: {message}")
+                    self.log_test("Contact Response Message", False, f"Response message doesn't contain support@beskarit.com: {message}")
                     return False
             else:
                 self.log_test("Contact Response Message", False, f"Status code: {response.status_code}")
