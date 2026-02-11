@@ -99,7 +99,10 @@ def send_notification_email(form: ContactForm):
         logger.info(f"Notification email sent successfully. Message ID: {api_response.message_id}")
         return api_response.message_id
     except ApiException as e:
-        logger.error(f"Failed to send notification email: {e}")
+        logger.error(f"Failed to send notification email (API error): {e}")
+        return None
+    except Exception as e:
+        logger.error(f"Failed to send notification email (unexpected error): {e}")
         return None
 
 
