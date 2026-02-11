@@ -123,18 +123,24 @@ async def submit_contact(form: ContactForm):
             "notification_email": SUPPORT_EMAIL,
         }
         result = contacts_collection.insert_one(contact_data)
-        
-        # Send email notification
-        email_id = send_notification_email(form)
-        
-        return {
-            "success": True,
-            "message": f"Thank you for reaching out. Our team at {SUPPORT_EMAIL} will be in touch soon.",
-            "id": str(result.inserted_id),
-            "email_sent": email_id is not None
-        }
+        contact_id = str(result.inserted_id)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Failed to save contact form to database: {e}")
+        raise HTTPException(status_code=500, detail="Failed to save your message. Please try again later.")
+
+    # Send email notification (non-blocking - never fails the endpoint)
+    email_id = None
+    try:
+        email_id = send_notification_email(form)
+    except Exception as e:
+        logger.error(f"Email notification failed (non-blocking): {e}")
+
+    return {
+        "success": True,
+        "message": f"Thank you for reaching out. Our team at {SUPPORT_EMAIL} will be in touch soon.",
+        "id": contact_id,
+        "email_sent": email_id is not None
+    }
 
 
 @app.get("/api/support-email")
