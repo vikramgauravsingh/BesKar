@@ -1,41 +1,42 @@
 # Beskar IT Website - PRD
 
 ## Original Problem Statement
-Update contact form to use Brevo API with new credentials:
-- Brevo API Key: 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
-- SMTP Server: smtp-relay.brevo.com:587
-- Login: a151d5001@smtp-brevo.com
-- Send submissions to: support@beskarIT.com
+"Unable to send message. Please email us directly at support@beskarit.com" error at https://www.beskarit.com/
+User wants to fix the contact form using Brevo (formerly Sendinblue) for email notifications.
 
 ## Architecture
-- **Frontend**: React.js with Framer Motion, TailwindCSS
-- **Backend**: FastAPI (Python)
-- **Database**: MongoDB
-- **Email Service**: Brevo (Sendinblue) Transactional Email API
-
-## Core Requirements
-1. Contact form submission functionality
-2. Email notifications sent via Brevo API
-3. Submissions stored in MongoDB
-4. Support email: support@beskarIT.com
-
-## What's Been Implemented
-### Jan 2026
-- ✅ Updated Brevo API key in backend/.env
-- ✅ Configured SENDER_EMAIL to a151d5001@smtp-brevo.com
-- ✅ Configured SUPPORT_EMAIL to support@beskarIT.com
-- ✅ Email notifications working via Brevo Transactional Email API
-- ✅ All tests passed (Backend: 100%, Frontend: 100%)
+- **Frontend**: React 18 + Tailwind CSS + Framer Motion (port 3000)
+- **Backend**: FastAPI + Python (port 8001)
+- **Database**: MongoDB (beskarit DB, contacts collection)
+- **Email**: Brevo (sib-api-v3-sdk) for transactional email notifications
 
 ## User Personas
-- **Website Visitors**: Submit inquiries via contact form
-- **Support Team**: Receive email notifications at support@beskarIT.com
+- Website visitors submitting contact inquiries
+- Beskar IT support team receiving email notifications
 
-## Current Status
-- Contact form fully functional
-- Emails successfully delivered via Brevo API
-- Frontend contact form integrated with backend
+## Core Requirements (Static)
+- Contact form saves submissions to MongoDB
+- Email notification sent to support@beskarit.com via Brevo
+- Graceful handling when Brevo key is unavailable
+- Form validation (name, email, message required)
 
-## Backlog
-- P2: Add email templates customization
-- P2: Add email delivery tracking/analytics
+## What's Been Implemented
+### 2026-02-11 - Contact Form Bug Fix
+- Fixed `send_notification_email` to catch ALL exceptions (not just `ApiException`), preventing endpoint crashes
+- Fixed `.env` BREVO_API_KEY self-referencing variable interpolation (`${BREVO_API_KEY}` -> empty placeholder)
+- Made email sending non-blocking in the contact endpoint (DB save and email are independent)
+- Separated MongoDB error handling from email error handling in `/api/contact`
+- All tests passing: Backend 7/7, Frontend 6/6
+
+## Prioritized Backlog
+### P0 (Critical)
+- Production deployment: Ensure BREVO_API_KEY is properly injected as environment variable
+- Verify REACT_APP_BACKEND_URL is correctly set in production build
+
+### P1 (Important)
+- Add rate limiting to contact form endpoint to prevent spam
+- Add CAPTCHA/honeypot to contact form
+
+### P2 (Nice to have)
+- Auto-reply email to form submitter
+- Contact form analytics dashboard
