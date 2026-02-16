@@ -8,6 +8,10 @@
     {
       "source": "/api/contact",
       "destination": "/api/contact"
+    },
+    {
+      "source": "/api/health",
+      "destination": "/api/health"
     }
   ]
 }
