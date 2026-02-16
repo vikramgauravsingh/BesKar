@@ -1,6 +1,8 @@
 from http.server import BaseHTTPRequestHandler
 import json
 import os
+import hashlib
+import time
 from datetime import datetime, timezone
 
 # Try to import optional dependencies
@@ -16,6 +18,104 @@ try:
     BREVO_AVAILABLE = True
 except ImportError:
     BREVO_AVAILABLE = False
+
+# In-memory rate limiting (resets on cold start, but provides basic protection)
+# For production, consider using Redis or MongoDB for persistent rate limiting
+RATE_LIMIT_WINDOW = 3600  # 1 hour window
+MAX_REQUESTS_PER_WINDOW = 5  # Max 5 submissions per hour per IP/email
+rate_limit_store = {}
+
+
+def get_rate_limit_key(ip, email):
+    """Generate a rate limit key from IP and email"""
+    combined = f"{ip}:{email}".lower()
+    return hashlib.md5(combined.encode()).hexdigest()
+
+
+def check_rate_limit(ip, email):
+    """Check if request is rate limited. Returns (is_allowed, remaining, reset_time)"""
+    current_time = time.time()
+    key = get_rate_limit_key(ip, email)
+    
+    # Clean up expired entries
+    expired_keys = [k for k, v in rate_limit_store.items() if current_time - v['window_start'] > RATE_LIMIT_WINDOW]
+    for k in expired_keys:
+        del rate_limit_store[k]
+    
+    if key not in rate_limit_store:
+        rate_limit_store[key] = {
+            'count': 1,
+            'window_start': current_time
+        }
+        return True, MAX_REQUESTS_PER_WINDOW - 1, int(current_time + RATE_LIMIT_WINDOW)
+    
+    entry = rate_limit_store[key]
+    window_elapsed = current_time - entry['window_start']
+    
+    # Reset window if expired
+    if window_elapsed > RATE_LIMIT_WINDOW:
+        rate_limit_store[key] = {
+            'count': 1,
+            'window_start': current_time
+        }
+        return True, MAX_REQUESTS_PER_WINDOW - 1, int(current_time + RATE_LIMIT_WINDOW)
+    
+    # Check if limit exceeded
+    if entry['count'] >= MAX_REQUESTS_PER_WINDOW:
+        reset_time = int(entry['window_start'] + RATE_LIMIT_WINDOW)
+        return False, 0, reset_time
+    
+    # Increment counter
+    entry['count'] += 1
+    remaining = MAX_REQUESTS_PER_WINDOW - entry['count']
+    reset_time = int(entry['window_start'] + RATE_LIMIT_WINDOW)
+    return True, remaining, reset_time
+
+
+def check_rate_limit_db(db, ip, email):
+    """Check rate limit using MongoDB for persistence across serverless invocations"""
+    if not db:
+        return check_rate_limit(ip, email)
+    
+    try:
+        current_time = time.time()
+        key = get_rate_limit_key(ip, email)
+        window_start = current_time - RATE_LIMIT_WINDOW
+        
+        # Count submissions in the current window
+        count = db["rate_limits"].count_documents({
+            "key": key,
+            "timestamp": {"$gte": window_start}
+        })
+        
+        if count >= MAX_REQUESTS_PER_WINDOW:
+            # Find earliest submission to calculate reset time
+            earliest = db["rate_limits"].find_one(
+                {"key": key, "timestamp": {"$gte": window_start}},
+                sort=[("timestamp", 1)]
+            )
+            reset_time = int(earliest['timestamp'] + RATE_LIMIT_WINDOW) if earliest else int(current_time + RATE_LIMIT_WINDOW)
+            return False, 0, reset_time
+        
+        # Record this submission
+        db["rate_limits"].insert_one({
+            "key": key,
+            "ip": ip,
+            "email": email,
+            "timestamp": current_time
+        })
+        
+        # Clean up old entries (older than 24 hours)
+        db["rate_limits"].delete_many({
+            "timestamp": {"$lt": current_time - 86400}
+        })
+        
+        remaining = MAX_REQUESTS_PER_WINDOW - count - 1
+        return True, remaining, int(current_time + RATE_LIMIT_WINDOW)
+    except Exception as e:
+        print(f"Rate limit DB error: {e}")
+        # Fall back to in-memory rate limiting
+        return check_rate_limit(ip, email)
 
 
 def get_db():
