@@ -1,42 +1,41 @@
 # Beskar IT Website - PRD
 
 ## Original Problem Statement
-"Unable to send message. Please email us directly at support@beskarit.com" error at https://www.beskarit.com/
-User wants to fix the contact form using Brevo (formerly Sendinblue) for email notifications.
+Contact form giving 404 error on Vercel deployment at `https://www.beskarit.com/api/contact`. The frontend works locally but the API endpoint fails in production.
+
+## Root Cause
+The `vercel.json` was configured to rewrite `/api/*` requests to an Emergent preview URL (`https://contact-form-fix-5.preview.emergentagent.com`) which doesn't exist in production. Vercel is a frontend-only platform and cannot run FastAPI directly.
+
+## Solution Implemented
+Converted FastAPI endpoint to Vercel Python Serverless Function.
 
 ## Architecture
-- **Frontend**: React 18 + Tailwind CSS + Framer Motion (port 3000)
-- **Backend**: FastAPI + Python (port 8001)
-- **Database**: MongoDB (beskarit DB, contacts collection)
-- **Email**: Brevo (sib-api-v3-sdk) for transactional email notifications
+- **Frontend**: React app deployed on Vercel
+- **Backend API**: Vercel Python Serverless Functions (`/api/contact.py`)
+- **Database**: MongoDB (connection via environment variable)
+- **Email**: Brevo (Sendinblue) for notifications
 
-## User Personas
-- Website visitors submitting contact inquiries
-- Beskar IT support team receiving email notifications
+## Files Changed (Feb 2026)
+1. `/frontend/api/contact.py` - Created serverless function
+2. `/frontend/api/requirements.txt` - Python dependencies
+3. `/frontend/vercel.json` - Updated routing config
 
-## Core Requirements (Static)
-- Contact form saves submissions to MongoDB
-- Email notification sent to support@beskarit.com via Brevo
-- Graceful handling when Brevo key is unavailable
-- Form validation (name, email, message required)
+## Environment Variables Required (Vercel Dashboard)
+- `MONGO_URL` - MongoDB Atlas connection string
+- `DB_NAME` - Database name (beskarit)
+- `BREVO_API_KEY` - Brevo API key for email
+- `SUPPORT_EMAIL` - Support email address
 
 ## What's Been Implemented
-### 2026-02-11 - Contact Form Bug Fix
-- Fixed `send_notification_email` to catch ALL exceptions (not just `ApiException`), preventing endpoint crashes
-- Fixed `.env` BREVO_API_KEY self-referencing variable interpolation (`${BREVO_API_KEY}` -> empty placeholder)
-- Made email sending non-blocking in the contact endpoint (DB save and email are independent)
-- Separated MongoDB error handling from email error handling in `/api/contact`
-- All tests passing: Backend 7/7, Frontend 6/6
+- [x] Contact form submission endpoint
+- [x] MongoDB storage (optional - graceful fallback)
+- [x] Brevo email notifications (optional)
+- [x] Input validation
+- [x] CORS handling
+- [x] Error handling
 
-## Prioritized Backlog
-### P0 (Critical)
-- Production deployment: Ensure BREVO_API_KEY is properly injected as environment variable
-- Verify REACT_APP_BACKEND_URL is correctly set in production build
-
-### P1 (Important)
-- Add rate limiting to contact form endpoint to prevent spam
-- Add CAPTCHA/honeypot to contact form
-
-### P2 (Nice to have)
-- Auto-reply email to form submitter
-- Contact form analytics dashboard
+## Backlog / Future Improvements
+- P1: Add `/api/health` endpoint for monitoring
+- P1: Add rate limiting to prevent spam
+- P2: Add CAPTCHA integration
+- P2: Add contact form analytics
