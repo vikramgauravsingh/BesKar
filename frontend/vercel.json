@@ -3,7 +3,7 @@
   "outputDirectory": "build",
   "functions": {
     "api/**/*.py": {
-      "runtime": "@vercel/python"
+      "runtime": "vercel-python@3.9"
     }
   },
   "rewrites": [
