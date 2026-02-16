@@ -1,0 +1,2 @@
+pymongo==4.6.1
+sib-api-v3-sdk==7.6.0
