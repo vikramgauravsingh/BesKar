@@ -297,6 +297,9 @@ class handler(BaseHTTPRequestHandler):
             # Success response
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
+            self.send_header('X-RateLimit-Limit', str(MAX_REQUESTS_PER_WINDOW))
+            self.send_header('X-RateLimit-Remaining', str(remaining))
+            self.send_header('X-RateLimit-Reset', str(reset_time))
             self.end_headers()
             
             response = {
