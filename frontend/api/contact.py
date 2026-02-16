@@ -207,6 +207,11 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         
         try:
+            # Get client IP
+            client_ip = self.headers.get('X-Forwarded-For', '').split(',')[0].strip() or \
+                       self.headers.get('X-Real-IP', '') or \
+                       self.client_address[0] if hasattr(self, 'client_address') else 'unknown'
+            
             # Read request body
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length)
@@ -238,11 +243,29 @@ class handler(BaseHTTPRequestHandler):
                 }).encode())
                 return
             
+            # Check rate limit
+            db = get_db()
+            is_allowed, remaining, reset_time = check_rate_limit_db(db, client_ip, email)
+            
+            if not is_allowed:
+                self.send_response(429)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('X-RateLimit-Limit', str(MAX_REQUESTS_PER_WINDOW))
+                self.send_header('X-RateLimit-Remaining', '0')
+                self.send_header('X-RateLimit-Reset', str(reset_time))
+                self.send_header('Retry-After', str(reset_time - int(time.time())))
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    "success": False,
+                    "detail": "Too many submissions. Please try again later.",
+                    "retry_after_seconds": reset_time - int(time.time())
+                }).encode())
+                return
+            
             support_email = os.environ.get("SUPPORT_EMAIL", "support@beskarit.com")
             contact_id = None
             
             # Save to MongoDB if available
-            db = get_db()
             if db:
                 try:
                     contact_data = {
@@ -252,6 +275,7 @@ class handler(BaseHTTPRequestHandler):
                         "message": message,
                         "created_at": datetime.now(timezone.utc).isoformat(),
                         "notification_email": support_email,
+                        "client_ip": client_ip
                     }
                     result = db["contacts"].insert_one(contact_data)
                     contact_id = str(result.inserted_id)
