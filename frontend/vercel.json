@@ -1,17 +1,19 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
   "functions": {
-    "api/*.py": {
-      "runtime": "python3.9"
+    "api/**/*.py": {
+      "runtime": "@vercel/python"
     }
   },
   "rewrites": [
     {
-      "source": "/api/contact",
-      "destination": "/api/contact"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     },
     {
-      "source": "/api/health",
-      "destination": "/api/health"
+      "source": "/((?!api).*)",
+      "destination": "/index.html"
     }
   ]
 }
