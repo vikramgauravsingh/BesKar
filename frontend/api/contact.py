@@ -320,7 +320,7 @@ class handler(BaseHTTPRequestHandler):
                 "success": False,
                 "detail": "Invalid JSON in request body."
             }).encode())
-        except Exception as e:
+        except Exception:
             self.send_response(500)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
