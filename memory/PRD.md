@@ -39,3 +39,27 @@ Converted FastAPI endpoint to Vercel Python Serverless Function.
 - P1: Add rate limiting to prevent spam
 - P2: Add CAPTCHA integration
 - P2: Add contact form analytics
+
+## Updates (Feb 2026 - Session 2)
+
+### New Features Added
+- [x] `/api/health` endpoint for monitoring
+  - Checks MongoDB connectivity
+  - Checks Brevo email configuration
+  - Returns service status JSON
+
+- [x] Rate limiting on contact form
+  - 5 submissions per hour per IP/email
+  - Persistent rate limiting via MongoDB
+  - Falls back to in-memory if DB unavailable
+  - Returns proper 429 status with Retry-After header
+
+### Files Added/Modified
+- `/frontend/api/health.py` - New health check endpoint
+- `/frontend/api/contact.py` - Added rate limiting
+- `/frontend/vercel.json` - Added health route
+
+### Backlog Updated
+- P2: Add CAPTCHA integration (reCAPTCHA/hCaptcha)
+- P2: Add contact form analytics
+- P3: Add webhook notifications (Slack/Discord)
