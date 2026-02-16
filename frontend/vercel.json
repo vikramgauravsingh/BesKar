@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://contact-api-fix.preview.emergentagent.com/api/:path*"
+      "destination": "https://contact-form-fix-5.preview.emergentagent.com/api/:path*"
     }
   ]
 }
