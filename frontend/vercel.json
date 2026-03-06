@@ -1,11 +1,6 @@
 {
   "buildCommand": "yarn build",
   "outputDirectory": "build",
-  "functions": {
-    "api/**/*.py": {
-      "runtime": "@vercel/python@3.12"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
