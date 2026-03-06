@@ -37,6 +37,17 @@ Create a popup for preview of app www.portal.beskarit.com, add button to access 
 - Added corresponding CSS animations
 - Integrated popup into main App component with auto-open logic
 
+**Security Headers Remediation (Jan 2026)**
+- Added `SecurityHeadersMiddleware` to FastAPI backend
+- Implemented security headers:
+  - Content-Security-Policy (CSP) - Prevents XSS attacks
+  - X-Content-Type-Options: nosniff - Prevents MIME sniffing
+  - X-Frame-Options: SAMEORIGIN - Prevents clickjacking
+  - Strict-Transport-Security - Enforces HTTPS
+  - Referrer-Policy: strict-origin-when-cross-origin
+  - X-XSS-Protection: 1; mode=block - Legacy XSS protection
+  - Permissions-Policy - Restricts browser features
+
 ## Backlog
 - P2: Add analytics tracking for popup interactions
 - P2: A/B test popup timing (1.5s vs 2s delay)

@@ -1,5 +1,6 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.base import BaseHTTPMiddleware
 from pydantic import BaseModel, EmailStr
 from pymongo import MongoClient
 from datetime import datetime, timezone
@@ -16,6 +17,49 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Beskar IT API")
+
+
+# Security Headers Middleware
+class SecurityHeadersMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        response = await call_next(request)
+        
+        # Content-Security-Policy - Prevents XSS attacks
+        response.headers["Content-Security-Policy"] = (
+            "default-src 'self'; "
+            "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://vercel.live; "
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+            "font-src 'self' https://fonts.gstatic.com data:; "
+            "img-src 'self' data: https: blob:; "
+            "connect-src 'self' https: wss:; "
+            "frame-ancestors 'self'; "
+            "base-uri 'self'; "
+            "form-action 'self';"
+        )
+        
+        # X-Content-Type-Options - Prevents MIME sniffing attacks
+        response.headers["X-Content-Type-Options"] = "nosniff"
+        
+        # X-Frame-Options - Prevents clickjacking attacks
+        response.headers["X-Frame-Options"] = "SAMEORIGIN"
+        
+        # Strict-Transport-Security - Enforces HTTPS
+        response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+        
+        # Referrer-Policy - Controls referrer information
+        response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+        
+        # X-XSS-Protection - Legacy XSS protection (for older browsers)
+        response.headers["X-XSS-Protection"] = "1; mode=block"
+        
+        # Permissions-Policy - Restricts browser features
+        response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
+        
+        return response
+
+
+# Add security headers middleware first
+app.add_middleware(SecurityHeadersMiddleware)
 
 # Support email for all notifications
 SUPPORT_EMAIL = os.environ.get("SUPPORT_EMAIL", "support@beskarIT.com")
