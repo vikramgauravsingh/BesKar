@@ -4,7 +4,7 @@
 Contact form giving 404 error on Vercel deployment at `https://www.beskarit.com/api/contact`. The frontend works locally but the API endpoint fails in production.
 
 ## Root Cause
-The `vercel.json` was configured to rewrite `/api/*` requests to an Emergent preview URL (`https://contact-form-fix-5.preview.emergentagent.com`) which doesn't exist in production. Vercel is a frontend-only platform and cannot run FastAPI directly.
+The `vercel.json` was configured to rewrite `/api/*` requests to an Emergent preview URL (`https://portal-preview-16.preview.emergentagent.com`) which doesn't exist in production. Vercel is a frontend-only platform and cannot run FastAPI directly.
 
 ## Solution Implemented
 Converted FastAPI endpoint to Vercel Python Serverless Function.

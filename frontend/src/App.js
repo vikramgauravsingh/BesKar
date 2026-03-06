@@ -84,6 +84,121 @@ const useCounter = (end, duration = 2000, inView) => {
   return count;
 };
 
+// Portal Preview Popup Component
+const PortalPreviewPopup = ({ isOpen, onClose }) => {
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  const portalFeatures = [
+    { icon: ClipboardCheck, title: "GRC Dashboard", description: "Unified compliance management across 8+ frameworks" },
+    { icon: Eye, title: "OSINT Toolkit", description: "Threat intelligence from 15+ sources" },
+    { icon: Bug, title: "Vulnerability Scanner", description: "122 security rules with SBOM generation" },
+    { icon: Cloud, title: "Cloud Security", description: "AWS, Azure, GCP posture management" }
+  ];
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
+        onClick={onClose}
+        data-testid="portal-preview-popup"
+      >
+        <motion.div
+          initial={{ scale: 0.85, opacity: 0, y: 30 }}
+          animate={{ scale: 1, opacity: 1, y: 0 }}
+          exit={{ scale: 0.85, opacity: 0, y: 30 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          className="relative w-full max-w-lg bg-gradient-to-br from-beskar-bg via-beskar-paper to-beskar-bg border border-slate-700 overflow-hidden shadow-2xl"
+          onClick={(e) => e.stopPropagation()}
+          style={{ boxShadow: '0 0 60px rgba(56, 189, 248, 0.15)' }}
+        >
+          {/* Decorative top border */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-beskar-cyan to-transparent" />
+          
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 text-slate-500 hover:text-white transition-colors z-10"
+            data-testid="portal-popup-close"
+          >
+            <X size={20} />
+          </button>
+
+          {/* Content */}
+          <div className="p-8">
+            {/* Header */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center justify-center p-3 bg-beskar-cyan/10 border border-beskar-cyan/30 mb-4">
+                <Shield className="w-8 h-8 text-beskar-cyan" />
+              </div>
+              <h2 className="font-heading text-2xl md:text-3xl font-bold text-white mb-2">
+                Beskar Security Portal
+              </h2>
+              <p className="text-slate-400 text-sm">
+                Your unified platform for GRC, OSINT & Cloud Security
+              </p>
+            </div>
+
+            {/* Features Grid */}
+            <div className="grid grid-cols-2 gap-3 mb-8">
+              {portalFeatures.map((feature, index) => (
+                <motion.div
+                  key={feature.title}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 + index * 0.1 }}
+                  className="p-3 bg-beskar-bg/50 border border-slate-800 hover:border-beskar-cyan/30 transition-colors"
+                >
+                  <feature.icon className="w-5 h-5 text-beskar-cyan mb-2" />
+                  <h3 className="text-white text-sm font-medium mb-1">{feature.title}</h3>
+                  <p className="text-slate-500 text-xs leading-relaxed">{feature.description}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="space-y-3">
+              <a
+                href="https://www.portal.beskarit.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary w-full flex items-center justify-center gap-2 bg-beskar-cyan text-beskar-bg hover:bg-beskar-cyan/90 py-4 font-semibold text-lg transition-all"
+                data-testid="portal-access-button"
+              >
+                Access Portal
+                <ArrowRight className="w-5 h-5" />
+              </a>
+              <button
+                onClick={onClose}
+                className="w-full text-slate-400 hover:text-white py-2 text-sm transition-colors"
+                data-testid="portal-popup-dismiss"
+              >
+                Continue to Website
+              </button>
+            </div>
+          </div>
+
+          {/* Decorative bottom glow */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 h-32 bg-beskar-cyan/10 blur-3xl pointer-events-none" />
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 // Navigation Component
 const Navigation = ({ currentPage, setCurrentPage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -1483,6 +1598,24 @@ const Footer = ({ setCurrentPage }) => {
 function App() {
   useSmoothScroll();
   const [currentPage, setCurrentPage] = useState('home');
+  const [showPortalPopup, setShowPortalPopup] = useState(false);
+
+  // Auto-open portal popup on page load (with slight delay for better UX)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // Check if user has already dismissed the popup in this session
+      const hasSeenPopup = sessionStorage.getItem('portalPopupSeen');
+      if (!hasSeenPopup) {
+        setShowPortalPopup(true);
+      }
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleClosePopup = () => {
+    setShowPortalPopup(false);
+    sessionStorage.setItem('portalPopupSeen', 'true');
+  };
 
   const renderPage = () => {
     switch (currentPage) {
@@ -1511,6 +1644,7 @@ function App() {
         {renderPage()}
       </main>
       <Footer setCurrentPage={setCurrentPage} />
+      <PortalPreviewPopup isOpen={showPortalPopup} onClose={handleClosePopup} />
       <Analytics />
       <SpeedInsights />
     </div>
