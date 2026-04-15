@@ -577,6 +577,7 @@ const ProductsSection = () => {
     },
     {
       id: "litesabre",
+      badge: "v3.0",
       name: "LiteSabre Scanner",
       tagline: "SAST & Dependency Vulnerability Scanner",
       description: "Comprehensive SAST, dependency, IaC, container, and secrets scanning with 176+ security rules, 250+ attack payloads, CI/CD integration, and SBOM generation.",
@@ -1711,7 +1712,6 @@ function App() {
             <WhyBeskar />
             <ServicesSection />
             <ComplianceSection />
-            <WhatsNew />
             <ImpactSection />
             <ContactSection />
           </>
