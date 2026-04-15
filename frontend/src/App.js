@@ -526,6 +526,7 @@ const ProductsSection = () => {
   const products = [
     {
       id: "grc-nexus",
+      badge: "v3.0",
       name: "GRC Nexus",
       tagline: "Governance, Risk & Compliance Platform",
       description: "Comprehensive GRC platform supporting 50+ compliance frameworks with risk management, audit management, STRIDE threat modeling, and executive dashboards.",
@@ -601,6 +602,7 @@ const ProductsSection = () => {
     },
     {
       id: "amidala-cspm",
+      badge: "v3.0",
       name: "Amidala CSPM",
       tagline: "Cloud Security Posture Management",
       description: "Multi-cloud security for AWS, Azure, GCP with 185 security checks, automated evidence collection, compliance mapping to CIS/NIST/PCI-DSS, and real-time alerts.",
@@ -626,6 +628,7 @@ const ProductsSection = () => {
     },
     {
       id: "litesabre-pro",
+      badge: "NEW",
       name: "LiteSabre Pro",
       tagline: "Automated Penetration Testing",
       description: "Enterprise-grade DAST for web, mobile (APK/IPA), and desktop applications with AI-powered autonomous pentesting and HackerOne scope integration.",
@@ -651,6 +654,7 @@ const ProductsSection = () => {
     },
     {
       id: "dpdpa-consent",
+      badge: "NEW",
       name: "DPDPA Consent Manager",
       tagline: "India Data Privacy Compliance",
       description: "Complete India DPDPA 2023 compliance suite with consent management, PII scanning across multiple databases, breach notification tracking, and DSR management.",
@@ -730,7 +734,14 @@ const ProductsSection = () => {
                     <product.icon className="w-6 h-6 text-beskar-cyan" />
                   </div>
                   <div>
-                    <h3 className="font-heading text-2xl font-bold text-white">{product.name}</h3>
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-heading text-2xl font-bold text-white">{product.name}</h3>
+                      {product.badge && (
+                        <span className={`px-2 py-0.5 text-xs font-mono ${product.badge === 'NEW' ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-beskar-cyan/20 text-beskar-cyan border border-beskar-cyan/30'}`} data-testid={`badge-${product.id}`}>
+                          {product.badge}
+                        </span>
+                      )}
+                    </div>
                     <p className="text-beskar-cyan text-sm">{product.tagline}</p>
                   </div>
                 </div>
@@ -1023,32 +1034,32 @@ const ImpactSection = () => {
 
   const stats = [
     { 
-      value: 70, 
-      suffix: "%+", 
-      label: "Audit Time Reduction",
-      description: "Reduce audit preparation time with unified compliance management",
-      icon: Activity
-    },
-    { 
       value: 50, 
       suffix: "+", 
-      label: "Security Checks",
-      description: "Pre-built cloud security checks across AWS, Azure, and GCP",
+      label: "Compliance Frameworks",
+      description: "Unified framework management including ISO, NIST, GDPR, HIPAA, DPDPA",
       icon: Shield
     },
     { 
-      value: 122, 
-      suffix: "", 
+      value: 176, 
+      suffix: "+", 
       label: "Security Rules",
-      description: "Comprehensive vulnerability and secret detection rules",
+      description: "Comprehensive SAST, secrets, API, crypto, IaC, and frontend scanning",
       icon: Bug
     },
     { 
-      value: 15, 
+      value: 185, 
+      suffix: "", 
+      label: "Cloud Security Checks",
+      description: "Multi-cloud controls across AWS, Azure, and GCP",
+      icon: Cloud
+    },
+    { 
+      value: 250, 
       suffix: "+", 
-      label: "Threat Intel Sources",
-      description: "Integrated threat intelligence for comprehensive analysis",
-      icon: Eye
+      label: "Attack Payloads",
+      description: "SQLi, XSS, SSRF, SSTI and more across 8 categories",
+      icon: Zap
     },
   ];
 
