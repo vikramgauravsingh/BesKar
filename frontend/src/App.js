@@ -32,9 +32,13 @@ import {
   Zap,
   Mail,
   ArrowLeft,
-  Linkedin
+  Linkedin,
+  BookOpen
 } from 'lucide-react';
 import './App.css';
+import PlatformGlance from './components/PlatformGlance';
+import WhyBeskar from './components/WhyBeskar';
+import WhatsNew from './components/WhatsNew';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 const SUPPORT_EMAIL = 'support@beskarit.com';
@@ -100,10 +104,10 @@ const PortalPreviewPopup = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const portalFeatures = [
-    { icon: ClipboardCheck, title: "GRC Dashboard", description: "Unified compliance management across 8+ frameworks" },
+    { icon: ClipboardCheck, title: "GRC Dashboard", description: "Unified compliance management across 50+ frameworks" },
     { icon: Eye, title: "OSINT Toolkit", description: "Threat intelligence from 15+ sources" },
-    { icon: Bug, title: "Vulnerability Scanner", description: "122 security rules with SBOM generation" },
-    { icon: Cloud, title: "Cloud Security", description: "AWS, Azure, GCP posture management" }
+    { icon: Bug, title: "Vulnerability Scanner", description: "176+ security rules with AI pentesting" },
+    { icon: Cloud, title: "Cloud Security", description: "185 checks across AWS, Azure, GCP" }
   ];
 
   return (
@@ -211,10 +215,10 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
   }, []);
 
   const navItems = [
+    { name: 'Platform', href: '#platform' },
     { name: 'Products', href: '#products' },
     { name: 'Services', href: '#services' },
     { name: 'Compliance', href: '#compliance' },
-    { name: 'Impact', href: '#impact' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -348,7 +352,7 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <span className="inline-block px-4 py-2 mb-8 text-sm font-mono text-beskar-cyan border border-beskar-cyan/30 bg-beskar-cyan/5">
-            Unified Compliance & Risk Reduction
+            GRC | Threat Intel | Scanning | Cloud Security | Privacy
           </span>
         </motion.div>
 
@@ -380,7 +384,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
         >
-          We help align multiple frameworks to reduce duplicate work, audit fatigue, and overall cost.
+          Purpose-built for CISOs, compliance officers, security engineers, and auditors. Unifying GRC, OSINT, vulnerability scanning, cloud security, and data privacy.
         </motion.p>
 
         <motion.div 
@@ -523,25 +527,25 @@ const ProductsSection = () => {
     {
       id: "grc-nexus",
       name: "GRC Nexus",
-      tagline: "Compliance Management Platform",
-      description: "Comprehensive GRC platform supporting 8+ compliance frameworks with custom framework builder, policy management, and executive dashboards.",
-      fullDescription: "GRC Nexus is your centralized compliance management solution supporting ISO 27001, SOC 2, GDPR, CCPA, PCI DSS, HIPAA, ISO 42001, and USPCF frameworks. With cross-framework mappings, automated policy generation, and real-time compliance tracking, reduce audit preparation time by 70%.",
+      tagline: "Governance, Risk & Compliance Platform",
+      description: "Comprehensive GRC platform supporting 50+ compliance frameworks with risk management, audit management, STRIDE threat modeling, and executive dashboards.",
+      fullDescription: "GRC Nexus is your centralized compliance management solution supporting 50+ frameworks including ISO 27001, SOC 2, GDPR, PCI DSS, HIPAA, NIST, DPDPA, and more. Features risk management with interactive heatmaps and KRI monitoring, audit management with engagements and findings tracking, STRIDE threat modeling, cross-framework mappings, and real-time compliance tracking.",
       icon: ClipboardCheck,
-      features: ["8+ compliance frameworks", "Custom framework builder", "Policy management", "Executive dashboards"],
+      features: ["50+ compliance frameworks", "Risk & audit management", "STRIDE threat modeling", "Executive dashboards"],
       detailedFeatures: [
-        { title: "Multi-Framework Support", description: "ISO 27001, SOC 2, GDPR, CCPA, PCI DSS, HIPAA, ISO 42001, USPCF with cross-framework mappings" },
-        { title: "Custom Framework Builder", description: "Create custom frameworks or use pre-built templates for Startup Security, Healthcare, Fintech, SaaS" },
+        { title: "50+ Framework Support", description: "ISO 27001, SOC 2, GDPR, PCI DSS, HIPAA, NIST, DPDPA, USPCF, and more with cross-framework mappings" },
+        { title: "Risk Management", description: "Risk register, 5x5 heatmap, risk treatments (Mitigate, Accept, Transfer, Avoid), and KRI monitoring" },
+        { title: "Audit Management", description: "Engagements, findings, workpapers, audit calendar, and evidence linking for streamlined audits" },
+        { title: "STRIDE Threat Modeling", description: "Interactive drag-and-drop data flow diagrams with React Flow for comprehensive threat analysis" },
         { title: "Policy Management", description: "Rich text editor, pre-built templates, version control, and approval workflows" },
-        { title: "Document & Evidence Management", description: "Chunked file upload, approval workflows, audit trail, and overdue indicators" },
-        { title: "Executive GRC Dashboard", description: "Real-time compliance visibility, framework metrics, and pending approvals widget" },
-        { title: "Compliance Trends", description: "Chart.js visualizations with historical data and AI-driven recommendations" }
+        { title: "Executive GRC Dashboard", description: "Real-time compliance visibility, cross-framework metrics, and AI-driven recommendations" }
       ],
       useCases: [
         "Reduce audit preparation time by 70%",
-        "Ensure no controls are missed",
-        "Leverage common controls across frameworks",
-        "Maintain continuous compliance",
-        "Single source of truth for compliance"
+        "Manage risk with interactive heatmaps",
+        "Model threats with STRIDE methodology",
+        "Maintain continuous compliance across 50+ frameworks",
+        "Single source of truth for GRC"
       ],
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&w=800&q=85"
     },
@@ -573,22 +577,22 @@ const ProductsSection = () => {
     {
       id: "litesabre",
       name: "LiteSabre Scanner",
-      tagline: "Vulnerability & Secret Scanner",
-      description: "Code, container, IaC, and secrets vulnerability scanning with 122 security rules, SBOM generation, and integration with NVD/OSV databases.",
-      fullDescription: "LiteSabre is a comprehensive vulnerability scanner covering code dependencies, Docker containers, Infrastructure as Code, and secrets detection. With 122 security rules covering OWASP Top 10, CWE Top 25, and 40 secret detection patterns for AWS, GCP, Azure, and more.",
+      tagline: "SAST & Dependency Vulnerability Scanner",
+      description: "Comprehensive SAST, dependency, IaC, container, and secrets scanning with 176+ security rules, 250+ attack payloads, CI/CD integration, and SBOM generation.",
+      fullDescription: "LiteSabre is a comprehensive vulnerability scanner covering SAST, code dependencies, Docker containers, Infrastructure as Code, secrets detection, and CI/CD pipeline integration. With 176+ security rules covering OWASP Top 10, CWE Top 25, 40 secret detection patterns, 0-100% confidence scoring, and support for GitHub Actions, GitLab CI, and Jenkins.",
       icon: Bug,
-      features: ["122 security rules", "SBOM generation", "Secret detection", "Multi-format export"],
+      features: ["176+ security rules", "250+ attack payloads", "CI/CD integration", "SBOM generation"],
       detailedFeatures: [
-        { title: "Multi-Type Scanning", description: "Dependency files, Git repositories, Docker containers, Terraform/K8s YAML, and source code" },
-        { title: "Secret Detection", description: "40 patterns for AWS, GCP, Azure, GitHub, Slack, Stripe, databases, private keys, AI services" },
-        { title: "Security Rules Library", description: "122 rules covering API Security, Cryptography, Serialization, IaC, Frontend, Headers, SAST" },
-        { title: "Vulnerability Database", description: "Live integration with NVD CVE API and OSV API for CVSS scores and package-specific data" },
-        { title: "SBOM Generation", description: "CycloneDX, SPDX, CSV, JSON formats with package health metrics and license information" },
-        { title: "Export Capabilities", description: "JSON, PDF, Markdown reports for compliance documentation" }
+        { title: "Multi-Type Scanning", description: "Dependency files, Git repositories, Docker containers, Terraform/K8s YAML, source code, and CI/CD pipelines" },
+        { title: "Secret Detection", description: "40 patterns for AWS, GCP, Azure, GitHub, Slack, Stripe, databases, private keys, and AI services" },
+        { title: "176+ Security Rules", description: "SAST rules covering API Security, Cryptography, Serialization, IaC, Frontend, Headers, and more" },
+        { title: "CI/CD Integration", description: "GitHub Actions, GitLab CI, Jenkins, and Generic Webhook scanning with pipeline security gates" },
+        { title: "Confidence Scoring", description: "0-100% confidence scores with color-coded badges for intelligent vulnerability prioritization" },
+        { title: "SBOM & Reports", description: "CycloneDX, SPDX, PDF, HTML, JSON, Markdown, CSV export formats for compliance documentation" }
       ],
       useCases: [
         "Shift security left in development",
-        "Reduce production security issues",
+        "Integrate security into CI/CD pipelines",
         "Detect hardcoded secrets before commit",
         "Supply chain security monitoring",
         "Link vulnerabilities to compliance controls"
@@ -599,26 +603,76 @@ const ProductsSection = () => {
       id: "amidala-cspm",
       name: "Amidala CSPM",
       tagline: "Cloud Security Posture Management",
-      description: "Multi-cloud security for AWS, Azure, GCP with 50+ pre-built checks, compliance mapping to CIS/NIST/PCI-DSS, and real-time alerts.",
-      fullDescription: "Amidala CSPM provides comprehensive cloud security posture management for AWS, Azure, and GCP. With 50+ pre-built security checks across IAM, Storage, Logging, Network, Encryption, Database, and Compute categories, mapped to CIS Benchmarks, NIST 800-53, PCI-DSS, SOC2, GDPR, HIPAA, and ISO 27001.",
+      description: "Multi-cloud security for AWS, Azure, GCP with 185 security checks, automated evidence collection, compliance mapping to CIS/NIST/PCI-DSS, and real-time alerts.",
+      fullDescription: "Amidala CSPM provides comprehensive cloud security posture management for AWS, Azure, and GCP. With 185 security checks across IAM, Storage, Logging, Network, Encryption, Database, and Compute categories. Features automated evidence collection linking cloud findings to GRC controls, and a catalog of 50 misconfigurations across 9 categories.",
       icon: Cloud,
-      features: ["AWS, Azure, GCP support", "50+ security checks", "CIS/NIST/PCI mapping", "Real-time alerts"],
+      features: ["AWS, Azure, GCP support", "185 security checks", "Automated evidence collection", "CIS/NIST/PCI mapping"],
       detailedFeatures: [
-        { title: "Multi-Cloud Support", description: "AWS (25+ checks), Azure (20+ checks), GCP (15+ checks) with unified dashboard" },
+        { title: "Multi-Cloud Support", description: "185 checks across AWS, Azure, and GCP with unified security dashboard" },
         { title: "Scan Categories", description: "IAM, Storage, Logging, Network, Encryption, Database, Compute security assessments" },
         { title: "Compliance Mapping", description: "Findings mapped to CIS Benchmarks, NIST 800-53, PCI-DSS, SOC2, GDPR, HIPAA, ISO 27001" },
-        { title: "Real-time Notifications", description: "WebSocket-powered scan progress and security alerts with expandable findings" },
-        { title: "Prowler-Inspired Dashboard", description: "Security score, risk pipeline, service watchlist with detailed remediation steps" },
-        { title: "Role-Based Access", description: "Admin, Security Analyst, Auditor, Viewer roles with async scanning via Redis/Celery" }
+        { title: "Automated Evidence Collection", description: "One-click evidence collection from CSPM scans linked to GRC compliance controls" },
+        { title: "Misconfigurations Database", description: "50 cloud misconfigurations across 9 categories for proactive security posture management" },
+        { title: "Role-Based Access", description: "Admin, Security Analyst, Auditor, Viewer roles with real-time WebSocket scan progress" }
       ],
       useCases: [
         "Identify cloud misconfigurations before exploitation",
+        "Automate compliance evidence collection",
         "Maintain continuous multi-framework compliance",
-        "Reduce manual audit preparation by 70%",
         "Get actionable remediation guidance",
         "Track security posture improvements"
       ],
       image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?crop=entropy&cs=srgb&fm=jpg&w=800&q=85"
+    },
+    {
+      id: "litesabre-pro",
+      name: "LiteSabre Pro",
+      tagline: "Automated Penetration Testing",
+      description: "Enterprise-grade DAST for web, mobile (APK/IPA), and desktop applications with AI-powered autonomous pentesting and HackerOne scope integration.",
+      fullDescription: "LiteSabre Pro brings automated penetration testing to web applications (DAST), mobile apps (APK/IPA), and desktop applications (PE/ELF/Mach-O/DMG). Features an AI Pentest Agent with autonomous testing using 12+ simulated Kali tools, HackerOne Bug Bounty scope scraping, and Frida-based mobile dynamic analysis with 27 runtime checks.",
+      icon: Target,
+      features: ["AI Pentest Agent", "Web/Mobile/Desktop DAST", "HackerOne integration", "Frida dynamic analysis"],
+      detailedFeatures: [
+        { title: "AI Pentest Agent", description: "Autonomous pentesting with Think-Act-Observe loop using 12+ simulated Kali Linux tools and LLM reasoning" },
+        { title: "Web DAST Scanner", description: "35 YAML-based security rules with 250+ attack payloads across SQLi, XSS, SSRF, SSTI, and more" },
+        { title: "Mobile Analysis", description: "APK and IPA scanning with Frida-based dynamic analysis: 27 runtime checks across 6 categories" },
+        { title: "Desktop Scanning", description: "Security analysis for PE (Windows), ELF (Linux), Mach-O (macOS), and DMG applications" },
+        { title: "HackerOne Integration", description: "Auto-import in-scope targets from HackerOne Bug Bounty programs for focused testing" },
+        { title: "Professional Reports", description: "AI Pentest PDF reports with one-click rescan capability and confidence scoring" }
+      ],
+      useCases: [
+        "Automate repetitive penetration testing tasks",
+        "Scale security testing across web, mobile, desktop",
+        "Integrate with bug bounty programs",
+        "Reduce manual pentesting hours",
+        "Generate compliance-ready pentest reports"
+      ],
+      image: "https://images.unsplash.com/photo-1760199789455-49098afd02f0?crop=entropy&cs=srgb&fm=jpg&w=800&q=85"
+    },
+    {
+      id: "dpdpa-consent",
+      name: "DPDPA Consent Manager",
+      tagline: "India Data Privacy Compliance",
+      description: "Complete India DPDPA 2023 compliance suite with consent management, PII scanning across multiple databases, breach notification tracking, and DSR management.",
+      fullDescription: "The DPDPA Consent Manager provides end-to-end compliance for India's Digital Personal Data Protection Act, 2023. Features consent purpose management, consent banner builder with embeddable JS/React components, multi-database PII scanning (14 categories across PostgreSQL, MySQL, SQL Server, MongoDB), breach notification tracking with 72-hour DPB countdown, and Data Subject Request management.",
+      icon: Lock,
+      features: ["Consent management", "PII scanner (14 categories)", "Breach notification", "DSR management"],
+      detailedFeatures: [
+        { title: "Consent Banner Builder", description: "Visual builder for DPDPA consent banners with embeddable JavaScript and React component exports" },
+        { title: "Multi-Database PII Scanner", description: "Scan PostgreSQL, MySQL, SQL Server, MongoDB for 14 PII categories with Section 8(4) violation checks" },
+        { title: "Breach Notification Tracker", description: "72-hour DPB countdown timer with auto-generated notification letters for DPB and data principals" },
+        { title: "Data Subject Requests", description: "Manage Access, Correction, Erasure, Grievance, and Nomination requests with 7-day SLA tracking" },
+        { title: "DPDPA Dashboard", description: "Real-time compliance score, consent statistics, DSR metrics, and PII scan summary" },
+        { title: "Jira Integration", description: "Auto-ticket creation for DSRs and breach notifications with workflow automation" }
+      ],
+      useCases: [
+        "Achieve India DPDPA 2023 compliance",
+        "Scan databases for personal data exposure",
+        "Manage consent collection and withdrawal",
+        "Track breach notification timelines",
+        "Generate DPDPA compliance reports"
+      ],
+      image: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?crop=entropy&cs=srgb&fm=jpg&w=800&q=85"
     }
   ];
 
@@ -642,11 +696,11 @@ const ProductsSection = () => {
         >
           <span className="text-beskar-cyan font-mono text-sm mb-4 block">Beskar Security Platform</span>
           <h2 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6">
-            Unified GRC, Cloud Security<br />
-            <span className="text-slate-500">& Open Source Intelligence</span>
+            Six integrated modules for<br />
+            <span className="text-slate-500">complete security coverage</span>
           </h2>
           <p className="text-lg text-slate-400 max-w-3xl">
-            A comprehensive platform for cybersecurity professionals, compliance officers, threat hunters, and security analysts.
+            A comprehensive platform for cybersecurity professionals, compliance officers, threat hunters, security analysts, and data protection officers.
           </p>
         </motion.div>
 
@@ -757,6 +811,18 @@ const ServicesSection = () => {
       description: "Ongoing security operations support",
       icon: Shield,
       items: ["24/7 Monitoring", "Incident Response", "Threat Intelligence", "Security Operations", "Continuous Compliance"]
+    },
+    {
+      category: "AI Pentesting",
+      description: "AI-powered autonomous penetration testing",
+      icon: Target,
+      items: ["AI Pentest Agent", "HackerOne Scope Import", "Autonomous Discovery", "PDF Reports", "One-Click Rescan"]
+    },
+    {
+      category: "Security Training",
+      description: "Security awareness education programs",
+      icon: BookOpen,
+      items: ["16 Training Modules", "Interactive Quizzes", "Badges & Leaderboards", "Compliance Mapping", "PDF Slide Upload"]
     }
   ];
 
@@ -904,7 +970,7 @@ const ComplianceSection = () => {
           <span className="text-beskar-cyan font-mono text-sm mb-4 block">Compliance Expertise</span>
           <h2 className="font-heading text-4xl md:text-6xl font-bold text-white mb-6">
             Frameworks & standards<br />
-            <span className="text-slate-500">we help you achieve</span>
+            <span className="text-slate-500">we help you achieve (50+)</span>
           </h2>
           <p className="text-lg text-slate-400">
             We help align multiple frameworks to reduce duplicate work, audit fatigue, and overall cost through unified compliance management.
@@ -1008,7 +1074,7 @@ const ImpactSection = () => {
           <span className="text-beskar-cyan font-mono text-sm mb-4 block">Platform Capabilities</span>
           <h2 className="font-heading text-4xl md:text-6xl font-bold text-white">
             Built for enterprise<br />
-            <span className="text-slate-500">security teams</span>
+            <span className="text-slate-500">security at scale</span>
           </h2>
         </motion.div>
 
@@ -1513,7 +1579,7 @@ const Footer = ({ setCurrentPage }) => {
               <span className="font-heading font-bold text-xl text-white">Beskar IT</span>
             </div>
             <p className="text-slate-500 mb-4">
-              Unified Compliance & Risk Reduction Platform.
+              Unified GRC, Threat Intel, Vulnerability Scanning, Cloud Security & Data Privacy Platform.
             </p>
             <p className="text-beskar-cyan italic mb-4">"This is the way"</p>
             <a 
@@ -1542,7 +1608,9 @@ const Footer = ({ setCurrentPage }) => {
               <li><a href="#products" className="text-slate-500 hover:text-white transition-colors">GRC Nexus</a></li>
               <li><a href="#products" className="text-slate-500 hover:text-white transition-colors">OSINT Toolkit</a></li>
               <li><a href="#products" className="text-slate-500 hover:text-white transition-colors">LiteSabre Scanner</a></li>
+              <li><a href="#products" className="text-slate-500 hover:text-white transition-colors">LiteSabre Pro</a></li>
               <li><a href="#products" className="text-slate-500 hover:text-white transition-colors">Amidala CSPM</a></li>
+              <li><a href="#products" className="text-slate-500 hover:text-white transition-colors">DPDPA Consent</a></li>
             </ul>
           </div>
 
@@ -1627,9 +1695,12 @@ function App() {
         return (
           <>
             <HeroSection />
+            <PlatformGlance />
             <ProductsSection />
+            <WhyBeskar />
             <ServicesSection />
             <ComplianceSection />
+            <WhatsNew />
             <ImpactSection />
             <ContactSection />
           </>
