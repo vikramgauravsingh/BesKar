@@ -33,28 +33,56 @@ const BeskarConsentBanner = ({ userId, onConsent }) => {
     },
   ];
 
+  const openBanner = () => {
+    setSelections((prev) => {
+      // Preload from last stored selection if available, otherwise mandatory-only
+      try {
+        const stored = JSON.parse(localStorage.getItem('beskar_consent_' + BANNER_ID) || 'null');
+        if (stored && Array.isArray(stored.accepted)) {
+          return Object.fromEntries(
+            purposes.map((p) => [p.id, p.mandatory || stored.accepted.includes(p.id)])
+          );
+        }
+      } catch (e) {
+        /* ignore */
+      }
+      return Object.fromEntries(purposes.map((p) => [p.id, p.mandatory]));
+    });
+    setVisible(true);
+    fetch(API_URL + '/banner/' + BANNER_ID + '/impression', { method: 'POST' }).catch(() => {});
+  };
+
   useEffect(() => {
     const stored = localStorage.getItem('beskar_consent_' + BANNER_ID);
+    let needsBanner = true;
     if (stored) {
       try {
         const prev = JSON.parse(stored);
-        if (prev.version === VERSION) return;
+        if (prev.version === VERSION) needsBanner = false;
       } catch (e) {
         /* ignore parse errors */
       }
     }
-    setVisible(true);
-    setSelections(Object.fromEntries(purposes.map((p) => [p.id, p.mandatory])));
-    fetch(API_URL + '/banner/' + BANNER_ID + '/impression', { method: 'POST' }).catch(() => {});
+    if (needsBanner) {
+      setVisible(true);
+      setSelections(Object.fromEntries(purposes.map((p) => [p.id, p.mandatory])));
+      fetch(API_URL + '/banner/' + BANNER_ID + '/impression', { method: 'POST' }).catch(() => {});
+    }
+
+    const handleOpen = () => openBanner();
+    window.addEventListener('beskar:open-consent', handleOpen);
+    return () => window.removeEventListener('beskar:open-consent', handleOpen);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleConsent = async (accepted, rejected) => {
+    const resolvedUserId =
+      userId || (typeof window !== 'undefined' ? window.__beskarUserId : null) || null;
     const principal =
-      userId ||
+      resolvedUserId ||
       localStorage.getItem('beskar_uid') ||
       'anon_' + Math.random().toString(36).substr(2, 12);
-    if (!userId) localStorage.setItem('beskar_uid', principal);
+    if (!resolvedUserId) localStorage.setItem('beskar_uid', principal);
 
     let data = {};
     try {
@@ -64,7 +92,7 @@ const BeskarConsentBanner = ({ userId, onConsent }) => {
         body: JSON.stringify({
           banner_id: BANNER_ID,
           principal_identifier: principal,
-          identifier_type: userId ? 'user_id' : 'cookie',
+          identifier_type: resolvedUserId ? 'user_id' : 'cookie',
           purposes_accepted: accepted,
           purposes_rejected: rejected,
           user_agent: navigator.userAgent,

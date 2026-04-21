@@ -32,6 +32,10 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - Supports Accept All / Reject All / Manage Preferences (Essential + Session mandatory, Marketing optional)
 - Fixed JSX syntax from original snippet (single → double braces for style objects) and contrast on "Accept All" button
 
+### Iteration 4 - Consent Reopen + User-ID Bridge (Jan 2026)
+- Added "Cookie Preferences" link in footer (`footer-cookie-preferences-link`) that dispatches a `beskar:open-consent` event the banner listens for; banner reopens with previously saved selections preloaded
+- `BeskarConsentBanner` now resolves `userId` from: prop → `window.__beskarUserId` (auth-context bridge) → anonymous cookie ID — ready for future login integration without further changes
+
 ## Products (6 total)
 1. GRC Nexus (v3.0) - 50+ frameworks, risk/audit mgmt, STRIDE
 2. Beskar OSINT Toolkit - 15+ threat intel sources

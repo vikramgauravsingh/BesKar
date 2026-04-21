@@ -1667,6 +1667,13 @@ const Footer = ({ setCurrentPage }) => {
             >
               Terms of Service
             </button>
+            <button
+              onClick={() => window.dispatchEvent(new Event('beskar:open-consent'))}
+              className="text-slate-600 hover:text-white transition-colors"
+              data-testid="footer-cookie-preferences-link"
+            >
+              Cookie Preferences
+            </button>
             <a href={`mailto:${SUPPORT_EMAIL}`} className="text-slate-600 hover:text-white transition-colors">Contact</a>
           </div>
         </div>
