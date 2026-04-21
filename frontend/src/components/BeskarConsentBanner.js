@@ -72,7 +72,6 @@ const BeskarConsentBanner = ({ userId, onConsent }) => {
     const handleOpen = () => openBanner();
     window.addEventListener('beskar:open-consent', handleOpen);
     return () => window.removeEventListener('beskar:open-consent', handleOpen);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleConsent = async (accepted, rejected) => {
@@ -99,10 +98,8 @@ const BeskarConsentBanner = ({ userId, onConsent }) => {
         }),
       });
       data = await resp.json();
-      // eslint-disable-next-line no-console
       console.log('Beskar consent recorded:', data.consent_id, 'records:', data.records_created);
     } catch (e) {
-      // eslint-disable-next-line no-console
       console.warn('Beskar consent submission failed:', e);
     }
 
