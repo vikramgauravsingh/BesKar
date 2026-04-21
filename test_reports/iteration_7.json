@@ -21,7 +21,7 @@
     ]
   },
   "passed_tests": [
-    "Frontend application loads successfully at https://nexus-osint-update.preview.emergentagent.com",
+    "Frontend application loads successfully at https://contact-fix-13.preview.emergentagent.com",
     "Main navigation and hero section render correctly",
     "No build errors or compilation issues in frontend",
     "PortalPreviewPopup component is properly implemented in code with correct data-testids",

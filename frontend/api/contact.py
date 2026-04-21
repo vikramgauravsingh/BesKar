@@ -126,8 +126,17 @@ def get_db():
     db_name = os.environ.get("DB_NAME", "beskarit")
     if not mongo_url:
         return None
-    client = MongoClient(mongo_url)
-    return client[db_name]
+    try:
+        client = MongoClient(
+            mongo_url,
+            serverSelectionTimeoutMS=3000,
+            connectTimeoutMS=3000,
+            socketTimeoutMS=3000,
+        )
+        return client[db_name]
+    except Exception as e:
+        print(f"MongoDB connection error: {e}")
+        return None
 
 
 def send_notification_email(form_data):
@@ -203,9 +212,6 @@ class handler(BaseHTTPRequestHandler):
     
     def do_POST(self):
         """Handle contact form submission"""
-        # CORS headers
-        self.send_header('Access-Control-Allow-Origin', '*')
-        
         try:
             # Get client IP
             client_ip = self.headers.get('X-Forwarded-For', '').split(',')[0].strip() or \
@@ -226,6 +232,7 @@ class handler(BaseHTTPRequestHandler):
             if not name or not email or not message:
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
                 self.end_headers()
                 self.wfile.write(json.dumps({
                     "success": False,
@@ -236,6 +243,7 @@ class handler(BaseHTTPRequestHandler):
             if not validate_email(email):
                 self.send_response(400)
                 self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
                 self.end_headers()
                 self.wfile.write(json.dumps({
                     "success": False,
@@ -250,6 +258,7 @@ class handler(BaseHTTPRequestHandler):
             if not is_allowed:
                 self.send_response(429)
                 self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
                 self.send_header('X-RateLimit-Limit', str(MAX_REQUESTS_PER_WINDOW))
                 self.send_header('X-RateLimit-Remaining', '0')
                 self.send_header('X-RateLimit-Reset', str(reset_time))
@@ -297,6 +306,7 @@ class handler(BaseHTTPRequestHandler):
             # Success response
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
             self.send_header('X-RateLimit-Limit', str(MAX_REQUESTS_PER_WINDOW))
             self.send_header('X-RateLimit-Remaining', str(remaining))
             self.send_header('X-RateLimit-Reset', str(reset_time))
@@ -315,19 +325,27 @@ class handler(BaseHTTPRequestHandler):
         except json.JSONDecodeError:
             self.send_response(400)
             self.send_header('Content-Type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
             self.wfile.write(json.dumps({
                 "success": False,
                 "detail": "Invalid JSON in request body."
             }).encode())
-        except Exception:
-            self.send_response(500)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({
-                "success": False,
-                "detail": "An unexpected error occurred. Please try again later."
-            }).encode())
+        except Exception as e:
+            import traceback
+            print(f"Contact form error: {e}")
+            print(traceback.format_exc())
+            try:
+                self.send_response(500)
+                self.send_header('Content-Type', 'application/json')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                self.wfile.write(json.dumps({
+                    "success": False,
+                    "detail": "An unexpected error occurred. Please try again later."
+                }).encode())
+            except Exception:
+                pass
     
     def do_GET(self):
         """Health check"""
