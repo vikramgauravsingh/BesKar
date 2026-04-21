@@ -74,7 +74,7 @@ def check_rate_limit(ip, email):
 
 def check_rate_limit_db(db, ip, email):
     """Check rate limit using MongoDB for persistence across serverless invocations"""
-    if not db:
+    if db is None:
         return check_rate_limit(ip, email)
     
     try:
@@ -275,7 +275,7 @@ class handler(BaseHTTPRequestHandler):
             contact_id = None
             
             # Save to MongoDB if available
-            if db:
+            if db is not None:
                 try:
                     contact_data = {
                         "name": name,
