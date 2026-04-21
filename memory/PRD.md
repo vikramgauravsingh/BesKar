@@ -24,6 +24,14 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - Fixed impact stats (50+, 176+, 185, 250+)
 - Fixed LiteSabre badge, removed duplicate code at end of App.js
 
+### Iteration 3 - DPDPA Cookie Consent Banner (Jan 2026)
+- Added `BeskarConsentBanner` component at `/app/frontend/src/components/BeskarConsentBanner.js`
+- Mounted globally in `App.js` (renders on every page)
+- Posts impressions + consents to `https://portal.beskarit.com/api/dpdpa/public`
+- Persists consent in localStorage under `beskar_consent_<BANNER_ID>` (version-gated)
+- Supports Accept All / Reject All / Manage Preferences (Essential + Session mandatory, Marketing optional)
+- Fixed JSX syntax from original snippet (single → double braces for style objects) and contrast on "Accept All" button
+
 ## Products (6 total)
 1. GRC Nexus (v3.0) - 50+ frameworks, risk/audit mgmt, STRIDE
 2. Beskar OSINT Toolkit - 15+ threat intel sources

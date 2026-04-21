@@ -10,7 +10,7 @@ import json
 from datetime import datetime
 
 class BeskarAPITester:
-    def __init__(self, base_url="https://contact-fix-13.preview.emergentagent.com"):
+    def __init__(self, base_url="https://beskar-cookie-banner.preview.emergentagent.com"):
         self.base_url = base_url
         self.tests_run = 0
         self.tests_passed = 0

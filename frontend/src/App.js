@@ -39,6 +39,7 @@ import './App.css';
 import PlatformGlance from './components/PlatformGlance';
 import WhyBeskar from './components/WhyBeskar';
 import WhatsNew from './components/WhatsNew';
+import BeskarConsentBanner from './components/BeskarConsentBanner';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 const SUPPORT_EMAIL = 'support@beskarit.com';
@@ -1727,6 +1728,7 @@ function App() {
       </main>
       <Footer setCurrentPage={setCurrentPage} />
       <PortalPreviewPopup isOpen={showPortalPopup} onClose={handleClosePopup} />
+      <BeskarConsentBanner />
       <Analytics />
       <SpeedInsights />
     </div>
