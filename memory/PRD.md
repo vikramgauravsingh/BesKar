@@ -55,6 +55,16 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
   - JSON-LD `Organization` structured data
 - Global font-size bump: `html { font-size: 17px }` (~6% slight bump) + `body { line-height: 1.6 }` — all rem-based sizes scale uniformly
 
+### Iteration 6 - sitemap.xml + robots.txt + Per-Route SEO (Jan 2026)
+- Added `/app/frontend/public/robots.txt` (allow all, disallow `/api/`, links sitemap)
+- Added `/app/frontend/public/sitemap.xml` with home, anchor sections, /privacy, /terms + image sitemap entry for logo
+- Installed `react-helmet-async` and created `/app/frontend/src/components/SEO.js` reusable component
+- Wrapped `<App />` in `<HelmetProvider>` and added per-route `<SEO>` tags:
+  - Home: full keyword-rich title, description, canonical, og:url
+  - Privacy (`/privacy`): GDPR/DPDPA-focused meta
+  - Terms (`/terms`): service-terms-focused meta
+- Cleaned `public/index.html` so Helmet fully owns per-route overridable tags (title, description, og:url, og:title, og:description, twitter:url/title/description, canonical) — eliminates duplicate meta tags. Static tags (og:type/image/site_name/locale, twitter:card/image, JSON-LD Organization) kept in index.html as crawler fallback.
+
 ## Backlog
 - P2: Mobile responsiveness deep testing
 - P2: Product detail modal verification for all 6 products

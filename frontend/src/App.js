@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { HelmetProvider } from 'react-helmet-async';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { 
@@ -40,6 +41,7 @@ import PlatformGlance from './components/PlatformGlance';
 import WhyBeskar from './components/WhyBeskar';
 import WhatsNew from './components/WhatsNew';
 import BeskarConsentBanner from './components/BeskarConsentBanner';
+import SEO from './components/SEO';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 const SUPPORT_EMAIL = 'support@beskarit.com';
@@ -1335,6 +1337,12 @@ const PrivacyPolicyPage = ({ setCurrentPage }) => {
 
   return (
     <div className="min-h-screen pt-32 pb-20" data-testid="privacy-policy-page">
+      <SEO
+        title="Privacy Policy | Beskar IT — GDPR & DPDPA Compliant Data Handling"
+        description="Read Beskar IT's Privacy Policy. Learn how we collect, use, and protect personal data under GDPR, DPDPA 2023, and other global data protection laws across our cybersecurity consulting and platform services."
+        path="/privacy"
+        keywords="Beskar IT privacy policy, GDPR, DPDPA 2023, data protection, personal data, cybersecurity privacy"
+      />
       <div className="max-w-4xl mx-auto px-6">
         <button 
           onClick={() => setCurrentPage('home')}
@@ -1472,6 +1480,12 @@ const TermsOfServicePage = ({ setCurrentPage }) => {
 
   return (
     <div className="min-h-screen pt-32 pb-20" data-testid="terms-of-service-page">
+      <SEO
+        title="Terms & Conditions | Beskar IT Cybersecurity & Compliance Services"
+        description="Review the Terms & Conditions governing access and use of Beskar IT's cybersecurity consulting, VAPT, secure code review, advisory, incident response, and platform services."
+        path="/terms"
+        keywords="Beskar IT terms, service terms, cybersecurity consulting agreement, VAPT terms"
+      />
       <div className="max-w-4xl mx-auto px-6">
         <button 
           onClick={() => setCurrentPage('home')}
@@ -1721,6 +1735,12 @@ function App() {
       default:
         return (
           <>
+            <SEO
+              title="Beskar IT — Unified GRC, Threat Intel, Vulnerability Scanning & Cloud Security Platform"
+              description="Beskar IT delivers an enterprise cybersecurity platform unifying GRC across 50+ compliance frameworks (ISO 27001, SOC 2, GDPR, HIPAA, PCI DSS, DPDPA), threat intelligence, SAST/DAST vulnerability scanning, cloud security posture management (AWS, Azure, GCP), and data privacy. This is the way."
+              path="/"
+              keywords="GRC platform, cybersecurity, ISO 27001, SOC 2, GDPR, HIPAA, PCI DSS, DPDPA, threat intelligence, OSINT, vulnerability scanning, SAST, DAST, cloud security, CSPM, AWS security, Azure security, GCP security, penetration testing, compliance management, Beskar IT"
+            />
             <HeroSection />
             <PlatformGlance />
             <ProductsSection />
@@ -1735,17 +1755,19 @@ function App() {
   };
 
   return (
-    <div className="grain">
-      <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      <main>
-        {renderPage()}
-      </main>
-      <Footer setCurrentPage={setCurrentPage} />
-      <PortalPreviewPopup isOpen={showPortalPopup} onClose={handleClosePopup} />
-      <BeskarConsentBanner />
-      <Analytics />
-      <SpeedInsights />
-    </div>
+    <HelmetProvider>
+      <div className="grain">
+        <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        <main>
+          {renderPage()}
+        </main>
+        <Footer setCurrentPage={setCurrentPage} />
+        <PortalPreviewPopup isOpen={showPortalPopup} onClose={handleClosePopup} />
+        <BeskarConsentBanner />
+        <Analytics />
+        <SpeedInsights />
+      </div>
+    </HelmetProvider>
   );
 }
 
