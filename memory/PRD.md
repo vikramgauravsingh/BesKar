@@ -65,6 +65,13 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
   - Terms (`/terms`): service-terms-focused meta
 - Cleaned `public/index.html` so Helmet fully owns per-route overridable tags (title, description, og:url, og:title, og:description, twitter:url/title/description, canonical) — eliminates duplicate meta tags. Static tags (og:type/image/site_name/locale, twitter:card/image, JSON-LD Organization) kept in index.html as crawler fallback.
 
+### Iteration 7 - JSON-LD SoftwareApplication for All 6 Products (Jan 2026)
+- Added `/app/frontend/src/seo/productsSchema.js` exporting an `@graph` containing:
+  - `ItemList` of all 6 products with stable `@id` anchors (`#grc-nexus`, `#beskar-osint`, etc.)
+  - 6 `SoftwareApplication` nodes (GRC Nexus, Beskar OSINT Toolkit, LiteSabre Scanner, Amidala CSPM, LiteSabre Pro, DPDPA Consent Manager) each with `name`, `alternateName`, `description`, `image`, `applicationCategory`, `applicationSubCategory`, `operatingSystem`, `keywords`, `softwareVersion` (where applicable), `featureList`, `publisher` (Beskar IT Organization), and `offers` (contact-for-pricing)
+- Extended `SEO.js` to accept a `jsonLd` prop and inject via Helmet `<script type="application/ld+json">`
+- Home route now emits the products graph; privacy/terms routes correctly omit it (route-scoped)
+
 ## Backlog
 - P2: Mobile responsiveness deep testing
 - P2: Product detail modal verification for all 6 products

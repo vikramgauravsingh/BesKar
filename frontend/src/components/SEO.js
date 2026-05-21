@@ -9,7 +9,7 @@ const DEFAULT_OG_IMAGE =
  * Per-route SEO meta tags. Overrides the global meta set in public/index.html
  * for richer indexing of /privacy and /terms (and any future routes).
  */
-const SEO = ({ title, description, path = '/', keywords, image = DEFAULT_OG_IMAGE }) => {
+const SEO = ({ title, description, path = '/', keywords, image = DEFAULT_OG_IMAGE, jsonLd }) => {
   const url = `${SITE_URL}${path}`;
   return (
     <Helmet>
@@ -30,6 +30,10 @@ const SEO = ({ title, description, path = '/', keywords, image = DEFAULT_OG_IMAG
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
+
+      {jsonLd && (
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      )}
     </Helmet>
   );
 };

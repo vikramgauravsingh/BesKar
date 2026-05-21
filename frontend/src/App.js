@@ -42,6 +42,7 @@ import WhyBeskar from './components/WhyBeskar';
 import WhatsNew from './components/WhatsNew';
 import BeskarConsentBanner from './components/BeskarConsentBanner';
 import SEO from './components/SEO';
+import productsGraph from './seo/productsSchema';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
 const SUPPORT_EMAIL = 'support@beskarit.com';
@@ -1740,6 +1741,7 @@ function App() {
               description="Beskar IT delivers an enterprise cybersecurity platform unifying GRC across 50+ compliance frameworks (ISO 27001, SOC 2, GDPR, HIPAA, PCI DSS, DPDPA), threat intelligence, SAST/DAST vulnerability scanning, cloud security posture management (AWS, Azure, GCP), and data privacy. This is the way."
               path="/"
               keywords="GRC platform, cybersecurity, ISO 27001, SOC 2, GDPR, HIPAA, PCI DSS, DPDPA, threat intelligence, OSINT, vulnerability scanning, SAST, DAST, cloud security, CSPM, AWS security, Azure security, GCP security, penetration testing, compliance management, Beskar IT"
+              jsonLd={productsGraph}
             />
             <HeroSection />
             <PlatformGlance />
