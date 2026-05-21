@@ -10,6 +10,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Slight global font-size bump (~6%) for improved readability.
+     Scales all rem-based sizing throughout the app. */
+  font-size: 17px;
 }
 
 html.lenis, html.lenis body {
@@ -34,6 +37,8 @@ html.lenis, html.lenis body {
 
 body {
   font-family: 'Manrope', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
   background-color: #020617;
   color: #f8fafc;
   overflow-x: hidden;

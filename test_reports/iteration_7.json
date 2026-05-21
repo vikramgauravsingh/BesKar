@@ -21,7 +21,7 @@
     ]
   },
   "passed_tests": [
-    "Frontend application loads successfully at https://beskar-cookie-banner.preview.emergentagent.com",
+    "Frontend application loads successfully at https://accessibility-boost-3.preview.emergentagent.com",
     "Main navigation and hero section render correctly",
     "No build errors or compilation issues in frontend",
     "PortalPreviewPopup component is properly implemented in code with correct data-testids",

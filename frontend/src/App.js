@@ -252,8 +252,11 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
         >
           <img 
             src="https://customer-assets.emergentagent.com/job_04619072-dd18-466a-b051-872e26ea17cf/artifacts/8uottcra_logo.png" 
-            alt="Beskar IT" 
+            alt="Beskar IT logo — Unified GRC, Threat Intelligence, Vulnerability Scanning & Cloud Security Platform" 
             className="h-10 w-auto"
+            width="40"
+            height="40"
+            loading="eager"
           />
           <span className="font-heading font-bold text-xl text-white">Beskar IT</span>
         </a>
@@ -724,8 +727,9 @@ const ProductsSection = () => {
               <div className="aspect-video relative overflow-hidden">
                 <img 
                   src={product.image} 
-                  alt={product.name}
+                  alt={`${product.name} — ${product.tagline} | Beskar IT cybersecurity platform module`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-beskar-paper via-beskar-paper/50 to-transparent" />
               </div>
@@ -1586,8 +1590,11 @@ const Footer = ({ setCurrentPage }) => {
             <div className="flex items-center gap-3 mb-6">
               <img 
                 src="https://customer-assets.emergentagent.com/job_04619072-dd18-466a-b051-872e26ea17cf/artifacts/8uottcra_logo.png" 
-                alt="Beskar IT" 
+                alt="Beskar IT logo — Enterprise Cybersecurity, Compliance & Risk Management Platform"
                 className="h-10 w-auto"
+                width="40"
+                height="40"
+                loading="lazy"
               />
               <span className="font-heading font-bold text-xl text-white">Beskar IT</span>
             </div>

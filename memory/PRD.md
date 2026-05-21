@@ -44,8 +44,20 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 5. Amidala CSPM (v3.0) - 185 checks, evidence collection
 6. DPDPA Consent Manager (NEW) - India DPDPA 2023, PII scanner
 
+### Iteration 5 - SEO Alt Text + Font Size Bump (Jan 2026)
+- Updated all `<img>` alt text across the site to be descriptive + SEO keyword-balanced:
+  - Header & footer logo alt now includes "Unified GRC, Threat Intelligence, Vulnerability Scanning & Cloud Security Platform"
+  - Product card images use `${name} — ${tagline} | Beskar IT cybersecurity platform module`
+  - Added `loading="lazy"/"eager"` and explicit `width`/`height` on logos for CLS/perf
+- Rewrote `/app/frontend/public/index.html` with full SEO meta tags:
+  - SEO-optimized `<title>`, `meta description`, `meta keywords`, `robots`, `canonical`
+  - Open Graph + Twitter Card tags
+  - JSON-LD `Organization` structured data
+- Global font-size bump: `html { font-size: 17px }` (~6% slight bump) + `body { line-height: 1.6 }` — all rem-based sizes scale uniformly
+
 ## Backlog
 - P2: Mobile responsiveness deep testing
 - P2: Product detail modal verification for all 6 products
 - P3: Case studies or testimonials section
 - P3: Team/about section
+- P3: Add `sitemap.xml` and `robots.txt` for full SEO coverage
