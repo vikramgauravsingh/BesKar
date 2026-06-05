@@ -180,7 +180,7 @@ const PortalPreviewPopup = ({ isOpen, onClose }) => {
             {/* CTA Buttons */}
             <div className="space-y-3">
               <a
-                href="https://www.portal.beskarit.com"
+                href="https://portal.beskarit.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary w-full flex items-center justify-center gap-2 bg-beskar-cyan text-beskar-bg hover:bg-beskar-cyan/90 py-4 font-semibold text-lg transition-all"
