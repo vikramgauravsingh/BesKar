@@ -1,5 +1,5 @@
 /**
- * JSON-LD SoftwareApplication structured data for all 6 Beskar IT products.
+ * JSON-LD SoftwareApplication structured data for all 6 Beskar products.
  * Helps Google emit rich product cards / sitelinks for queries like
  * "ISO 27001 compliance platform", "CSPM AWS Azure GCP", etc.
  */
@@ -9,7 +9,7 @@ const LOGO =
   'https://customer-assets.emergentagent.com/job_04619072-dd18-466a-b051-872e26ea17cf/artifacts/8uottcra_logo.png';
 const PUBLISHER = {
   '@type': 'Organization',
-  name: 'Beskar IT',
+  name: 'Beskar',
   url: BASE,
   logo: LOGO,
 };
@@ -148,7 +148,7 @@ const buildSoftwareApplication = (p) => ({
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
     url: `${BASE}/#contact`,
-    description: 'Contact Beskar IT for enterprise licensing and demo.',
+    description: 'Contact Beskar for enterprise licensing and demo.',
   },
 });
 
@@ -158,7 +158,7 @@ const productsGraph = {
     {
       '@type': 'ItemList',
       '@id': `${BASE}/#products-list`,
-      name: 'Beskar IT Security Platform Modules',
+      name: 'Beskar Security Platform Modules',
       description:
         'Six integrated cybersecurity modules: GRC Nexus, Beskar OSINT Toolkit, LiteSabre Scanner, Amidala CSPM, LiteSabre Pro, and DPDPA Consent Manager.',
       numberOfItems: products.length,

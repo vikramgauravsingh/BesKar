@@ -258,13 +258,13 @@ const Navigation = ({ currentPage, setCurrentPage }) => {
         >
           <img 
             src="https://customer-assets.emergentagent.com/job_04619072-dd18-466a-b051-872e26ea17cf/artifacts/8uottcra_logo.png" 
-            alt="Beskar IT logo — Unified GRC, Threat Intelligence, Vulnerability Scanning & Cloud Security Platform" 
+            alt="Beskar logo — Unified GRC, Threat Intelligence, Vulnerability Scanning & Cloud Security Platform" 
             className="h-10 w-auto"
             width="40"
             height="40"
             loading="eager"
           />
-          <span className="font-heading font-bold text-xl text-white">Beskar IT</span>
+          <span className="font-heading font-bold text-xl text-white">Beskar</span>
         </a>
         
         <div className="hidden md:flex items-center gap-8">
@@ -733,7 +733,7 @@ const ProductsSection = () => {
               <div className="aspect-video relative overflow-hidden">
                 <img 
                   src={product.image} 
-                  alt={`${product.name} — ${product.tagline} | Beskar IT cybersecurity platform module`}
+                  alt={`${product.name} — ${product.tagline} | Beskar cybersecurity platform module`}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
@@ -1207,7 +1207,7 @@ const ContactSection = () => {
               <span className="text-slate-500">your future?</span>
             </h2>
             <p className="text-lg text-slate-400 mb-8">
-              Let's discuss how Beskar IT can help align your compliance frameworks 
+              Let's discuss how Beskar can help align your compliance frameworks 
               and strengthen your security posture.
             </p>
             
@@ -1343,13 +1343,13 @@ const Footer = ({ setCurrentPage }) => {
             <div className="flex items-center gap-3 mb-6">
               <img 
                 src="https://customer-assets.emergentagent.com/job_04619072-dd18-466a-b051-872e26ea17cf/artifacts/8uottcra_logo.png" 
-                alt="Beskar IT logo — Enterprise Cybersecurity, Compliance & Risk Management Platform"
+                alt="Beskar logo — Enterprise Cybersecurity, Compliance & Risk Management Platform"
                 className="h-10 w-auto"
                 width="40"
                 height="40"
                 loading="lazy"
               />
-              <span className="font-heading font-bold text-xl text-white">Beskar IT</span>
+              <span className="font-heading font-bold text-xl text-white">Beskar</span>
             </div>
             <p className="text-slate-500 mb-4">
               Unified GRC, Threat Intel, Vulnerability Scanning, Cloud Security & Data Privacy Platform.
@@ -1410,7 +1410,7 @@ const Footer = ({ setCurrentPage }) => {
 
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-slate-600 text-sm">
-            © {new Date().getFullYear()} Beskar IT. All rights reserved.
+            © {new Date().getFullYear()} Beskar. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
             <a 
@@ -1490,15 +1490,15 @@ function App() {
           description="Beskar Private Limited Privacy Policy: how we collect, use, share and protect Personal Data under DPDP Act 2023, GDPR, UK GDPR, CCPA/CPRA and other laws." />;
       case 'terms':
         return <LegalPage doc={termsOfUse} path="/Terms-Of-Use" testId="terms-of-use-page" onBack={() => setCurrentPage('home')}
-          description="Terms of Use governing access to and use of the Beskar IT website operated by Beskar Private Limited." />;
+          description="Terms of Use governing access to and use of the Beskar website operated by Beskar Private Limited." />;
       default:
         return (
           <>
             <SEO
-              title="Beskar IT — Unified GRC, Threat Intel, Vulnerability Scanning & Cloud Security Platform"
-              description="Beskar IT delivers an enterprise cybersecurity platform unifying GRC across 50+ compliance frameworks (ISO 27001, SOC 2, GDPR, HIPAA, PCI DSS, DPDPA), threat intelligence, SAST/DAST vulnerability scanning, cloud security posture management (AWS, Azure, GCP), and data privacy. This is the way."
+              title="Beskar — Unified GRC, Threat Intel, Vulnerability Scanning & Cloud Security Platform"
+              description="Beskar delivers an enterprise cybersecurity platform unifying GRC across 50+ compliance frameworks (ISO 27001, SOC 2, GDPR, HIPAA, PCI DSS, DPDPA), threat intelligence, SAST/DAST vulnerability scanning, cloud security posture management (AWS, Azure, GCP), and data privacy. This is the way."
               path="/"
-              keywords="GRC platform, cybersecurity, ISO 27001, SOC 2, GDPR, HIPAA, PCI DSS, DPDPA, threat intelligence, OSINT, vulnerability scanning, SAST, DAST, cloud security, CSPM, AWS security, Azure security, GCP security, penetration testing, compliance management, Beskar IT"
+              keywords="GRC platform, cybersecurity, ISO 27001, SOC 2, GDPR, HIPAA, PCI DSS, DPDPA, threat intelligence, OSINT, vulnerability scanning, SAST, DAST, cloud security, CSPM, AWS security, Azure security, GCP security, penetration testing, compliance management, Beskar"
               jsonLd={productsGraph}
             />
             <HeroSection />

@@ -60,7 +60,7 @@ const LegalPage = ({ doc, path, description, testId, onBack }) => {
   useEffect(() => { window.scrollTo(0, 0); }, []);
   return (
     <div className="min-h-screen pt-32 pb-20" data-testid={testId}>
-      <SEO title={`${doc.title} | Beskar IT`} description={description} path={path} />
+      <SEO title={`${doc.title} | Beskar`} description={description} path={path} />
       <article className="max-w-4xl mx-auto px-6 text-slate-400 leading-relaxed">
         <button onClick={onBack} className="text-beskar-cyan hover:underline mb-8 text-sm" data-testid={`${testId}-back-btn`}>
           &larr; Back to Home
