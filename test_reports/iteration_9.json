@@ -1,0 +1,24 @@
+{
+  "summary": "Frontend-only retest of the Privacy Policy and Terms of Use links bug fix. Every requested scenario passed: going straight to /Privacy-Policy, /Terms-Of-Use and their lowercase versions shows the legal pages, not the home page. Privacy Policy: title, 'Last Updated: 18 October 2026', 32 h2 sections (1. INTRODUCTION to 32. CONTACT US), and one table with the headers Category/Examples/Principal purposes. Terms of Use: 17 h2 sections (1. INTRODUCTION to 17. CONTACT US), lettered items a.-i., and a mailto:privacy@beskarit.com link. The footer and cookie banner links (href /Privacy-Policy and /Terms-Of-Use, target _blank) open a new tab showing the right legal page. The portal popup does not open on legal pages and still opens on home. The Back to Home button goes to '/'. The browser back and forward buttons work. nav-products and the mobile Compliance menu item go from a legal page to home and scroll to the section (section top at 0). At 390px there is no page overflow (scrollWidth 390) and the table scrolls inside its overflow-x:auto container. No page errors.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Home footer", "issues": ["Minor: on first visit, the fixed cookie consent banner covers the footer bottom row (Privacy/Terms links) until the user accepts or rejects. This is expected banner behaviour, not a blocker."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "App.js is about 1534 lines. Consider splitting it into components (Navigation, Footer, sections).",
+    "The portal popup timer only checks the pathname on first mount. If the user lands on a legal page and clicks Back to Home, the popup never shows in that session. That is acceptable, just noting it.",
+    "vercel.json has an SPA rewrite to index.html, so deep links will also work in production."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A", "frontend": "100%"},
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "The legal pages are rendered by the client from frontend/src/legal/*.json through components/LegalPage.js, and App.js routes by window.location.pathname (case-insensitive). On the home page the cookie banner covers the footer links, so click Accept All before clicking the footer links. Popup testid: portal-preview-popup."
+}

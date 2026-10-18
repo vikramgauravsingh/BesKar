@@ -85,3 +85,4 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - Consent banner now links to Privacy Policy
 - Footer already has support@beskarit.com email + LinkedIn links
 - Consent banner also links Terms of Use
+- Fix: /Privacy-Policy and /Terms-Of-Use now in-app pages (LegalPage.js + src/legal/*.json from uploaded docx); footer/banner links relative; vercel.json SPA rewrite handles deep links. Tested iteration_9 100%.
