@@ -87,3 +87,4 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - Consent banner also links Terms of Use
 - Fix: /Privacy-Policy and /Terms-Of-Use now in-app pages (LegalPage.js + src/legal/*.json from uploaded docx); footer/banner links relative; vercel.json SPA rewrite handles deep links. Tested iteration_9 100%.
 - Rebrand: 'Beskar IT' -> 'Beskar' across site text, SEO meta, schema, sitemap (LinkedIn URL slug unchanged)
+- Privacy Policy section 32 contact details filled (DPO Ankita Jha, privacy@beskarit.com, Bangalore office)
