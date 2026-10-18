@@ -1675,20 +1675,24 @@ const Footer = ({ setCurrentPage }) => {
             © {new Date().getFullYear()} Beskar IT. All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <button 
-              onClick={() => setCurrentPage('privacy')} 
+            <a 
+              href="https://www.beskarit.com/Privacy-Policy"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-slate-600 hover:text-white transition-colors"
               data-testid="footer-privacy-link"
             >
               Privacy Policy
-            </button>
-            <button 
-              onClick={() => setCurrentPage('terms')} 
+            </a>
+            <a 
+              href="https://www.beskarit.com/Terms-Of-Use"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-slate-600 hover:text-white transition-colors"
               data-testid="footer-terms-link"
             >
-              Terms of Service
-            </button>
+              Terms of Use
+            </a>
             <button
               onClick={() => window.dispatchEvent(new Event('beskar:open-consent'))}
               className="text-slate-600 hover:text-white transition-colors"
