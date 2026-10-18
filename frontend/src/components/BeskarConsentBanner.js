@@ -142,7 +142,17 @@ const BeskarConsentBanner = ({ userId, onConsent }) => {
           <p style={{ margin: '4px 0 0', opacity: 0.85, fontSize: '13px' }}>
             We use cookies and process personal data as per DPDPA 2023. We use cookies to enhance
             your browsing experience, serve personalized content, and analyze our traffic. By
-            clicking "Accept All", you consent to our use of cookies.
+            clicking "Accept All", you consent to our use of cookies. Read our{' '}
+            <a
+              href="https://www.beskarit.com/Privacy-Policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="consent-privacy-link"
+              style={{ color: '#ffffff', textDecoration: 'underline', fontWeight: 600 }}
+            >
+              Privacy Policy
+            </a>
+            .
           </p>
         </div>
         <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>

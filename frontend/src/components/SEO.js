@@ -5,10 +5,7 @@ const SITE_URL = 'https://www.beskarit.com';
 const DEFAULT_OG_IMAGE =
   'https://customer-assets.emergentagent.com/job_04619072-dd18-466a-b051-872e26ea17cf/artifacts/8uottcra_logo.png';
 
-/**
- * Per-route SEO meta tags. Overrides the global meta set in public/index.html
- * for richer indexing of /privacy and /terms (and any future routes).
- */
+// Per-route SEO meta tags; overrides global meta in public/index.html.
 const SEO = ({ title, description, path = '/', keywords, image = DEFAULT_OG_IMAGE, jsonLd }) => {
   const url = `${SITE_URL}${path}`;
   return (

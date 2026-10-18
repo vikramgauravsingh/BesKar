@@ -205,3 +205,6 @@ credentials.json
 *.pem
 *.key
 .credentials
+
+node_modules/
+__pycache__/

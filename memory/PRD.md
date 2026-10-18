@@ -78,3 +78,9 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - P3: Case studies or testimonials section
 - P3: Team/about section
 - P3: Add `sitemap.xml` and `robots.txt` for full SEO coverage
+
+## Update (Jun 2026) - Legal links
+- Footer Privacy Policy -> https://www.beskarit.com/Privacy-Policy, Terms of Use -> https://www.beskarit.com/Terms-Of-Use (new tab)
+- Removed built-in PrivacyPolicyPage/TermsOfServicePage + sitemap entries
+- Consent banner now links to Privacy Policy
+- Footer already has support@beskarit.com email + LinkedIn links
