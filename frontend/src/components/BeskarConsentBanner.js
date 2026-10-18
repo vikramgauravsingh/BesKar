@@ -144,7 +144,7 @@ const BeskarConsentBanner = ({ userId, onConsent }) => {
             your browsing experience, serve personalized content, and analyze our traffic. By
             clicking "Accept All", you consent to our use of cookies. Read our{' '}
             <a
-              href="https://www.beskarit.com/Privacy-Policy"
+              href="/Privacy-Policy"
               target="_blank"
               rel="noopener noreferrer"
               data-testid="consent-privacy-link"
@@ -154,7 +154,7 @@ const BeskarConsentBanner = ({ userId, onConsent }) => {
             </a>
             {' '}and{' '}
             <a
-              href="https://www.beskarit.com/Terms-Of-Use"
+              href="/Terms-Of-Use"
               target="_blank"
               rel="noopener noreferrer"
               data-testid="consent-terms-link"

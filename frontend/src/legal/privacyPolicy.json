@@ -1,0 +1,2439 @@
+{
+ "title": "Privacy Policy",
+ "updated": "18 October 2026",
+ "blocks": [
+  {
+   "t": "h2",
+   "text": "1. INTRODUCTION"
+  },
+  {
+   "t": "p",
+   "text": "Beskar Private Limited (“Beskar”, “we”, “us” or “our”) provides technology platforms and professional services relating to cybersecurity, information security, governance, risk and compliance, vulnerability assessment, penetration testing, cloud security posture management, threat intelligence, data privacy management and related solutions through its websites, applications, platforms and associated products and services (collectively, the “Services”)."
+  },
+  {
+   "t": "p",
+   "text": "We are committed to respecting your privacy and protecting the Personal Data entrusted to us. This Privacy Policy (“Policy”) explains how we collect, use, disclose, retain, transfer and protect Personal Data through our websites, Services, business operations and other interactions with you."
+  },
+  {
+   "t": "p",
+   "text": "This Policy applies to individuals who visit our websites, create or use an account, use our Services, communicate with us, interact with us through marketing or business development activities, apply for employment, visit our premises, provide goods or services to us, or otherwise interact with Beskar."
+  },
+  {
+   "t": "strong",
+   "text": "Our Role When Processing Customer Data"
+  },
+  {
+   "t": "p",
+   "text": "Beskar provides Services primarily to businesses and organizations. Where we process Personal Data on behalf of a customer in connection with the customer's use of our Services, Beskar may act as a Data Processor, service provider, contractor or equivalent entity under applicable data protection law."
+  },
+  {
+   "t": "p",
+   "text": "In those circumstances, the customer may act as the Data Fiduciary, controller, business or equivalent entity, and our processing of Personal Data will be governed primarily by the applicable customer agreement, Data Processing Agreement (“DPA”), Business Associate Agreement (“BAA”), where applicable, and the customer's documented instructions."
+  },
+  {
+   "t": "p",
+   "text": "If your Personal Data is processed by Beskar on behalf of one of our customers, you may need to contact that customer directly to exercise your privacy rights. Beskar will assist its customers with such requests where required by applicable law or contract."
+  },
+  {
+   "t": "p",
+   "text": "We encourage you to read this Policy together with any additional privacy notice, contractual terms, consent notice, product-specific disclosure, Cookie Policy or other information provided when Personal Data is collected or processed."
+  },
+  {
+   "t": "p",
+   "text": "For purposes of this Policy, “Personal Data” or “Personal Information” means information that identifies, relates to, describes, is reasonably capable of being associated with, or can reasonably be used to identify an individual, directly or indirectly, as determined under applicable law. The terminology and scope may differ depending on the jurisdiction."
+  },
+  {
+   "t": "p",
+   "text": "This Policy is intended to address privacy requirements that may apply to our operations and Services in India and other jurisdictions, including the European Economic Area (“EEA”), the United Kingdom (“UK”) and applicable jurisdictions in the United States."
+  },
+  {
+   "t": "h2",
+   "text": "2. PERSONAL DATA WE COLLECT"
+  },
+  {
+   "t": "p",
+   "text": "The Personal Data we collect depends on how you interact with Beskar, the Services you use, the information provided to us by our customers and the applicable legal requirements."
+  },
+  {
+   "t": "h3",
+   "text": "2.1 Customers and Users of Our Services"
+  },
+  {
+   "t": "p",
+   "text": "If you are a customer, prospective customer or authorized user of our Services, we may collect:"
+  },
+  {
+   "t": "li",
+   "text": "Name;"
+  },
+  {
+   "t": "li",
+   "text": "Business or work email address;"
+  },
+  {
+   "t": "li",
+   "text": "Telephone number, where provided;"
+  },
+  {
+   "t": "li",
+   "text": "Company or organization;"
+  },
+  {
+   "t": "li",
+   "text": "Job title or professional role;"
+  },
+  {
+   "t": "li",
+   "text": "Account and user identifiers;"
+  },
+  {
+   "t": "li",
+   "text": "Customer identifiers;"
+  },
+  {
+   "t": "li",
+   "text": "Login and authentication information;"
+  },
+  {
+   "t": "li",
+   "text": "Device identifiers;"
+  },
+  {
+   "t": "li",
+   "text": "IP address;"
+  },
+  {
+   "t": "li",
+   "text": "Subscription and account information;"
+  },
+  {
+   "t": "li",
+   "text": "Communications with us; and"
+  },
+  {
+   "t": "li",
+   "text": "Information relating to your access to and use of the Services."
+  },
+  {
+   "t": "p",
+   "text": "We may also collect technical and usage information such as logs, telemetry, diagnostic information, system information, security events, product interactions, features accessed, performance information and other information reasonably necessary to operate, secure, maintain and improve the Services."
+  },
+  {
+   "t": "h3",
+   "text": "2.2 End Users of Our Customers"
+  },
+  {
+   "t": "p",
+   "text": "Where our Services are provided through one of our business customers, we may process Personal Data relating to employees, contractors, customers, users or other individuals associated with that customer."
+  },
+  {
+   "t": "p",
+   "text": "Depending on the Services and the customer's use of them, such information may include:"
+  },
+  {
+   "t": "li",
+   "text": "Names and contact information;"
+  },
+  {
+   "t": "li",
+   "text": "User or account identifiers;"
+  },
+  {
+   "t": "li",
+   "text": "IP addresses;"
+  },
+  {
+   "t": "li",
+   "text": "Device and browser information;"
+  },
+  {
+   "t": "li",
+   "text": "Usage information;"
+  },
+  {
+   "t": "li",
+   "text": "Logs and telemetry;"
+  },
+  {
+   "t": "li",
+   "text": "Communications, content or information submitted to the Services;"
+  },
+  {
+   "t": "li",
+   "text": "Compliance records, audit evidence and related documentation;"
+  },
+  {
+   "t": "li",
+   "text": "System configurations, security findings and vulnerability information; and"
+  },
+  {
+   "t": "li",
+   "text": "Other information generated through or submitted to the Services."
+  },
+  {
+   "t": "p",
+   "text": "The nature and scope of this processing depend on the Services selected by the customer and the customer's instructions to Beskar."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar processes such information solely on behalf of a customer, the customer is generally responsible for determining the purposes and means of processing, providing appropriate privacy notices, establishing an appropriate legal basis and responding to applicable privacy-rights requests, subject to applicable law."
+  },
+  {
+   "t": "h3",
+   "text": "2.3 Account Information"
+  },
+  {
+   "t": "p",
+   "text": "If you create an account, we may collect your:"
+  },
+  {
+   "t": "li",
+   "text": "Name;"
+  },
+  {
+   "t": "li",
+   "text": "Email address;"
+  },
+  {
+   "t": "li",
+   "text": "Company or organization;"
+  },
+  {
+   "t": "li",
+   "text": "Job title;"
+  },
+  {
+   "t": "li",
+   "text": "Account credentials;"
+  },
+  {
+   "t": "li",
+   "text": "Authentication information; and"
+  },
+  {
+   "t": "li",
+   "text": "Other information necessary to create, secure and administer the account."
+  },
+  {
+   "t": "h3",
+   "text": "2.4 Subscription, Billing and Transaction Information"
+  },
+  {
+   "t": "p",
+   "text": "If you purchase or subscribe to our Services, we may collect information relating to your subscriptions, purchases, billing arrangements, invoices and transaction history."
+  },
+  {
+   "t": "p",
+   "text": "Payment card information may be processed directly by third-party payment service providers. Depending on the payment arrangement, Beskar may receive limited payment-related information, such as transaction identifiers, payment status and billing details, rather than complete payment card information."
+  },
+  {
+   "t": "h3",
+   "text": "2.5 Website and Device Information"
+  },
+  {
+   "t": "p",
+   "text": "When you visit our websites or interact with our online Services, we may automatically collect information such as:"
+  },
+  {
+   "t": "li",
+   "text": "IP address;"
+  },
+  {
+   "t": "li",
+   "text": "Browser type and version;"
+  },
+  {
+   "t": "li",
+   "text": "Operating system;"
+  },
+  {
+   "t": "li",
+   "text": "Device identifiers;"
+  },
+  {
+   "t": "li",
+   "text": "Language preferences;"
+  },
+  {
+   "t": "li",
+   "text": "Time zone;"
+  },
+  {
+   "t": "li",
+   "text": "Approximate location derived from IP address or similar information, where collected;"
+  },
+  {
+   "t": "li",
+   "text": "Referring and exit pages;"
+  },
+  {
+   "t": "li",
+   "text": "Pages or screens viewed;"
+  },
+  {
+   "t": "li",
+   "text": "Links or features used;"
+  },
+  {
+   "t": "li",
+   "text": "Interactions with website or Service content; and"
+  },
+  {
+   "t": "li",
+   "text": "Date, time and duration of activity."
+  },
+  {
+   "t": "p",
+   "text": "This information may be collected through cookies, logs, pixels, web beacons, software development kits, APIs, analytics technologies and similar tools, where implemented."
+  },
+  {
+   "t": "h3",
+   "text": "2.6 Communications and Support"
+  },
+  {
+   "t": "p",
+   "text": "If you communicate with us by email, website form, chat functionality, support channel, social media or other communication method, we may collect your contact information, the contents of the communication and any Personal Data you choose to provide."
+  },
+  {
+   "t": "h3",
+   "text": "2.7 Events, Surveys and Marketing Activities"
+  },
+  {
+   "t": "p",
+   "text": "If you participate in a webinar, conference, survey, event, demonstration, promotional activity or other engagement organized or sponsored by Beskar, we may collect:"
+  },
+  {
+   "t": "li",
+   "text": "Name;"
+  },
+  {
+   "t": "li",
+   "text": "Contact information;"
+  },
+  {
+   "t": "li",
+   "text": "Organization and professional role;"
+  },
+  {
+   "t": "li",
+   "text": "Preferences;"
+  },
+  {
+   "t": "li",
+   "text": "Survey or event responses;"
+  },
+  {
+   "t": "li",
+   "text": "Event registration details; and"
+  },
+  {
+   "t": "li",
+   "text": "Other information voluntarily provided."
+  },
+  {
+   "t": "p",
+   "text": "Where photographs, video recordings or other media are captured at an event, we will process such information in accordance with applicable law and applicable event-specific notices or consent requirements."
+  },
+  {
+   "t": "h3",
+   "text": "2.8 Recruitment and Employment-Related Information"
+  },
+  {
+   "t": "p",
+   "text": "If you apply for a job, internship or other position with Beskar, we may collect information such as:"
+  },
+  {
+   "t": "li",
+   "text": "Name and contact information;"
+  },
+  {
+   "t": "li",
+   "text": "Resume or curriculum vitae;"
+  },
+  {
+   "t": "li",
+   "text": "Employment history;"
+  },
+  {
+   "t": "li",
+   "text": "Educational and professional qualifications;"
+  },
+  {
+   "t": "li",
+   "text": "Skills and professional experience;"
+  },
+  {
+   "t": "li",
+   "text": "Interview and assessment information;"
+  },
+  {
+   "t": "li",
+   "text": "References;"
+  },
+  {
+   "t": "li",
+   "text": "Work authorization information, where required;"
+  },
+  {
+   "t": "li",
+   "text": "Compensation expectations or related information;"
+  },
+  {
+   "t": "li",
+   "text": "Background verification information, where permitted by law; and"
+  },
+  {
+   "t": "li",
+   "text": "Other information provided during recruitment."
+  },
+  {
+   "t": "p",
+   "text": "Additional employment-related information may be collected if you become an employee or contractor."
+  },
+  {
+   "t": "h3",
+   "text": "2.9 Vendors, Suppliers and Business Partners"
+  },
+  {
+   "t": "p",
+   "text": "If you represent or work for a vendor, supplier, professional adviser, business partner or other organization with which Beskar interacts, we may collect:"
+  },
+  {
+   "t": "li",
+   "text": "Name;"
+  },
+  {
+   "t": "li",
+   "text": "Business contact details;"
+  },
+  {
+   "t": "li",
+   "text": "Organization;"
+  },
+  {
+   "t": "li",
+   "text": "Job title or designation;"
+  },
+  {
+   "t": "li",
+   "text": "Business address;"
+  },
+  {
+   "t": "li",
+   "text": "Tax or invoicing information;"
+  },
+  {
+   "t": "li",
+   "text": "Payment-related business information;"
+  },
+  {
+   "t": "li",
+   "text": "Information contained in contracts, quotations, proposals, purchase orders or invoices; and"
+  },
+  {
+   "t": "li",
+   "text": "Other information necessary to establish and manage the business relationship."
+  },
+  {
+   "t": "h3",
+   "text": "2.10 Office Visitors"
+  },
+  {
+   "t": "p",
+   "text": "Where you visit a Beskar office or other controlled facility, we may collect information reasonably necessary for physical access, safety and security, including visitor name, contact information, organization, date and time of visit, purpose of visit, host, identification information where reasonably required, and CCTV footage or other physical-security information, where applicable."
+  },
+  {
+   "t": "h2",
+   "text": "3. HOW WE COLLECT PERSONAL DATA"
+  },
+  {
+   "t": "p",
+   "text": "We may collect Personal Data from the following sources."
+  },
+  {
+   "t": "h3",
+   "text": "3.1 Directly from you"
+  },
+  {
+   "t": "p",
+   "text": "We collect information that you provide when you:"
+  },
+  {
+   "t": "li",
+   "text": "Create or manage an account;"
+  },
+  {
+   "t": "li",
+   "text": "Use the Services;"
+  },
+  {
+   "t": "li",
+   "text": "Enter into an agreement with us;"
+  },
+  {
+   "t": "li",
+   "text": "Subscribe to or purchase Services;"
+  },
+  {
+   "t": "li",
+   "text": "Request customer or technical support;"
+  },
+  {
+   "t": "li",
+   "text": "Communicate with us;"
+  },
+  {
+   "t": "li",
+   "text": "Submit a form;"
+  },
+  {
+   "t": "li",
+   "text": "Register for an event;"
+  },
+  {
+   "t": "li",
+   "text": "Complete a survey;"
+  },
+  {
+   "t": "li",
+   "text": "Apply for employment;"
+  },
+  {
+   "t": "li",
+   "text": "Visit our premises;"
+  },
+  {
+   "t": "li",
+   "text": "Engage with our marketing or social media channels; or"
+  },
+  {
+   "t": "li",
+   "text": "Otherwise provide information to us."
+  },
+  {
+   "t": "h3",
+   "text": "3.2 Automatically"
+  },
+  {
+   "t": "p",
+   "text": "When you access our websites or Services, we may automatically collect technical, security, usage and device information through logs, cookies, APIs, analytics technologies and similar tools."
+  },
+  {
+   "t": "p",
+   "text": "We may use this information to provide and secure the Services, authenticate users, understand usage, monitor performance, troubleshoot problems, maintain reliability, identify errors, detect fraud or security threats and improve our websites and Services."
+  },
+  {
+   "t": "h3",
+   "text": "3.3 From Customers"
+  },
+  {
+   "t": "p",
+   "text": "Our customers may provide Personal Data to us or cause Personal Data to be processed through the Services."
+  },
+  {
+   "t": "p",
+   "text": "For example, an organization may provide account information necessary to provision its employees' access to the Services or may submit Personal Data relating to its own users, customers or personnel through compliance management, privacy management, vulnerability assessment or other functionality."
+  },
+  {
+   "t": "h3",
+   "text": "3.4 From Third Parties"
+  },
+  {
+   "t": "p",
+   "text": "Where permitted by applicable law, we may receive Personal Data from sources such as:"
+  },
+  {
+   "t": "li",
+   "text": "Business partners;"
+  },
+  {
+   "t": "li",
+   "text": "Service providers;"
+  },
+  {
+   "t": "li",
+   "text": "Authentication or identity providers;"
+  },
+  {
+   "t": "li",
+   "text": "Analytics providers;"
+  },
+  {
+   "t": "li",
+   "text": "Event organizers;"
+  },
+  {
+   "t": "li",
+   "text": "Recruitment agencies;"
+  },
+  {
+   "t": "li",
+   "text": "Professional networks;"
+  },
+  {
+   "t": "li",
+   "text": "Publicly available sources; and"
+  },
+  {
+   "t": "li",
+   "text": "Other third parties with whom we have a legitimate business relationship."
+  },
+  {
+   "t": "h2",
+   "text": "4. COOKIES AND SIMILAR TECHNOLOGIES"
+  },
+  {
+   "t": "p",
+   "text": "We may use cookies and similar technologies to operate our websites and Services, remember preferences, authenticate users, maintain security, understand website and product usage, measure performance and improve user experience."
+  },
+  {
+   "t": "p",
+   "text": "Depending on applicable law, we may seek consent before placing or using certain categories of cookies or similar technologies."
+  },
+  {
+   "t": "p",
+   "text": "You may be able to manage cookie preferences through your browser settings or cookie management tools made available on our website."
+  },
+  {
+   "t": "p",
+   "text": "Additional information about the categories of cookies and similar technologies we use, their purposes and available choices may be provided in our Cookie Policy or cookie management interface."
+  },
+  {
+   "t": "p",
+   "text": "Where applicable law requires an opt-out or consent mechanism relating to advertising, analytics or similar technologies, Beskar will provide the mechanism required by applicable law."
+  },
+  {
+   "t": "h2",
+   "text": "5. CUSTOMER DATA"
+  },
+  {
+   "t": "p",
+   "text": "Our customers may submit, upload, transmit, generate or otherwise make Personal Data available to Beskar through their use of the Services (“Customer Data”)."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar processes Customer Data solely on behalf of a customer, we process that Personal Data:"
+  },
+  {
+   "t": "li",
+   "text": "According to the customer's documented instructions;"
+  },
+  {
+   "t": "li",
+   "text": "For the purposes specified in the applicable agreement;"
+  },
+  {
+   "t": "li",
+   "text": "Subject to the applicable DPA or other data protection terms; and"
+  },
+  {
+   "t": "li",
+   "text": "In accordance with applicable data protection law."
+  },
+  {
+   "t": "p",
+   "text": "In those circumstances, the customer is generally responsible for determining the purpose of processing, establishing an appropriate legal basis, providing required notices to individuals and responding to applicable privacy-rights requests."
+  },
+  {
+   "t": "p",
+   "text": "Nothing in this section limits Beskar's obligations under applicable law or its contractual obligations to customers."
+  },
+  {
+   "t": "h2",
+   "text": "6. HOW WE USE PERSONAL DATA"
+  },
+  {
+   "t": "p",
+   "text": "We process Personal Data for legitimate business, operational, contractual, security, compliance and other lawful purposes."
+  },
+  {
+   "t": "p",
+   "text": "Where we act as a Data Processor, service provider or equivalent entity for a customer, the purposes of processing are determined primarily by that customer and the applicable agreement."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar determines the purposes and means of processing, we may use Personal Data for the following purposes."
+  },
+  {
+   "t": "h3",
+   "text": "6.1 Providing and Administering the Services"
+  },
+  {
+   "t": "p",
+   "text": "We may use Personal Data to:"
+  },
+  {
+   "t": "li",
+   "text": "Create and administer customer and user accounts;"
+  },
+  {
+   "t": "li",
+   "text": "Authenticate users and manage access;"
+  },
+  {
+   "t": "li",
+   "text": "Provide, operate, maintain and support the Services;"
+  },
+  {
+   "t": "li",
+   "text": "Enable product functionality;"
+  },
+  {
+   "t": "li",
+   "text": "Process subscriptions, orders, transactions and billing;"
+  },
+  {
+   "t": "li",
+   "text": "Provide customer, technical and product support;"
+  },
+  {
+   "t": "li",
+   "text": "Respond to enquiries and requests;"
+  },
+  {
+   "t": "li",
+   "text": "Monitor Service availability, performance and reliability;"
+  },
+  {
+   "t": "li",
+   "text": "Troubleshoot errors and service interruptions;"
+  },
+  {
+   "t": "li",
+   "text": "Provide documentation and Service-related information;"
+  },
+  {
+   "t": "li",
+   "text": "Communicate about accounts, transactions, contractual matters, security, availability and material changes;"
+  },
+  {
+   "t": "li",
+   "text": "Administer events, webinars and demonstrations; and"
+  },
+  {
+   "t": "li",
+   "text": "Fulfil our contractual obligations."
+  },
+  {
+   "t": "h3",
+   "text": "6.2 Security, Fraud Prevention and Service Integrity"
+  },
+  {
+   "t": "p",
+   "text": "We may use Personal Data to:"
+  },
+  {
+   "t": "li",
+   "text": "Maintain network, application, information and cybersecurity;"
+  },
+  {
+   "t": "li",
+   "text": "Authenticate and verify users;"
+  },
+  {
+   "t": "li",
+   "text": "Detect suspicious, unauthorized or malicious activity;"
+  },
+  {
+   "t": "li",
+   "text": "Prevent and investigate fraud or abuse;"
+  },
+  {
+   "t": "li",
+   "text": "Detect, investigate and respond to security incidents;"
+  },
+  {
+   "t": "li",
+   "text": "Monitor vulnerabilities and system integrity;"
+  },
+  {
+   "t": "li",
+   "text": "Debug technical issues;"
+  },
+  {
+   "t": "li",
+   "text": "Maintain logs and security records; and"
+  },
+  {
+   "t": "li",
+   "text": "Protect the availability, confidentiality and integrity of the Services."
+  },
+  {
+   "t": "h3",
+   "text": "6.3 Business Operations and Administration"
+  },
+  {
+   "t": "p",
+   "text": "We may use Personal Data to:"
+  },
+  {
+   "t": "li",
+   "text": "Conduct internal operations, planning and reporting;"
+  },
+  {
+   "t": "li",
+   "text": "Administer customer and vendor relationships;"
+  },
+  {
+   "t": "li",
+   "text": "Conduct audits and assessments;"
+  },
+  {
+   "t": "li",
+   "text": "Manage finance, accounting and taxation;"
+  },
+  {
+   "t": "li",
+   "text": "Maintain business and compliance records;"
+  },
+  {
+   "t": "li",
+   "text": "Administer contracts;"
+  },
+  {
+   "t": "li",
+   "text": "Enforce our agreements and policies;"
+  },
+  {
+   "t": "li",
+   "text": "Manage procurement and vendors;"
+  },
+  {
+   "t": "li",
+   "text": "Manage corporate governance; and"
+  },
+  {
+   "t": "li",
+   "text": "Otherwise operate and administer our business."
+  },
+  {
+   "t": "h3",
+   "text": "6.4 Analytics, Research and Service Improvement"
+  },
+  {
+   "t": "p",
+   "text": "We may use Personal Data, where permitted by applicable law, to:"
+  },
+  {
+   "t": "li",
+   "text": "Understand how websites and Services are used;"
+  },
+  {
+   "t": "li",
+   "text": "Monitor and analyze product performance;"
+  },
+  {
+   "t": "li",
+   "text": "Conduct research, testing and quality assurance;"
+  },
+  {
+   "t": "li",
+   "text": "Improve and enhance existing Services;"
+  },
+  {
+   "t": "li",
+   "text": "Develop new products, features and functionality;"
+  },
+  {
+   "t": "li",
+   "text": "Identify usage trends and technical issues; and"
+  },
+  {
+   "t": "li",
+   "text": "Generate operational and business insights."
+  },
+  {
+   "t": "p",
+   "text": "Where Customer Data is involved, any use for these purposes will be subject to the applicable customer agreement, DPA and applicable law."
+  },
+  {
+   "t": "h3",
+   "text": "6.5 Marketing and Business Development"
+  },
+  {
+   "t": "p",
+   "text": "Subject to applicable law and your preferences, we may use Personal Data to:"
+  },
+  {
+   "t": "li",
+   "text": "Communicate about our products, Services and features;"
+  },
+  {
+   "t": "li",
+   "text": "Invite individuals to events, webinars and demonstrations;"
+  },
+  {
+   "t": "li",
+   "text": "Manage business leads and customer relationships;"
+  },
+  {
+   "t": "li",
+   "text": "Conduct promotional and business development activities;"
+  },
+  {
+   "t": "li",
+   "text": "Measure the effectiveness of marketing communications;"
+  },
+  {
+   "t": "li",
+   "text": "Personalize marketing or website experiences where permitted;"
+  },
+  {
+   "t": "li",
+   "text": "Publish customer stories, testimonials or case studies with appropriate authorization; and"
+  },
+  {
+   "t": "li",
+   "text": "Promote Beskar through appropriate business and digital channels."
+  },
+  {
+   "t": "p",
+   "text": "You may opt out of promotional communications by using the unsubscribe mechanism in the communication or contacting us as described in the Contact Us section."
+  },
+  {
+   "t": "p",
+   "text": "Opting out of marketing communications does not prevent us from sending necessary transactional, contractual, account, security, privacy or Service-related communications."
+  },
+  {
+   "t": "h3",
+   "text": "6.6 Recruitment and Employment"
+  },
+  {
+   "t": "p",
+   "text": "We may process recruitment and employment-related Personal Data to evaluate candidates, communicate with applicants, conduct interviews and assessments, verify references or conduct background checks where permitted, administer offers, establish and administer employment or contractor relationships, manage payroll and benefits, maintain personnel records, comply with legal requirements and protect our personnel, systems, property and legal interests."
+  },
+  {
+   "t": "h3",
+   "text": "6.7 Legal and Regulatory Compliance"
+  },
+  {
+   "t": "p",
+   "text": "We may process Personal Data where reasonably necessary to:"
+  },
+  {
+   "t": "li",
+   "text": "Comply with applicable laws and regulations;"
+  },
+  {
+   "t": "li",
+   "text": "Respond to valid court orders and legal process;"
+  },
+  {
+   "t": "li",
+   "text": "Respond to lawful requests from competent authorities;"
+  },
+  {
+   "t": "li",
+   "text": "Maintain records required by law;"
+  },
+  {
+   "t": "li",
+   "text": "Investigate suspected violations of law or our agreements;"
+  },
+  {
+   "t": "li",
+   "text": "Establish, exercise or defend legal claims;"
+  },
+  {
+   "t": "li",
+   "text": "Protect legal rights; and"
+  },
+  {
+   "t": "li",
+   "text": "Comply with tax, accounting, audit and reporting requirements."
+  },
+  {
+   "t": "h3",
+   "text": "6.8 Other Lawful Purposes"
+  },
+  {
+   "t": "p",
+   "text": "We may process Personal Data for other purposes that are disclosed at or before collection, authorized by you where consent is required, necessary to enter into or perform a contract, necessary to comply with legal obligations, or otherwise permitted or required by applicable law."
+  },
+  {
+   "t": "p",
+   "text": "Where we rely on consent, you may withdraw that consent subject to applicable law. Withdrawal does not affect the lawfulness of processing undertaken before the withdrawal."
+  },
+  {
+   "t": "h2",
+   "text": "7. LEGAL BASES FOR PROCESSING"
+  },
+  {
+   "t": "p",
+   "text": "The legal basis applicable to a particular activity depends on the jurisdiction, our relationship with you, the purpose of processing and whether Beskar is acting as a controller, Data Fiduciary, Data Processor or service provider."
+  },
+  {
+   "t": "p",
+   "text": "Where applicable, our legal bases may include:"
+  },
+  {
+   "t": "p",
+   "text": "Processing necessary to enter or perform a contract with you or your organization, or to take steps at your request before entering into a contract.",
+   "lead": "Performance of a Contract:"
+  },
+  {
+   "t": "p",
+   "text": "Processing based on valid consent where consent is required or otherwise appropriate under applicable law.",
+   "lead": "Consent:"
+  },
+  {
+   "t": "p",
+   "text": "Processing necessary to comply with legal, regulatory, employment, tax, accounting, reporting or other obligations.",
+   "lead": "Legal Obligation:"
+  },
+  {
+   "t": "p",
+   "text": "Where recognized under applicable law, processing necessary for our legitimate interests or those of a third party, provided those interests are not overridden by applicable rights and interests.",
+   "lead": "Legitimate Interests:"
+  },
+  {
+   "t": "p",
+   "text": "Our legitimate interests may include providing and securing our Services, maintaining customer and business relationships, preventing fraud and misuse, improving our Services, administering our business and protecting our legal rights."
+  },
+  {
+   "t": "p",
+   "text": "Processing necessary to establish, exercise or defend legal claims or protect the rights, security, property or safety of Beskar or others.",
+   "lead": "Protection of Rights and Safety:"
+  },
+  {
+   "t": "p",
+   "text": "Any other basis permitted by the law applicable to the relevant processing.",
+   "lead": "Other Lawful Bases:"
+  },
+  {
+   "t": "h2",
+   "text": "8. DE-IDENTIFIED, ANONYMISED AND AGGREGATED INFORMATION"
+  },
+  {
+   "t": "p",
+   "text": "We may create, use and disclose information that has been de-identified, anonymized or aggregated so that it no longer identifies, or is not reasonably capable of identifying, an individual, to the extent permitted by applicable law."
+  },
+  {
+   "t": "p",
+   "text": "Such information may be used for analytics, research and development, statistical analysis, security, benchmarking, reporting, Service improvement and understanding trends relating to our Services."
+  },
+  {
+   "t": "p",
+   "text": "Where information is treated as de-identified or anonymized under applicable law, Beskar will not attempt to re-identify it except where permitted or required by law."
+  },
+  {
+   "t": "p",
+   "text": "Where such information is derived from Customer Data, its use will also be subject to the applicable customer agreement, DPA and applicable law."
+  },
+  {
+   "t": "h2",
+   "text": "9. HOW WE SHARE PERSONAL DATA"
+  },
+  {
+   "t": "p",
+   "text": "We may disclose Personal Data where reasonably necessary for the purposes described in this Policy or otherwise permitted or required by applicable law."
+  },
+  {
+   "t": "h3",
+   "text": "9.1 Service Providers and Sub processors"
+  },
+  {
+   "t": "p",
+   "text": "We may disclose Personal Data to third-party service providers, contractors and sub processors that assist us with functions such as:"
+  },
+  {
+   "t": "li",
+   "text": "Cloud hosting and infrastructure;"
+  },
+  {
+   "t": "li",
+   "text": "Data storage and databases;"
+  },
+  {
+   "t": "li",
+   "text": "Cybersecurity;"
+  },
+  {
+   "t": "li",
+   "text": "Authentication and identity management;"
+  },
+  {
+   "t": "li",
+   "text": "System monitoring;"
+  },
+  {
+   "t": "li",
+   "text": "Communications;"
+  },
+  {
+   "t": "li",
+   "text": "Customer support;"
+  },
+  {
+   "t": "li",
+   "text": "Analytics;"
+  },
+  {
+   "t": "li",
+   "text": "Payment and billing administration;"
+  },
+  {
+   "t": "li",
+   "text": "Recruitment and background verification;"
+  },
+  {
+   "t": "li",
+   "text": "Professional services;"
+  },
+  {
+   "t": "li",
+   "text": "Legal, accounting and audit services; and"
+  },
+  {
+   "t": "li",
+   "text": "Other technology or business operations."
+  },
+  {
+   "t": "p",
+   "text": "Where applicable, we require such providers to be subject to contractual confidentiality, security and data protection obligations appropriate to the services they provide."
+  },
+  {
+   "t": "p",
+   "text": "Where Customer Data is involved, the use of sub processors is subject to the applicable customer agreement, DPA and applicable data protection requirements."
+  },
+  {
+   "t": "h3",
+   "text": "9.2 Affiliates"
+  },
+  {
+   "t": "p",
+   "text": "Where applicable, we may share Personal Data among entities within our corporate group for Service delivery, infrastructure and IT management, security, customer support, finance and accounting, legal and compliance, business administration, personnel administration and other lawful business purposes."
+  },
+  {
+   "t": "h3",
+   "text": "9.3 Business Partners and Integrations"
+  },
+  {
+   "t": "p",
+   "text": "We may disclose Personal Data to business partners where necessary to provide an integration, functionality or service requested by you or your organization."
+  },
+  {
+   "t": "p",
+   "text": "Our Services may interact with third-party APIs, software libraries, integrations and technology services. Where those providers process Personal Data on our behalf, applicable contractual, security and data protection requirements will apply."
+  },
+  {
+   "t": "p",
+   "text": "Where a third-party processes information independently for its own purposes, its own privacy notice may apply."
+  },
+  {
+   "t": "h3",
+   "text": "9.4 Professional Advisers"
+  },
+  {
+   "t": "p",
+   "text": "We may disclose Personal Data to lawyers, auditors, accountants, insurers, consultants and other professional advisers where reasonably necessary to obtain professional advice, administer our business, comply with law or protect our legal interests."
+  },
+  {
+   "t": "h3",
+   "text": "9.5 Legal Process, Rights, Security and Safety"
+  },
+  {
+   "t": "p",
+   "text": "We may access, preserve, use or disclose Personal Data where we reasonably believe this is necessary or appropriate to comply with applicable law, respond to valid legal process or lawful government requests, establish or defend legal rights, enforce contracts or policies, protect Beskar, our customers, users, employees or other individuals, investigate or prevent fraud or unlawful activity, investigate security incidents, or protect the integrity and availability of our systems and Services."
+  },
+  {
+   "t": "p",
+   "text": "Where legally permitted, we will seek to limit disclosure to information reasonably necessary for the relevant purpose."
+  },
+  {
+   "t": "h3",
+   "text": "9.6 Corporate Transactions"
+  },
+  {
+   "t": "p",
+   "text": "Personal Data may be disclosed or transferred in connection with an actual or proposed merger, acquisition, financing, investment, restructuring, reorganization, insolvency, sale or transfer of assets, change of ownership or similar corporate transaction."
+  },
+  {
+   "t": "p",
+   "text": "Such disclosures will be subject to applicable law and contractual obligations."
+  },
+  {
+   "t": "h3",
+   "text": "9.7 At Your Direction or With Your Consent"
+  },
+  {
+   "t": "p",
+   "text": "We may disclose Personal Data at your direction or where you provide authorization or consent, where required."
+  },
+  {
+   "t": "h2",
+   "text": "10. SALE, SHARING AND TARGETED ADVERTISING"
+  },
+  {
+   "t": "p",
+   "text": "Beskar does not sell Personal Data for monetary consideration."
+  },
+  {
+   "t": "p",
+   "text": "Certain privacy laws, including the California Consumer Privacy Act, as amended by the California Privacy Rights Act (“CCPA/CPRA”), define terms such as “sale”, “sharing” and “targeted advertising” more broadly than an exchange of Personal Data for money."
+  },
+  {
+   "t": "p",
+   "text": "To the extent any activity undertaken by Beskar is considered a sale, sharing, targeted advertising or similar regulated activity under applicable law, Beskar will provide applicable notices and rights mechanisms, including opt-out mechanisms where required."
+  },
+  {
+   "t": "p",
+   "text": "Where required by applicable law, Beskar will also recognize legally valid browser-based or other universal opt-out preference signals."
+  },
+  {
+   "t": "p",
+   "text": "Our practices concerning cookies, advertising and similar technologies may be further described in our Cookie Policy or applicable cookie-preference mechanism."
+  },
+  {
+   "t": "h2",
+   "text": "11. SECURITY OF PERSONAL DATA"
+  },
+  {
+   "t": "p",
+   "text": "Beskar maintains reasonable and appropriate administrative, technical, physical and organizational safeguards designed to protect Personal Data against unauthorized access, acquisition, use, alteration, disclosure, loss, destruction and other unlawful or accidental processing."
+  },
+  {
+   "t": "p",
+   "text": "Depending on the Services and circumstances, these measures may include:"
+  },
+  {
+   "t": "li",
+   "text": "Access controls;"
+  },
+  {
+   "t": "li",
+   "text": "Authentication mechanisms;"
+  },
+  {
+   "t": "li",
+   "text": "Encryption and other technical safeguards;"
+  },
+  {
+   "t": "li",
+   "text": "Logging and security monitoring;"
+  },
+  {
+   "t": "li",
+   "text": "Incident detection and response;"
+  },
+  {
+   "t": "li",
+   "text": "Vulnerability management and security testing;"
+  },
+  {
+   "t": "li",
+   "text": "Backup and recovery measures;"
+  },
+  {
+   "t": "li",
+   "text": "Business continuity and disaster recovery measures;"
+  },
+  {
+   "t": "li",
+   "text": "Confidentiality obligations for personnel and contractors;"
+  },
+  {
+   "t": "li",
+   "text": "Information security and privacy policies; and"
+  },
+  {
+   "t": "li",
+   "text": "Due diligence and contractual requirements for applicable service providers and sub processors."
+  },
+  {
+   "t": "p",
+   "text": "We take reasonable steps to require service providers processing Personal Data on our behalf to maintain appropriate confidentiality, security and data protection safeguards."
+  },
+  {
+   "t": "p",
+   "text": "However, no system, transmission method or electronic storage method can be guaranteed to be completely secure. Accordingly, we cannot guarantee that Personal Data will never be accessed, disclosed, lost, altered or otherwise compromised."
+  },
+  {
+   "t": "p",
+   "text": "Nothing in this section limits any rights or remedies available under applicable law."
+  },
+  {
+   "t": "h2",
+   "text": "12. SECURITY INCIDENTS AND PRIVACY COMMUNICATIONS"
+  },
+  {
+   "t": "p",
+   "text": "Beskar may communicate with individuals regarding security, privacy, administrative, transactional, contractual and Service-related matters through electronic or other appropriate means."
+  },
+  {
+   "t": "p",
+   "text": "If Beskar becomes aware of a security incident involving Personal Data that requires notification under applicable law, we will investigate the incident, take reasonable steps to contain and mitigate its effects and notify affected customers, individuals, regulators or other parties where and to the extent required by applicable law."
+  },
+  {
+   "t": "p",
+   "text": "Where we process affected Personal Data on behalf of a customer, notification and cooperation obligations may also be governed by the applicable customer agreement or DPA."
+  },
+  {
+   "t": "h2",
+   "text": "13. HIPAA AND PROTECTED HEALTH INFORMATION"
+  },
+  {
+   "t": "p",
+   "text": "Beskar may provide Services intended to assist customers with healthcare-related security, privacy and compliance readiness, including readiness activities relating to the United States Health Insurance Portability and Accountability Act of 1996 (“HIPAA”) and its implementing regulations."
+  },
+  {
+   "t": "p",
+   "text": "Where applicable Services involve the processing of Protected Health Information (“PHI”) on behalf of a customer, such processing will be governed by the applicable Services, contractual requirements and law."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar acts as a Business Associate under HIPAA, the processing of PHI will be governed by an applicable Business Associate Agreement (“BAA”), where required."
+  },
+  {
+   "t": "p",
+   "text": "Customers that are covered entities or business associates under HIPAA should submit PHI to Beskar only where the applicable Services have been agreed and any required BAA or other applicable contractual documentation has been executed."
+  },
+  {
+   "t": "p",
+   "text": "Where a BAA applies, Beskar's processing of PHI will be subject to that BAA, applicable HIPAA requirements and other applicable privacy and security laws. If this Policy conflicts with a BAA concerning PHI, the BAA will govern to the extent required by applicable law."
+  },
+  {
+   "t": "p",
+   "text": "Beskar's ability to support HIPAA-related readiness or compliance activities does not itself constitute a certification or representation that any particular customer, product, configuration or use of the Services is compliant with HIPAA. Customers remain responsible for configuring and using the Services consistently with their own legal, regulatory, contractual and compliance obligations."
+  },
+  {
+   "t": "h2",
+   "text": "14. INTERNATIONAL DATA TRANSFERS"
+  },
+  {
+   "t": "p",
+   "text": "Depending on the Services, the location of users, customers, personnel and service providers, Personal Data may be accessed, transferred, processed or stored outside the country in which it was collected."
+  },
+  {
+   "t": "p",
+   "text": "Where Personal Data is transferred internationally, Beskar will take appropriate steps required under applicable data protection law."
+  },
+  {
+   "t": "p",
+   "text": "Depending on the jurisdiction and circumstances, such measures may include:"
+  },
+  {
+   "t": "li",
+   "text": "Adequacy decisions or regulations;"
+  },
+  {
+   "t": "li",
+   "text": "Standard contractual clauses;"
+  },
+  {
+   "t": "li",
+   "text": "International data transfer agreements or addenda;"
+  },
+  {
+   "t": "li",
+   "text": "Contractual data protection provisions;"
+  },
+  {
+   "t": "li",
+   "text": "Binding Corporate Rules, where applicable;"
+  },
+  {
+   "t": "li",
+   "text": "Recognized certification or code mechanisms, where legally available;"
+  },
+  {
+   "t": "li",
+   "text": "Transfer assessments;"
+  },
+  {
+   "t": "li",
+   "text": "Supplementary technical, contractual or organizational safeguards;"
+  },
+  {
+   "t": "li",
+   "text": "Applicable statutory derogations or exceptions; and"
+  },
+  {
+   "t": "li",
+   "text": "Other legally recognized transfer mechanisms."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar processes Personal Data on behalf of a customer, international transfer arrangements may additionally be governed by the applicable customer agreement, DPA and customer instructions."
+  },
+  {
+   "t": "p",
+   "text": "Beskar may disclose Personal Data to governmental, regulatory, law enforcement or other public authorities where required or permitted by applicable law or valid legal process."
+  },
+  {
+   "t": "p",
+   "text": "Where legally permitted and appropriate, we will seek to limit such disclosure to Personal Data reasonably necessary to comply with the relevant lawful request."
+  },
+  {
+   "t": "h2",
+   "text": "15. DATA RETENTION"
+  },
+  {
+   "t": "p",
+   "text": "Beskar retains Personal Data only for as long as reasonably necessary for the purposes for which it was collected or otherwise processed, including to:"
+  },
+  {
+   "t": "li",
+   "text": "Provide and administer the Services;"
+  },
+  {
+   "t": "li",
+   "text": "Maintain customer, contractual and business relationships;"
+  },
+  {
+   "t": "li",
+   "text": "Comply with legal, regulatory, tax, accounting and reporting obligations;"
+  },
+  {
+   "t": "li",
+   "text": "Maintain security and business records;"
+  },
+  {
+   "t": "li",
+   "text": "Prevent fraud and abuse;"
+  },
+  {
+   "t": "li",
+   "text": "Investigate incidents;"
+  },
+  {
+   "t": "li",
+   "text": "Establish, exercise or defend legal claims; and"
+  },
+  {
+   "t": "li",
+   "text": "Enforce contractual rights."
+  },
+  {
+   "t": "p",
+   "text": "Retention periods may vary based on the nature and sensitivity of the Personal Data, the purpose of processing, the relationship with the individual or customer, contractual commitments, customer instructions, applicable legal requirements, limitation periods, security requirements and legitimate business-record requirements."
+  },
+  {
+   "t": "p",
+   "text": "When Personal Data is no longer reasonably required, Beskar will take reasonable steps to delete, anonymize or securely dispose of it unless continued retention is required or permitted by applicable law."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar processes Customer Data on behalf of a customer, retention, return and deletion will generally be governed by the customer agreement, DPA and documented customer instructions, subject to applicable law."
+  },
+  {
+   "t": "h2",
+   "text": "16. YOUR PRIVACY RIGHTS"
+  },
+  {
+   "t": "p",
+   "text": "Depending on your jurisdiction, applicable law and Beskar's role in processing your Personal Data, you may have one or more privacy rights."
+  },
+  {
+   "t": "p",
+   "text": "These may include rights to:"
+  },
+  {
+   "t": "li",
+   "text": "Obtain information about processing;"
+  },
+  {
+   "t": "li",
+   "text": "Access Personal Data;"
+  },
+  {
+   "t": "li",
+   "text": "Obtain a copy of Personal Data;"
+  },
+  {
+   "t": "li",
+   "text": "Correct or update inaccurate information;"
+  },
+  {
+   "t": "li",
+   "text": "Request deletion or erasure;"
+  },
+  {
+   "t": "li",
+   "text": "Request restriction of processing;"
+  },
+  {
+   "t": "li",
+   "text": "Object to particular processing;"
+  },
+  {
+   "t": "li",
+   "text": "Withdraw consent;"
+  },
+  {
+   "t": "li",
+   "text": "Obtain Personal Data in a portable format;"
+  },
+  {
+   "t": "li",
+   "text": "Opt out of certain sales, sharing, targeted advertising or profiling;"
+  },
+  {
+   "t": "li",
+   "text": "Limit specified uses of sensitive Personal Data;"
+  },
+  {
+   "t": "li",
+   "text": "Obtain information regarding certain automated decision-making;"
+  },
+  {
+   "t": "li",
+   "text": "Appeal certain decisions concerning privacy requests;"
+  },
+  {
+   "t": "li",
+   "text": "Nominate or appoint another person to exercise rights where provided by law; and"
+  },
+  {
+   "t": "li",
+   "text": "Lodge a complaint with an applicable regulatory or supervisory authority."
+  },
+  {
+   "t": "p",
+   "text": "These rights are not absolute and may be subject to statutory conditions, exceptions, limitations and verification requirements."
+  },
+  {
+   "t": "h3",
+   "text": "16.1 Exercising Your Rights"
+  },
+  {
+   "t": "p",
+   "text": "To exercise an applicable privacy right, contact us using the details in the Contact Us section or use another privacy-request mechanism made available by Beskar."
+  },
+  {
+   "t": "p",
+   "text": "We may take reasonable steps to verify your identity and authority before fulfilling a request. Verification measures will depend on the nature of the request and sensitivity of the Personal Data involved."
+  },
+  {
+   "t": "p",
+   "text": "Where permitted by applicable law, you may authorize another person or agent to make a request on your behalf. We may require reasonable evidence of the agent's authority and verification of the identities or authority involved."
+  },
+  {
+   "t": "p",
+   "text": "We will respond to valid requests in accordance with the timelines and requirements prescribed by applicable law."
+  },
+  {
+   "t": "h3",
+   "text": "16.2 Customer-Controlled Data"
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar processes Personal Data solely on behalf of a customer, the customer may be the relevant controller, Data Fiduciary, business or other responsible entity."
+  },
+  {
+   "t": "p",
+   "text": "In such circumstances, you may need to submit your request directly to that customer. Beskar will assist the customer in responding where required by law or contract."
+  },
+  {
+   "t": "h2",
+   "text": "17. INDIA: DIGITAL PERSONAL DATA PROTECTION FRAMEWORK"
+  },
+  {
+   "t": "p",
+   "text": "Where the Digital Personal Data Protection Act, 2023 (“DPDP Act”), the Digital Personal Data Protection Rules, 2025 (“DPDP Rules”), or relevant provisions thereof apply to the processing of your Personal Data, you may have rights and protections available under Indian law, subject to the applicability and commencement of the relevant provisions."
+  },
+  {
+   "t": "p",
+   "text": "Depending on the circumstances and applicable provisions, these may include rights to:"
+  },
+  {
+   "t": "li",
+   "text": "Obtain prescribed information about Personal Data being processed;"
+  },
+  {
+   "t": "li",
+   "text": "Request correction of inaccurate or misleading Personal Data;"
+  },
+  {
+   "t": "li",
+   "text": "Request completion or updating of Personal Data;"
+  },
+  {
+   "t": "li",
+   "text": "Request erasure where applicable;"
+  },
+  {
+   "t": "li",
+   "text": "Withdraw consent where processing is based on consent;"
+  },
+  {
+   "t": "li",
+   "text": "Access applicable grievance-redressal mechanisms; and"
+  },
+  {
+   "t": "li",
+   "text": "Nominate another individual to exercise applicable rights in the circumstances provided by law."
+  },
+  {
+   "t": "p",
+   "text": "Where processing is based on consent, withdrawal of consent will be made reasonably accessible in accordance with applicable law. Withdrawal does not affect the lawfulness of processing undertaken before withdrawal."
+  },
+  {
+   "t": "p",
+   "text": "Beskar will provide notices and rights mechanisms as required under applicable Indian law."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar acts as a Data Processor on behalf of a customer acting as the Data Fiduciary, the customer may be primarily responsible for providing notices, establishing the applicable basis for processing and responding to Data Principal requests. Beskar will provide assistance as required under applicable law and contract."
+  },
+  {
+   "t": "p",
+   "text": "Individuals may also have access to grievance-redressal and regulatory mechanisms available under applicable Indian law."
+  },
+  {
+   "t": "h2",
+   "text": "18. EUROPEAN ECONOMIC AREA"
+  },
+  {
+   "t": "p",
+   "text": "Where the EU General Data Protection Regulation (“EU GDPR”) applies, individuals may have rights including the:"
+  },
+  {
+   "t": "li",
+   "text": "Right to be informed;"
+  },
+  {
+   "t": "li",
+   "text": "Right of access;"
+  },
+  {
+   "t": "li",
+   "text": "Right to rectification;"
+  },
+  {
+   "t": "li",
+   "text": "Right to erasure in circumstances provided by law;"
+  },
+  {
+   "t": "li",
+   "text": "Right to restriction of processing;"
+  },
+  {
+   "t": "li",
+   "text": "Right to data portability, where applicable;"
+  },
+  {
+   "t": "li",
+   "text": "Right to object to processing, including an absolute right to object to direct marketing;"
+  },
+  {
+   "t": "li",
+   "text": "Right to withdraw consent where processing is based on consent; and"
+  },
+  {
+   "t": "li",
+   "text": "Rights relating to certain automated decision-making and profiling."
+  },
+  {
+   "t": "p",
+   "text": "These rights are subject to the conditions and exceptions established under applicable law."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar acts as a processor on behalf of a customer, that customer may be the relevant controller and individuals may need to direct requests to the customer."
+  },
+  {
+   "t": "p",
+   "text": "Individuals may also lodge a complaint with a competent supervisory authority, including, as applicable, the authority in the country where they live or work or where they believe an infringement occurred."
+  },
+  {
+   "t": "h3",
+   "text": "18.1 International Transfers From the EEA"
+  },
+  {
+   "t": "p",
+   "text": "Personal Data subject to the EU GDPR may be transferred to, accessed from or processed in countries outside the EEA."
+  },
+  {
+   "t": "p",
+   "text": "Where Personal Data subject to the EU GDPR is transferred to a recipient outside the EEA and an applicable adequacy decision is unavailable, Beskar will use a legally recognized transfer mechanism where required."
+  },
+  {
+   "t": "p",
+   "text": "Such safeguards may include:"
+  },
+  {
+   "t": "li",
+   "text": "The European Commission's Standard Contractual Clauses (“SCCs”);"
+  },
+  {
+   "t": "li",
+   "text": "Binding Corporate Rules, where applicable;"
+  },
+  {
+   "t": "li",
+   "text": "An approved code of conduct or certification mechanism, where legally available;"
+  },
+  {
+   "t": "li",
+   "text": "Another legally recognized safeguard; or"
+  },
+  {
+   "t": "li",
+   "text": "A permitted derogation in circumstances provided by law."
+  },
+  {
+   "t": "p",
+   "text": "Where required, Beskar will undertake an appropriate transfer assessment and implement supplementary technical, contractual or organizational measures necessary for the relevant transfer."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar processes Personal Data on behalf of a customer, transfer arrangements may additionally be governed by the applicable DPA and customer instructions."
+  },
+  {
+   "t": "h2",
+   "text": "19. UNITED KINGDOM"
+  },
+  {
+   "t": "p",
+   "text": "Where the UK General Data Protection Regulation (“UK GDPR”) and Data Protection Act 2018 apply, individuals may have rights including the:"
+  },
+  {
+   "t": "li",
+   "text": "Right to be informed;"
+  },
+  {
+   "t": "li",
+   "text": "Right of access;"
+  },
+  {
+   "t": "li",
+   "text": "Right to rectification;"
+  },
+  {
+   "t": "li",
+   "text": "Right to erasure in circumstances provided by law;"
+  },
+  {
+   "t": "li",
+   "text": "Right to restriction of processing;"
+  },
+  {
+   "t": "li",
+   "text": "Right to object, including to direct marketing;"
+  },
+  {
+   "t": "li",
+   "text": "Right to data portability, where applicable;"
+  },
+  {
+   "t": "li",
+   "text": "Right to withdraw consent where processing is based on consent; and"
+  },
+  {
+   "t": "li",
+   "text": "Rights relating to certain automated decision-making and profiling."
+  },
+  {
+   "t": "p",
+   "text": "These rights are subject to applicable statutory conditions and exemptions."
+  },
+  {
+   "t": "p",
+   "text": "Individuals may lodge a complaint with the UK Information Commissioner's Office (“ICO”) or another competent supervisory authority where applicable."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar acts as a processor on behalf of a customer, that customer may be the relevant controller and requests may need to be directed to the customer."
+  },
+  {
+   "t": "h3",
+   "text": "19.1 International Transfers From the UK"
+  },
+  {
+   "t": "p",
+   "text": "Personal Data subject to UK data protection law may be transferred to, accessed from or processed in countries outside the UK."
+  },
+  {
+   "t": "p",
+   "text": "Where a transfer constitutes a restricted transfer under applicable UK data protection law, Beskar will use an applicable adequacy regulation, appropriate safeguard or other legally permitted transfer mechanism."
+  },
+  {
+   "t": "p",
+   "text": "Where required, safeguards may include:"
+  },
+  {
+   "t": "li",
+   "text": "The UK International Data Transfer Agreement (“IDTA”);"
+  },
+  {
+   "t": "li",
+   "text": "The International Data Transfer Addendum to the EU Standard Contractual Clauses (“UK Addendum”);"
+  },
+  {
+   "t": "li",
+   "text": "UK Binding Corporate Rules, where applicable;"
+  },
+  {
+   "t": "li",
+   "text": "Another legally recognized safeguard or mechanism; or"
+  },
+  {
+   "t": "li",
+   "text": "A permitted statutory exception."
+  },
+  {
+   "t": "p",
+   "text": "Where required, Beskar will complete the applicable transfer risk assessment and implement additional technical, contractual or organizational measures where necessary."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar processes Personal Data on behalf of a customer, international transfer requirements may additionally be governed by the applicable customer agreement, DPA and transfer mechanism."
+  },
+  {
+   "t": "h2",
+   "text": "20. CALIFORNIA PRIVACY RIGHTS"
+  },
+  {
+   "t": "p",
+   "text": "This section applies only to the extent Beskar is subject to the California Consumer Privacy Act, as amended by the California Privacy Rights Act (“CCPA/CPRA”), and the relevant Personal Information is within its scope."
+  },
+  {
+   "t": "h3",
+   "text": "20.1 California Consumer Rights"
+  },
+  {
+   "t": "p",
+   "text": "Subject to applicable conditions and exceptions, California residents may have the:"
+  },
+  {
+   "t": "li",
+   "text": "The categories and, where applicable, specific pieces of Personal Information collected about them and certain information regarding its collection, use and disclosure;",
+   "lead": "Right to Know:"
+  },
+  {
+   "t": "li",
+   "text": "Personal Information, subject to applicable exceptions;",
+   "lead": "Right to Delete:"
+  },
+  {
+   "t": "li",
+   "text": "Inaccurate Personal Information;",
+   "lead": "Right to Correct:"
+  },
+  {
+   "t": "li",
+   "text": "Of sale or sharing where Beskar engages in activities constituting a sale or sharing under the CCPA/CPRA;",
+   "lead": "Right to Opt Out:"
+  },
+  {
+   "t": "li",
+   "text": "Use and disclosure of Sensitive Personal Information where the statutory right applies;",
+   "lead": "Right to Limit:"
+  },
+  {
+   "t": "li",
+   "text": "For exercising rights under applicable California privacy law; and",
+   "lead": "Right to Non-Discrimination:"
+  },
+  {
+   "t": "li",
+   "text": "Rights relating to certain uses of automated decision-making technology, where and to the extent applicable under California law."
+  },
+  {
+   "t": "p",
+   "text": "Where applicable, Beskar will also process legally recognized opt-out preference signals in accordance with applicable California requirements."
+  },
+  {
+   "t": "h3",
+   "text": "20.2 Categories of Personal Information"
+  },
+  {
+   "t": "p",
+   "text": "Depending on the Services used and the nature of your interaction with Beskar, categories of Personal Information that may be processed include:"
+  },
+  {
+   "t": "table",
+   "rows": [
+    [
+     "Category",
+     "Examples",
+     "Principal purposes"
+    ],
+    [
+     "Identifiers",
+     "Name, email address, account identifier, online identifier, IP address",
+     "Account administration, authentication, communications, security and Service delivery"
+    ],
+    [
+     "Customer or commercial information",
+     "Organization, subscription information, transaction and billing information",
+     "Service delivery, billing, customer support and business administration"
+    ],
+    [
+     "Internet or electronic network activity",
+     "Browser information, device information, logs and interactions with websites or Services",
+     "Security, analytics, monitoring, troubleshooting and Service improvement"
+    ],
+    [
+     "Geolocation information",
+     "Approximate location derived from IP address or similar information, where collected",
+     "Security, analytics and Service functionality"
+    ],
+    [
+     "Professional or employment-related information",
+     "Job title, organization, employment history and recruitment information",
+     "Customer relationships, recruitment and business administration"
+    ],
+    [
+     "Inferences",
+     "Preferences or other inferences derived from interactions or information, where applicable",
+     "Analytics, personalization and Service improvement"
+    ],
+    [
+     "Sensitive Personal Information",
+     "Account login credentials and other information falling within statutory sensitive-information categories, where collected",
+     "Authentication, security, account administration or other disclosed purposes"
+    ]
+   ]
+  },
+  {
+   "t": "p",
+   "text": "The actual categories collected will depend on the relevant Service, customer relationship and interaction with Beskar."
+  },
+  {
+   "t": "h3",
+   "text": "20.3 Sources"
+  },
+  {
+   "t": "p",
+   "text": "Sources may include you directly, Beskar customers, your organization, automatic collection through our websites and Services, service providers, business partners, authentication providers, recruitment sources and publicly available sources, where permitted."
+  },
+  {
+   "t": "h3",
+   "text": "20.4 Business and Commercial Purposes"
+  },
+  {
+   "t": "p",
+   "text": "We may process applicable Personal Information for the purposes described in this Policy, including providing and administering the Services, authentication, customer support, billing, cybersecurity and fraud prevention, analytics, debugging, research and Service improvement, business administration, marketing where permitted, recruitment, compliance with law and protection of rights and safety."
+  },
+  {
+   "t": "h3",
+   "text": "20.5 Categories of Recipients"
+  },
+  {
+   "t": "p",
+   "text": "Depending on the circumstances, Personal Information may be disclosed to categories of recipients including Beskar's Affiliates, service providers, sub processors, business partners, integration providers, professional advisers, parties to corporate transactions, and governmental or regulatory authorities where legally required or permitted."
+  },
+  {
+   "t": "h3",
+   "text": "20.6 Sale and Sharing"
+  },
+  {
+   "t": "p",
+   "text": "Beskar does not sell Personal Information for monetary consideration."
+  },
+  {
+   "t": "p",
+   "text": "If Beskar engages in an activity that constitutes a “sale” or “sharing” under applicable California law, Beskar will provide applicable disclosures and opt-out mechanisms required by law."
+  },
+  {
+   "t": "p",
+   "text": "Beskar will not knowingly sell or share Personal Information of consumers under the applicable age threshold without any authorization required by California law."
+  },
+  {
+   "t": "h3",
+   "text": "20.7 Sensitive Personal Information"
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar processes Sensitive Personal Information, we will use and disclose it in accordance with applicable California law."
+  },
+  {
+   "t": "p",
+   "text": "If Beskar uses or discloses Sensitive Personal Information for purposes that give rise to a statutory right to limit such processing, we will provide the legally required mechanism to exercise that right."
+  },
+  {
+   "t": "h3",
+   "text": "20.8 Authorized Agents and Verification"
+  },
+  {
+   "t": "p",
+   "text": "California residents may use an authorized agent where permitted by law."
+  },
+  {
+   "t": "p",
+   "text": "We may request evidence of the agent's authority and take reasonable steps to verify the identity or authority of the consumer and agent, subject to applicable law."
+  },
+  {
+   "t": "h3",
+   "text": "20.9 Non-Discrimination"
+  },
+  {
+   "t": "p",
+   "text": "Beskar will not discriminate against an individual for exercising rights available under applicable California privacy law."
+  },
+  {
+   "t": "p",
+   "text": "This does not prohibit legally permitted differences in prices, rates, levels of service or benefits that comply with applicable law."
+  },
+  {
+   "t": "h3",
+   "text": "20.10 Financial Incentives"
+  },
+  {
+   "t": "p",
+   "text": "If Beskar offers a financial-incentive, price-difference, loyalty, referral or similar programme that is subject to California privacy-law requirements, Beskar will provide any notice and information required by applicable law before or in connection with participation."
+  },
+  {
+   "t": "p",
+   "text": "Participation in any such programme will be voluntary where required by law."
+  },
+  {
+   "t": "h3",
+   "text": "20.11 California Shine the Light"
+  },
+  {
+   "t": "p",
+   "text": "To the extent California's “Shine the Light” law applies to Beskar, California residents may submit applicable requests concerning disclosures of Personal Information to third parties for those third parties' own direct-marketing purposes using the contact information provided below."
+  },
+  {
+   "t": "h2",
+   "text": "21. OTHER UNITED STATES STATE PRIVACY RIGHTS"
+  },
+  {
+   "t": "p",
+   "text": "Residents of US states with applicable comprehensive privacy laws may have additional rights depending on the state, applicable statutory thresholds and exemptions, the nature of the Personal Data and Beskar's role in processing it."
+  },
+  {
+   "t": "p",
+   "text": "These rights may include:"
+  },
+  {
+   "t": "li",
+   "text": "Confirming whether Personal Data is processed;"
+  },
+  {
+   "t": "li",
+   "text": "Accessing Personal Data;"
+  },
+  {
+   "t": "li",
+   "text": "Correcting Personal Data;"
+  },
+  {
+   "t": "li",
+   "text": "Deleting Personal Data;"
+  },
+  {
+   "t": "li",
+   "text": "Obtaining a portable copy;"
+  },
+  {
+   "t": "li",
+   "text": "Opting out of sale;"
+  },
+  {
+   "t": "li",
+   "text": "Opting out of targeted advertising;"
+  },
+  {
+   "t": "li",
+   "text": "Opting out of specified profiling or automated-decision activities;"
+  },
+  {
+   "t": "li",
+   "text": "Limiting or providing consent for processing Sensitive Personal Data;"
+  },
+  {
+   "t": "li",
+   "text": "Withdrawing consent;"
+  },
+  {
+   "t": "li",
+   "text": "Appealing denial of a privacy request; and"
+  },
+  {
+   "t": "li",
+   "text": "Exercising rights without unlawful discrimination."
+  },
+  {
+   "t": "p",
+   "text": "Where applicable state law provides a right to appeal a decision concerning a privacy request, Beskar will provide an appropriate appeal mechanism."
+  },
+  {
+   "t": "p",
+   "text": "Where a legally recognized universal opt-out mechanism is required to be honored, Beskar will do so in accordance with applicable law."
+  },
+  {
+   "t": "p",
+   "text": "Beskar will provide state-specific disclosures or mechanisms where required."
+  },
+  {
+   "t": "h3",
+   "text": "21.1 Nevada"
+  },
+  {
+   "t": "p",
+   "text": "To the extent applicable, Nevada residents may have the right to opt out of the sale of certain covered information under Nevada law."
+  },
+  {
+   "t": "p",
+   "text": "Beskar does not sell Personal Data for monetary consideration. If Nevada law provides an applicable opt-out right concerning a Beskar processing activity, the request may be submitted through the contact information below."
+  },
+  {
+   "t": "h2",
+   "text": "22. AUTOMATED DECISION-MAKING AND ARTIFICIAL INTELLIGENCE"
+  },
+  {
+   "t": "p",
+   "text": "Beskar provides technology platforms and Services that may incorporate automated, AI-assisted or other algorithmic functionality, including functionality supporting security assessments, vulnerability identification, compliance management, cloud security posture management and data privacy operations."
+  },
+  {
+   "t": "p",
+   "text": "The role of Beskar in relation to Personal Data processed through such functionality depends on the relevant Service, customer configuration and processing context."
+  },
+  {
+   "t": "p",
+   "text": "Where customers use Beskar Services to process Personal Data, including through automated or AI-enabled functionality, Beskar may process such information on behalf of the customer in accordance with the customer's instructions and applicable agreements."
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar itself uses automated processing involving Personal Data and applicable law imposes specific transparency, assessment, consent, access, opt-out or other requirements, Beskar will take steps required by that law."
+  },
+  {
+   "t": "p",
+   "text": "Beskar does not represent through this Policy that all AI-enabled functionality constitutes automated decision-making producing legal or similarly significant effects."
+  },
+  {
+   "t": "p",
+   "text": "Whether such requirements apply depends on the specific use case, purpose and applicable law."
+  },
+  {
+   "t": "p",
+   "text": "Where applicable law provides rights concerning automated decision-making or profiling, individuals may exercise those rights using the mechanisms described in this Policy."
+  },
+  {
+   "t": "h2",
+   "text": "23. RECRUITMENT AND EMPLOYMENT-RELATED PROCESSING"
+  },
+  {
+   "t": "p",
+   "text": "In addition to the information described elsewhere in this Policy, Beskar may process recruitment and employment-related Personal Data for:"
+  },
+  {
+   "t": "li",
+   "text": "Evaluating qualifications and suitability;"
+  },
+  {
+   "t": "li",
+   "text": "Communicating with candidates;"
+  },
+  {
+   "t": "li",
+   "text": "Conducting interviews and assessments;"
+  },
+  {
+   "t": "li",
+   "text": "Conducting background and reference checks where permitted;"
+  },
+  {
+   "t": "li",
+   "text": "Administering offers;"
+  },
+  {
+   "t": "li",
+   "text": "Onboarding;"
+  },
+  {
+   "t": "li",
+   "text": "Administering employment or contractor relationships;"
+  },
+  {
+   "t": "li",
+   "text": "Payroll and benefits;"
+  },
+  {
+   "t": "li",
+   "text": "Workforce management;"
+  },
+  {
+   "t": "li",
+   "text": "Maintaining personnel records;"
+  },
+  {
+   "t": "li",
+   "text": "Complying with employment, labor, immigration, tax and other legal requirements; and"
+  },
+  {
+   "t": "li",
+   "text": "Protecting Beskar's rights, systems, property, personnel and business."
+  },
+  {
+   "t": "p",
+   "text": "Depending on the jurisdiction, processing may be based on steps taken before entering into a contract, performance or administration of a contract, legal obligations, legitimate interests, consent where required, or another lawful basis."
+  },
+  {
+   "t": "p",
+   "text": "Special categories of Personal Data or Sensitive Personal Data will be processed only where permitted or required under applicable law and subject to any additional legal basis or safeguards required."
+  },
+  {
+   "t": "p",
+   "text": "Recruitment and employment information may be accessed by appropriately authorized personnel and relevant service providers supporting recruitment, HR, payroll, benefits, background verification, technology, legal, accounting, audit or other legitimate business functions."
+  },
+  {
+   "t": "h2",
+   "text": "24. OFFICE VISITORS AND PHYSICAL SECURITY"
+  },
+  {
+   "t": "p",
+   "text": "Beskar may process visitor Personal Data to:"
+  },
+  {
+   "t": "li",
+   "text": "Manage and authorize access to facilities;"
+  },
+  {
+   "t": "li",
+   "text": "Protect employees, visitors and property;"
+  },
+  {
+   "t": "li",
+   "text": "Maintain physical and information security;"
+  },
+  {
+   "t": "li",
+   "text": "Investigate security incidents;"
+  },
+  {
+   "t": "li",
+   "text": "Maintain appropriate visitor and security records; and"
+  },
+  {
+   "t": "li",
+   "text": "Comply with applicable legal or regulatory obligations."
+  },
+  {
+   "t": "p",
+   "text": "Visitor Personal Data may be accessible to authorized Beskar personnel, facility-management providers, security providers, technology providers, auditors and public authorities where required or permitted by law."
+  },
+  {
+   "t": "p",
+   "text": "CCTV or similar security monitoring, where used, will be operated subject to applicable law and relevant notices."
+  },
+  {
+   "t": "h2",
+   "text": "25. VENDORS AND BUSINESS PARTNERS"
+  },
+  {
+   "t": "p",
+   "text": "Beskar may process Personal Data relating to vendors, suppliers and business partners to:"
+  },
+  {
+   "t": "li",
+   "text": "Conduct onboarding and due diligence;"
+  },
+  {
+   "t": "li",
+   "text": "Evaluate and manage relationships;"
+  },
+  {
+   "t": "li",
+   "text": "Negotiate and administer agreements;"
+  },
+  {
+   "t": "li",
+   "text": "Issue and manage purchase orders;"
+  },
+  {
+   "t": "li",
+   "text": "Process invoices and payments;"
+  },
+  {
+   "t": "li",
+   "text": "Manage procurement;"
+  },
+  {
+   "t": "li",
+   "text": "Communicate with business contacts;"
+  },
+  {
+   "t": "li",
+   "text": "Conduct audits and compliance activities; and"
+  },
+  {
+   "t": "li",
+   "text": "Comply with legal, tax, accounting and regulatory obligations."
+  },
+  {
+   "t": "p",
+   "text": "Depending on the jurisdiction, applicable legal bases may include performance of a contract, steps before entering into a contract, legal obligations, legitimate interests, consent where required, or another permitted basis."
+  },
+  {
+   "t": "h2",
+   "text": "26. CHILDREN AND MINORS"
+  },
+  {
+   "t": "p",
+   "text": "The Services are primarily intended for businesses, organizations, professionals and other users authorized to enter into applicable business arrangements."
+  },
+  {
+   "t": "p",
+   "text": "Unless expressly stated otherwise for a particular Service, our Services are not directed to children."
+  },
+  {
+   "t": "p",
+   "text": "Beskar does not knowingly collect Personal Data directly from children for the purpose of independently offering the Services to them where such collection would violate applicable law."
+  },
+  {
+   "t": "p",
+   "text": "However, where Beskar processes Personal Data on behalf of a customer, the nature of the Customer Data is determined by that customer. Customers are responsible for ensuring that their collection and submission of Personal Data relating to children or minors complies with applicable law and the applicable agreement with Beskar."
+  },
+  {
+   "t": "p",
+   "text": "Where applicable law establishes an age threshold or additional requirements concerning children's Personal Data, Beskar will comply with the requirements applicable to its processing role."
+  },
+  {
+   "t": "p",
+   "text": "If you are a parent or legal guardian and believe a child has provided Personal Data directly to Beskar in circumstances not permitted by applicable law, please contact us."
+  },
+  {
+   "t": "p",
+   "text": "If Beskar determines that Personal Data was collected in violation of applicable children's privacy law, we will take appropriate steps, which may include deletion, subject to applicable legal requirements."
+  },
+  {
+   "t": "h2",
+   "text": "27. INFORMATION YOU PROVIDE ABOUT OTHER INDIVIDUALS"
+  },
+  {
+   "t": "p",
+   "text": "Certain Services or business interactions may allow you to provide Personal Data relating to another individual."
+  },
+  {
+   "t": "p",
+   "text": "If you provide such information, you are responsible for ensuring that you have appropriate authority, permission or another lawful basis to provide that Personal Data to Beskar."
+  },
+  {
+   "t": "p",
+   "text": "You should not provide another person's Personal Data where doing so would violate applicable law or your obligations to that individual."
+  },
+  {
+   "t": "h2",
+   "text": "28. THIRD-PARTY WEBSITES, APPLICATIONS AND SERVICES"
+  },
+  {
+   "t": "p",
+   "text": "Our websites, Services or communications may contain links to third-party websites, applications, platforms or services. Third parties may also link to or reference Beskar."
+  },
+  {
+   "t": "p",
+   "text": "Third-party services not controlled by Beskar may have privacy practices, terms and security measures that differ from ours."
+  },
+  {
+   "t": "p",
+   "text": "Beskar is not responsible for the privacy practices or content of third-party services that we do not control. We encourage you to review the applicable privacy notice and terms before providing Personal Data to an independent third party."
+  },
+  {
+   "t": "p",
+   "text": "This section does not apply to a service provider or sub processor processing Personal Data on Beskar's behalf, whose processing is subject to applicable contractual and data protection requirements."
+  },
+  {
+   "t": "h2",
+   "text": "29. SUPERVISORY AND REGULATORY AUTHORITIES"
+  },
+  {
+   "t": "p",
+   "text": "Depending on your location and applicable law, you may have the right to lodge a complaint with a competent privacy, data protection or regulatory authority."
+  },
+  {
+   "t": "p",
+   "text": "For example:"
+  },
+  {
+   "t": "li",
+   "text": "Individuals in the EEA may contact the competent data protection supervisory authority;"
+  },
+  {
+   "t": "li",
+   "text": "Individuals in the UK may contact the ICO;"
+  },
+  {
+   "t": "li",
+   "text": "Individuals in India may have grievance and regulatory remedies available under applicable provisions of the DPDP framework as they come into force; and"
+  },
+  {
+   "t": "li",
+   "text": "US residents may have rights to contact applicable state privacy regulators or attorneys general, depending on applicable law."
+  },
+  {
+   "t": "p",
+   "text": "We encourage individuals to contact Beskar so that we have an opportunity to address the concern. However, contacting Beskar first is not intended to restrict any statutory right to contact an applicable regulatory authority."
+  },
+  {
+   "t": "h2",
+   "text": "30. ACCESSIBILITY"
+  },
+  {
+   "t": "p",
+   "text": "Beskar seeks to make this Privacy Policy reasonably accessible to individuals with disabilities and to use generally recognized accessibility practices for online content."
+  },
+  {
+   "t": "p",
+   "text": "If you experience difficulty accessing this Policy or require it in another reasonably available format, please contact us using the information below."
+  },
+  {
+   "t": "h2",
+   "text": "31. CHANGES TO THIS PRIVACY POLICY"
+  },
+  {
+   "t": "p",
+   "text": "Beskar may update this Policy from time to time to reflect changes in our Services, technologies, business practices, legal or regulatory requirements or other relevant circumstances."
+  },
+  {
+   "t": "p",
+   "text": "When we update the Policy, we will revise the “Last Updated” date."
+  },
+  {
+   "t": "p",
+   "text": "Where required by applicable law, we will provide additional notice of material changes through an appropriate method, which may include email, an in-product notice or a website notice."
+  },
+  {
+   "t": "p",
+   "text": "Where consent to a material change is required by applicable law, we will obtain such consent as required."
+  },
+  {
+   "t": "p",
+   "text": "We encourage you to review this Policy periodically."
+  },
+  {
+   "t": "h2",
+   "text": "32. CONTACT US"
+  },
+  {
+   "t": "p",
+   "text": "If you have questions about this Privacy Policy or Beskar's privacy practices, wish to exercise an applicable privacy right, or wish to make a privacy complaint, please contact:"
+  },
+  {
+   "t": "p",
+   "text": "Beskar Private Limited",
+   "lead": "Entity:"
+  },
+  {
+   "t": "p",
+   "text": "________________",
+   "lead": "Privacy Contact / Data Protection Officer, if appointed:"
+  },
+  {
+   "t": "p",
+   "text": "__________________",
+   "lead": "Email:"
+  },
+  {
+   "t": "p",
+   "text": "[●]",
+   "lead": "Registered Office:"
+  },
+  {
+   "t": "strong",
+   "text": "Website: www.beskarit.com"
+  },
+  {
+   "t": "p",
+   "text": "Where Beskar processes Personal Data on behalf of a customer, that customer may be the relevant controller, Data Fiduciary, business or equivalent entity. In such circumstances, you may need to direct your request to the relevant customer, and Beskar will provide reasonable assistance where required by applicable law or contract."
+  },
+  {
+   "t": "p",
+   "text": "Nothing in this Privacy Policy is intended to limit any rights available to an individual under applicable privacy or data protection law."
+  }
+ ]
+}

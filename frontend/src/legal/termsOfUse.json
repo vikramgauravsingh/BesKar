@@ -1,0 +1,310 @@
+{
+ "title": "Terms of Use",
+ "updated": "18 October 2026",
+ "blocks": [
+  {
+   "t": "h2",
+   "text": "1. INTRODUCTION"
+  },
+  {
+   "t": "p",
+   "text": "These Terms of Use (“Terms”) govern access to and use of the website operated by Beskar Private Limited (“Beskar”, “Company”, “we”, “us” or “our”), including its content, features, resources and information relating to its products and services (collectively, the “Website”)."
+  },
+  {
+   "t": "p",
+   "text": "By accessing or using the Website, you agree to be bound by these Terms. If you do not agree, you must discontinue use of the Website."
+  },
+  {
+   "t": "h2",
+   "text": "2. ELIGIBILITY"
+  },
+  {
+   "t": "p",
+   "text": "You represent that you are legally competent to accept these Terms under applicable law. If you access or use the Website on behalf of an organization, you represent that you are authorized to accept these Terms on its behalf."
+  },
+  {
+   "t": "h2",
+   "text": "3. WEBSITE CONTENT AND SERVICES"
+  },
+  {
+   "t": "p",
+   "text": "The Website provides information about Beskar's technology platforms and professional services relating to cybersecurity, information security, governance, risk and compliance, vulnerability assessment, penetration testing, cloud security posture management, threat intelligence, data privacy and related compliance solutions."
+  },
+  {
+   "t": "p",
+   "text": "Beskar may update, modify, suspend or discontinue any part of the Website or its content at any time without prior notice."
+  },
+  {
+   "t": "p",
+   "text": "Specific products, subscriptions, professional services and deliverables may be subject to separate agreements, Order Forms or Statements of Work. In the event of a conflict, the applicable executed agreement shall prevail in relation to the relevant products or services."
+  },
+  {
+   "t": "h2",
+   "text": "4. PERMITTED USE"
+  },
+  {
+   "t": "p",
+   "text": "You may access and use the Website for lawful purposes, including learning about Beskar's offerings, accessing publicly available resources and contacting Beskar regarding its products and services."
+  },
+  {
+   "t": "p",
+   "text": "You shall not:"
+  },
+  {
+   "t": "li",
+   "text": "a. use the Website in violation of any applicable law or regulation;"
+  },
+  {
+   "t": "li",
+   "text": "b. access or attempt to access any restricted area, account, system or information without authorization;"
+  },
+  {
+   "t": "li",
+   "text": "c. interfere with or disrupt the Website, its servers, networks or security mechanisms;"
+  },
+  {
+   "t": "li",
+   "text": "d. introduce malware, malicious code or other harmful material;"
+  },
+  {
+   "t": "li",
+   "text": "e. scrape, crawl, extract or systematically collect Website content or data through automated means without prior written permission, except as permitted by applicable law;"
+  },
+  {
+   "t": "li",
+   "text": "f. reverse engineer, decompile or attempt to derive the source code or underlying technology of any Website software, except to the extent such restriction is prohibited by law;"
+  },
+  {
+   "t": "li",
+   "text": "g. copy, reproduce, modify, distribute or commercially exploit Website content without authorization;"
+  },
+  {
+   "t": "li",
+   "text": "h. conduct vulnerability scans, penetration tests or other security assessments of the Website or its infrastructure without Beskar's prior written authorization; or"
+  },
+  {
+   "t": "li",
+   "text": "i. use the Website in any manner that could damage Beskar's reputation, systems or legitimate business interests."
+  },
+  {
+   "t": "h2",
+   "text": "5. INTELLECTUAL PROPERTY RIGHTS"
+  },
+  {
+   "t": "p",
+   "text": "All Intellectual Property Rights in the Website and its content, including text, graphics, designs, logos, trademarks, software, interfaces, documentation and other materials, are owned by or licensed to Beskar, except where otherwise indicated."
+  },
+  {
+   "t": "p",
+   "text": "Subject to these Terms, Beskar grants you a limited, revocable, non-exclusive, non-transferable license to access and use the Website for personal or internal business purposes."
+  },
+  {
+   "t": "p",
+   "text": "No ownership rights are transferred to you. You shall not use Beskar's name, trademarks, logos or other proprietary materials without prior written permission, except as permitted by law."
+  },
+  {
+   "t": "h2",
+   "text": "6. USER SUBMISSIONS AND COMMUNICATIONS"
+  },
+  {
+   "t": "p",
+   "text": "If you submit enquiries, feedback, suggestions, documents or other information through the Website, you represent that you are authorized to provide such information and that doing so does not violate any applicable law or third-party rights."
+  },
+  {
+   "t": "p",
+   "text": "You shall not submit unlawful, misleading, defamatory, infringing or malicious material."
+  },
+  {
+   "t": "p",
+   "text": "Beskar may use feedback and suggestions to improve its products and services, provided that such use does not disclose your Confidential Information or Personal Data in violation of applicable law or an applicable agreement."
+  },
+  {
+   "t": "p",
+   "text": "Submission of information through the Website does not, by itself, create a customer relationship, professional engagement, confidentiality obligation or other contractual relationship with Beskar."
+  },
+  {
+   "t": "p",
+   "text": "You should not submit sensitive Personal Data, passwords, access credentials, confidential business information or security vulnerabilities through general enquiry forms unless an appropriate secure channel has been expressly provided."
+  },
+  {
+   "t": "h2",
+   "text": "7. CYBERSECURITY AND COMPLIANCE INFORMATION"
+  },
+  {
+   "t": "p",
+   "text": "Information published on the Website concerning cybersecurity, vulnerability management, privacy, governance, risk, compliance frameworks and regulatory requirements is provided for general informational purposes only."
+  },
+  {
+   "t": "p",
+   "text": "Such information does not constitute legal advice, a formal audit opinion, certification, attestation or a guarantee of regulatory compliance or security."
+  },
+  {
+   "t": "p",
+   "text": "Security tools, assessments, reports and recommendations may be subject to technical limitations and may not identify every vulnerability, threat, control deficiency or compliance gap."
+  },
+  {
+   "t": "p",
+   "text": "Formal certifications, attestations, audit opinions and regulatory approvals, where applicable, remain subject to the requirements and independent determination of the relevant auditor, certification body or competent authority."
+  },
+  {
+   "t": "p",
+   "text": "You are responsible for independently evaluating the suitability of any information or recommendations for your specific circumstances."
+  },
+  {
+   "t": "h2",
+   "text": "8. THIRD-PARTY LINKS AND SERVICES"
+  },
+  {
+   "t": "p",
+   "text": "The Website may contain links to third-party websites, tools, resources or services for convenience or informational purposes."
+  },
+  {
+   "t": "p",
+   "text": "Beskar does not control and is not responsible for the content, availability, security, privacy practices or terms of third-party websites or services. Accessing such websites or services is at your own risk and subject to their applicable terms and policies."
+  },
+  {
+   "t": "h2",
+   "text": "9. PRIVACY AND PERSONAL DATA"
+  },
+  {
+   "t": "p",
+   "text": "Beskar may collect and process Personal Data when you access the Website, submit an enquiry, request a demonstration or otherwise interact with us."
+  },
+  {
+   "t": "p",
+   "text": "Such processing shall be governed by Beskar's Privacy Policy, available at https://www.beskarit.com/Privacy-Policy , and applicable data protection laws."
+  },
+  {
+   "t": "p",
+   "text": "You should review the Privacy Policy to understand how your Personal Data is collected, used, disclosed, stored and protected."
+  },
+  {
+   "t": "h2",
+   "text": "10. DISCLAIMERS"
+  },
+  {
+   "t": "p",
+   "text": "To the maximum extent permitted by applicable law, the Website and its content are provided on an “as is” and “as available” basis."
+  },
+  {
+   "t": "p",
+   "text": "Beskar does not warrant that:"
+  },
+  {
+   "t": "li",
+   "text": "a. the Website will always be available, uninterrupted, secure or error-free;"
+  },
+  {
+   "t": "li",
+   "text": "b. the information on the Website will always be accurate, complete, current or suitable for a particular purpose;"
+  },
+  {
+   "t": "li",
+   "text": "c. the Website will be free from viruses, malicious code or other harmful components; or"
+  },
+  {
+   "t": "li",
+   "text": "d. any product, tool, recommendation or information described on the Website will meet your specific requirements or achieve a particular outcome."
+  },
+  {
+   "t": "p",
+   "text": "Nothing in these Terms excludes any warranty or right that cannot lawfully be excluded under applicable law."
+  },
+  {
+   "t": "h2",
+   "text": "11. LIMITATION OF LIABILITY"
+  },
+  {
+   "t": "p",
+   "text": "To the maximum extent permitted by applicable law, Beskar shall not be liable for any indirect, incidental, special, consequential or punitive loss or damage, or any loss of profits, revenue, business opportunities, goodwill or data arising out of or relating to your access to or use of the Website."
+  },
+  {
+   "t": "p",
+   "text": "Beskar shall not be responsible for loss or damage resulting from reliance on Website content, unauthorized access caused by circumstances beyond its reasonable control, third-party websites or services, or interruptions in connectivity or infrastructure."
+  },
+  {
+   "t": "p",
+   "text": "Nothing in these Terms excludes or limits liability to the extent such exclusion or limitation is prohibited under applicable law."
+  },
+  {
+   "t": "h2",
+   "text": "12. INDEMNIFICATION"
+  },
+  {
+   "t": "p",
+   "text": "You agree to indemnify and hold harmless Beskar, its Affiliates, directors, officers and employees against third-party claims, losses, liabilities, damages and reasonable costs arising from your unlawful use of the Website, your breach of these Terms, or your infringement of third-party rights, except to the extent caused by Beskar's breach of law or willful misconduct."
+  },
+  {
+   "t": "h2",
+   "text": "13. SUSPENSION AND TERMINATION"
+  },
+  {
+   "t": "p",
+   "text": "Beskar may restrict, suspend or terminate your access to the Website where reasonably necessary to protect its systems, users, intellectual property or legitimate business interests, address a security risk, prevent misuse or comply with applicable law."
+  },
+  {
+   "t": "p",
+   "text": "Termination or suspension shall not affect rights or obligations that accrued before such action."
+  },
+  {
+   "t": "h2",
+   "text": "14. CHANGES TO THESE TERMS"
+  },
+  {
+   "t": "p",
+   "text": "Beskar may revise these Terms from time to time. Updated Terms shall be published on the Website with a revised “Last Updated” date."
+  },
+  {
+   "t": "p",
+   "text": "Your continued use of the Website after the updated Terms are published constitutes acceptance of the revised Terms, to the extent permitted by applicable law."
+  },
+  {
+   "t": "h2",
+   "text": "15. GOVERNING LAW AND JURISDICTION"
+  },
+  {
+   "t": "p",
+   "text": "These Terms shall be governed by and construed in accordance with the laws of India. The courts of competent jurisdiction at Bengaluru, Karnataka, India, shall have exclusive jurisdiction over disputes arising out of or relating to these Terms, subject to applicable law."
+  },
+  {
+   "t": "h2",
+   "text": "16. GENERAL PROVISIONS"
+  },
+  {
+   "t": "p",
+   "text": "If any provision of these Terms is held to be invalid or unenforceable, the remaining provisions shall continue in effect."
+  },
+  {
+   "t": "p",
+   "text": "Failure to enforce any provision shall not constitute a waiver of that provision."
+  },
+  {
+   "t": "p",
+   "text": "These Terms constitute the agreement between you and Beskar concerning your access to and use of the Website and do not supersede any separate written agreement governing Beskar's products or professional services."
+  },
+  {
+   "t": "p",
+   "text": "Beskar may assign its rights and obligations under these Terms in connection with a merger, restructuring or transfer of its business, subject to applicable law."
+  },
+  {
+   "t": "h2",
+   "text": "17. CONTACT US"
+  },
+  {
+   "t": "p",
+   "text": "For questions, concerns or requests relating to these Terms, please contact:"
+  },
+  {
+   "t": "strong",
+   "text": "Beskar Private Limited"
+  },
+  {
+   "t": "p",
+   "text": "Email: privacy@beskarit.com"
+  },
+  {
+   "t": "p",
+   "text": "Registered Office: #109, 3rd floor, 3rd main, 2nd cross Minhaj Nagar behind viva hospital Bangalore 560078"
+  }
+ ]
+}

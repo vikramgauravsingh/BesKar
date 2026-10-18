@@ -42,6 +42,9 @@ import WhyBeskar from './components/WhyBeskar';
 import WhatsNew from './components/WhatsNew';
 import BeskarConsentBanner from './components/BeskarConsentBanner';
 import SEO from './components/SEO';
+import LegalPage from './components/LegalPage';
+import privacyPolicy from './legal/privacyPolicy.json';
+import termsOfUse from './legal/termsOfUse.json';
 import productsGraph from './seo/productsSchema';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || '';
@@ -1411,7 +1414,7 @@ const Footer = ({ setCurrentPage }) => {
           </p>
           <div className="flex gap-6 text-sm">
             <a 
-              href="https://www.beskarit.com/Privacy-Policy"
+              href="/Privacy-Policy"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-600 hover:text-white transition-colors"
@@ -1420,7 +1423,7 @@ const Footer = ({ setCurrentPage }) => {
               Privacy Policy
             </a>
             <a 
-              href="https://www.beskarit.com/Terms-Of-Use"
+              href="/Terms-Of-Use"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-600 hover:text-white transition-colors"
@@ -1443,10 +1446,24 @@ const Footer = ({ setCurrentPage }) => {
   );
 };
 
+const LEGAL_URLS = { privacy: '/Privacy-Policy', terms: '/Terms-Of-Use' };
+const LEGAL_PATHS = { '/privacy-policy': 'privacy', '/terms-of-use': 'terms' };
+
 // Main App Component
 function App() {
   useSmoothScroll();
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setPage] = useState(() => LEGAL_PATHS[window.location.pathname.toLowerCase()] || 'home');
+  const setCurrentPage = (page) => {
+    const path = page === 'home' ? '/' : Object.keys(LEGAL_PATHS).find((k) => LEGAL_PATHS[k] === page);
+    if (window.location.pathname.toLowerCase() !== path) window.history.pushState({}, '', page === 'home' ? '/' : LEGAL_URLS[page]);
+    setPage(page);
+  };
+
+  useEffect(() => {
+    const onPop = () => setPage(LEGAL_PATHS[window.location.pathname.toLowerCase()] || 'home');
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
   const [showPortalPopup, setShowPortalPopup] = useState(false);
 
   // Auto-open portal popup on page load (with slight delay for better UX)
@@ -1454,7 +1471,7 @@ function App() {
     const timer = setTimeout(() => {
       // Check if user has already dismissed the popup in this session
       const hasSeenPopup = sessionStorage.getItem('portalPopupSeen');
-      if (!hasSeenPopup) {
+      if (!hasSeenPopup && !LEGAL_PATHS[window.location.pathname.toLowerCase()]) {
         setShowPortalPopup(true);
       }
     }, 1500);
@@ -1468,6 +1485,12 @@ function App() {
 
   const renderPage = () => {
     switch (currentPage) {
+      case 'privacy':
+        return <LegalPage doc={privacyPolicy} path="/Privacy-Policy" testId="privacy-policy-page" onBack={() => setCurrentPage('home')}
+          description="Beskar Private Limited Privacy Policy: how we collect, use, share and protect Personal Data under DPDP Act 2023, GDPR, UK GDPR, CCPA/CPRA and other laws." />;
+      case 'terms':
+        return <LegalPage doc={termsOfUse} path="/Terms-Of-Use" testId="terms-of-use-page" onBack={() => setCurrentPage('home')}
+          description="Terms of Use governing access to and use of the Beskar IT website operated by Beskar Private Limited." />;
       default:
         return (
           <>
