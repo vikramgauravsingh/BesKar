@@ -152,6 +152,16 @@ const BeskarConsentBanner = ({ userId, onConsent }) => {
             >
               Privacy Policy
             </a>
+            {' '}and{' '}
+            <a
+              href="https://www.beskarit.com/Terms-Of-Use"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="consent-terms-link"
+              style={{ color: '#ffffff', textDecoration: 'underline', fontWeight: 600 }}
+            >
+              Terms of Use
+            </a>
             .
           </p>
         </div>

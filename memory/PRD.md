@@ -84,3 +84,4 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - Removed built-in PrivacyPolicyPage/TermsOfServicePage + sitemap entries
 - Consent banner now links to Privacy Policy
 - Footer already has support@beskarit.com email + LinkedIn links
+- Consent banner also links Terms of Use
