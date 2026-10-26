@@ -1,0 +1,34 @@
+{
+  "summary": "Tested the Vercel cold-start hardening and ran preview regression. Simulated Vercel runtime (fresh uv venv /tmp/t314, Python 3.14.9, /app/frontend/requirements.txt, env -i VERCEL=1, TestClient without lifespan): (a) missing JWT_SECRET: import OK, /api/health 503 {missing_settings:[JWT_SECRET]}, login/admin/track 503 'Server is not fully configured yet' (5/5 passed); (b) unreachable MONGO_URL mongodb://10.255.255.1: import OK, health 503 database 'unreachable' in 8s, _setup_done stays False so it retries (3/3 passed); also mongodb+srv with a nonexistent host: import OK, health 503; (c) full env with ADMIN_EMAIL=Admin.Test@Example.com: health 200, login with uppercased email 200, /api/admin/stats Bearer 200 / no token 401, bad login 401, admin seeded in lowercase, scheduler not started, beskarit_vtest dropped (9/9 passed). ONE GAP FOUND: a malformed MONGO_URL (bad scheme, quotes or spaces pasted into Vercel, or a password containing an unescaped '@') raises pymongo InvalidURI when MongoClient() is built at import time. The function still crashes with FUNCTION_INVOCATION_FAILED. Preview: health 200 with the new shape; contact with no token or a bogus token gives 400 and a spam_blocks row ('Missing token' / 'Invalid token (...)'); track/visit 200 (4/4 passed). Login sets an HttpOnly Secure cookie; 6th bad login gives 429; bcrypt hash starts with $2b$. Admin UI: wrong password shows admin-login-error; login with mixed-case email opens admin-dashboard; the visitors, contacts and spam tabs render their table or list; the session survives a reload; logout works and stays logged out after a reload.",
+  "backend_issues": {
+    "critical": [
+      {"endpoint": "module import (server.py line 72 / frontend/api/index.py)", "issue": "MongoClient(os.environ.get('MONGO_URL')) is still built at import time. If MONGO_URL is malformed, it raises pymongo.errors.InvalidURI and the import crashes, so every /api route returns 500 FUNCTION_INVOCATION_FAILED, including /api/health. Reproduced on Python 3.14 with MONGO_URL='mongodb//localhost' and MONGO_URL='mongodb://user:p@ss@localhost:27017'. Common causes on Vercel: the value pasted with quotes or whitespace, or an Atlas password with special characters that is not URL-encoded. Fix: wrap client creation in try/except (or create it lazily), add 'MONGO_URL (invalid)' to MISSING_ENV/missing_settings so health reports it, and .strip() the value.", "priority": "HIGH"}
+    ],
+    "minor": [
+      {"endpoint": "all non-health /api routes when DB unreachable", "issue": "The middleware only returns 503 for missing env. If the DB is unreachable, ensure_setup fails (8s) and then the handler times out again (8s). The ServerSelectionTimeoutError is unhandled, so the user gets a 500 after about 16s, which may exceed the Vercel function timeout. Consider returning 503 'database unreachable' when ensure_setup fails, or adding a ServerSelectionTimeoutError/ConnectionFailure exception handler that returns 503."},
+      {"endpoint": "require_config middleware", "issue": "It is registered last with @app.middleware, so it is the outermost middleware. Its 503 responses skip CORSMiddleware and SecurityHeadersMiddleware, so they have no CORS or security headers, and OPTIONS preflights also get 503. This is harmless while frontend and API share an origin."},
+      {"endpoint": "ensure_setup", "issue": "Synchronous pymongo and bcrypt calls run inside an async middleware, so they block the event loop for up to 8s per request while the DB is down."},
+      {"endpoint": "tests", "issue": "These legacy tests are now stale because reCAPTCHA is configured in preview (they expect 200 or 'skipped' without a token) or they rely on seeded data that is gone: test_tracking_contact_admin.py::test_contact_with_visitor_snapshot, ::test_contact_without_visitor; test_stats_spam_retention.py::test_stats_structure, ::test_contacts_include_score, ::TestRecaptchaBlocks::test_unconfigured_skips. These are test issues, not app bugs. Running them leaves 'test@example.com' spam_blocks rows; I deleted the 4 they created."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/vercel_env_scenarios.py", "/app/backend/tests/test_contact_recaptcha_regression.py", "/app/backend/tests/vercel_runtime_check.py", "/app/test_reports/pytest/pytest_results_iter13_recaptcha.xml"],
+  "action_items": [
+    "HIGH: stop a malformed MONGO_URL from crashing the import. Guard the MongoClient construction with try/except InvalidURI/ConfigurationError, strip the value, and report it in /api/health missing_settings. Then copy server.py to frontend/api/index.py again.",
+    "Tell the user to check that MONGO_URL on Vercel has no quotes or spaces and that special characters in the password are URL-encoded. After redeploying, /api/health will show what is missing.",
+    "Optional: return 503 instead of a late 500 when the DB is unreachable on non-health routes.",
+    "Optional: update or skip the 5 stale legacy tests now that reCAPTCHA is configured in preview."
+  ],
+  "critical_code_review_comments": [
+    "Import-time MongoClient is the remaining single point of failure for FUNCTION_INVOCATION_FAILED. Every other env or DB failure mode now degrades to 503.",
+    "frontend/api/index.py is still a manual copy of backend/server.py (currently identical); they can drift apart.",
+    "@app.on_event('startup') is deprecated, and Vercel may not run it. The lazy ensure_setup in the middleware covers this correctly."
+  ],
+  "updated_files": ["/app/backend/tests/vercel_env_scenarios.py", "/app/backend/tests/test_contact_recaptcha_regression.py"],
+  "success_rate": {"backend": "Requested scenarios 17/17 passed; preview regression 4/4; 1 HIGH robustness gap found (malformed MONGO_URL)", "frontend": "100% (admin login, error, tabs, refresh, logout)"},
+  "seed_data_creation": "Temporary DB beskarit_vtest (dropped). Preview: test spam_blocks rows (test-recap-*@example.com, test@example.com), a lockout-test login_attempts row and TEST_ visitors were all deleted.",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Scenario runner: env -i VERCEL=1 DB_NAME=beskarit_vtest SUPPORT_EMAIL=s@example.com SENDER_EMAIL=n@example.com ADMIN_EMAIL=Admin.Test@Example.com ADMIN_PASSWORD=x JWT_SECRET=... MONGO_URL=... /tmp/t314/bin/python /app/backend/tests/vercel_env_scenarios.py <missing_jwt|bad_mongo|full>. Use MONGO_URL='mongodb//localhost' with bad_mongo to retest the InvalidURI crash.",
+  "rca of the issue": "Live 500 FUNCTION_INVOCATION_FAILED on every route means the import crashed. The new code handles missing env and an unreachable or nonexistent DB. A malformed MONGO_URL still crashes at import (pymongo validates the URI inside MongoClient.__init__). Mitigation: guard the client construction, then redeploy and check /api/health."
+}

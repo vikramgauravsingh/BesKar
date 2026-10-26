@@ -69,7 +69,13 @@ ADMIN_EMAIL = (os.environ.get("ADMIN_EMAIL") or "").strip().lower()
 ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 CRON_SECRET = os.environ.get("CRON_SECRET")
 
-db = MongoClient(os.environ.get("MONGO_URL"), serverSelectionTimeoutMS=8000)[os.environ.get("DB_NAME") or "unconfigured"]
+try:
+    _mongo = MongoClient(os.environ.get("MONGO_URL"), serverSelectionTimeoutMS=8000)
+except Exception as e:
+    logger.error(f"MONGO_URL is invalid: {type(e).__name__}: {e}")
+    MISSING_ENV.append("MONGO_URL (invalid format)")
+    _mongo = MongoClient(connect=False, serverSelectionTimeoutMS=1000)
+db = _mongo[os.environ.get("DB_NAME") or "unconfigured"]
 contacts = db["contacts"]
 visitors = db["visitors"]
 geo_cache = db["geo_cache"]
@@ -287,7 +293,7 @@ def submit_contact(form: ContactForm, request: Request):
 @app.get("/api/health")
 def health_check():
     db_ok = False
-    if not {"MONGO_URL", "DB_NAME"} & set(MISSING_ENV):
+    if not any(m.split()[0] in ("MONGO_URL", "DB_NAME") for m in MISSING_ENV):
         try:
             db.command("ping")
             db_ok = True
