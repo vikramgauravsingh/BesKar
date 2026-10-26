@@ -70,12 +70,13 @@ ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 CRON_SECRET = os.environ.get("CRON_SECRET")
 
 try:
-    _mongo = MongoClient(os.environ.get("MONGO_URL"), serverSelectionTimeoutMS=8000)
+    _mongo = MongoClient((os.environ.get("MONGO_URL") or "").strip().strip("\"'") or None, serverSelectionTimeoutMS=8000)
 except Exception as e:
     logger.error(f"MONGO_URL is invalid: {type(e).__name__}: {e}")
-    MISSING_ENV.append("MONGO_URL (invalid format)")
+    if "MONGO_URL" not in MISSING_ENV:
+        MISSING_ENV.append("MONGO_URL (invalid format)")
     _mongo = MongoClient(connect=False, serverSelectionTimeoutMS=1000)
-db = _mongo[os.environ.get("DB_NAME") or "unconfigured"]
+db = _mongo[(os.environ.get("DB_NAME") or "unconfigured").strip().strip("\"'")]
 contacts = db["contacts"]
 visitors = db["visitors"]
 geo_cache = db["geo_cache"]

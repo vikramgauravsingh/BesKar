@@ -1,0 +1,32 @@
+{
+  "summary": "Retested the fix for a malformed MONGO_URL. Everything requested passed. Simulated Vercel runtime: /tmp/t314 venv, Python 3.14.9, env -i VERCEL=1, frontend/api/index.py (identical to backend/server.py). Eight malformed MONGO_URL values were tried: 'mongodb//localhost', 'http://localhost:27017', a value wrapped in quotes, a password with an unescaped '@', leading/trailing spaces, an empty string, 'mongodb+srv://user:pw@' and mongodb+srv with a port. For every one: import does not raise (about 0.4s), /api/health returns 503 with missing_settings containing 'MONGO_URL (invalid format)' and database 'unreachable' (no ping attempted), POST /api/contact returns JSON 503 'Server is not fully configured yet...', and login returns 503 (32/32 checks passed). With valid local Mongo (DB beskarit_vtest) and all required env: health 200 healthy; contact POST 200 {success:true, id, email_sent:false} because reCAPTCHA and Brevo are unset there; the row persisted; an invalid payload gives 422 JSON; beskarit_vtest dropped (5/5 passed). Frontend, with Playwright route mocks on /api/contact: a JSON 503 shows the server detail, a JSON 400 shows the server detail, and a non-JSON 500 shows the 'Unable to send message' fallback as expected (3/3 passed). Preview regression: /api/health 200 healthy; the reCAPTCHA regression pytest passed 4/4; a real UI contact submit returns 400 'We couldn't verify you're human', which is expected and acceptable because the reCAPTCHA badge shows 'Invalid domain' for the preview host; admin login (API 200 with HttpOnly Secure cookie, bcrypt $2b$) and admin UI dashboard work.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/health", "issue": "An empty MONGO_URL ('') is listed twice: missing_settings = ['MONGO_URL', 'MONGO_URL (invalid format)']. This is cosmetic."},
+      {"endpoint": "Mongo init", "issue": "The value is not stripped or unquoted before MongoClient(). A URL that is valid but has surrounding spaces or quotes (common when pasting into Vercel) is rejected as invalid instead of being auto-healed. Consider os.environ.get('MONGO_URL','').strip().strip('\"\\''). This is optional, since health now clearly reports the problem."},
+      {"endpoint": "require_config middleware", "issue": "Carried over from iteration 13: 503 responses bypass CORS and security headers, because this is the outermost middleware. A slow 500 is still possible when the DB is reachable at import but unreachable at request time."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [{"screen": "Home", "issues": ["The portal-preview-popup and consent banner overlay the contact form on first load. This is expected UX, but tests must dismiss them ('Continue to Website', 'Reject All') before clicking Send Message."]}]
+  },
+  "test_report_links": ["/app/backend/tests/vercel_malformed_mongo.py", "/app/backend/tests/vercel_valid_contact.py", "/app/backend/tests/vercel_env_scenarios.py", "/app/backend/tests/test_contact_recaptcha_regression.py", "/app/test_reports/pytest/pytest_results_iter14.xml"],
+  "action_items": [
+    "No blocking issues. To fix the live site, the user must redeploy on Vercel and then open https://www.beskarit.com/api/health. The missing_settings field will name anything wrong; if it shows 'MONGO_URL (invalid format)', remove quotes and spaces and URL-encode special characters in the Atlas password.",
+    "Optional: strip whitespace and quotes from MONGO_URL, and de-duplicate the empty-MONGO_URL entry in missing_settings."
+  ],
+  "critical_code_review_comments": [
+    "The InvalidURI/ConfigurationError guard works. The fallback MongoClient(connect=False) is never pinged, because health skips the ping when MONGO_URL is in MISSING_ENV and the middleware blocks other routes.",
+    "frontend/api/index.py is still a manual copy of server.py (currently identical), so the two can drift.",
+    "The ContactSection error handling is correct: JSON detail strings are shown, a 422 array detail shows the generic 'check the form' message, and non-JSON responses fall back to the email message."
+  ],
+  "updated_files": ["/app/backend/tests/vercel_malformed_mongo.py", "/app/backend/tests/vercel_valid_contact.py"],
+  "success_rate": {"backend": "100% (32/32 malformed-URI checks, 5/5 valid env, 4/4 preview regression)", "frontend": "100% (3/3 mocked error displays, real submit gives the expected 400 message, admin login OK)"},
+  "seed_data_creation": "Temporary DB beskarit_vtest (dropped). Deleted 1 preview spam_blocks row (uitest@example.com).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Malformed URI runner: env -i VERCEL=1 MONGO_URL='<bad>' DB_NAME=beskarit_vtest SUPPORT_EMAIL=s@example.com SENDER_EMAIL=n@example.com JWT_SECRET=... ADMIN_EMAIL=... ADMIN_PASSWORD=... /tmp/t314/bin/python /app/backend/tests/vercel_malformed_mongo.py. Valid run: the same env with MONGO_URL=mongodb://localhost:27017 and vercel_valid_contact.py (it drops the DB). In the UI, dismiss 'Continue to Website' and 'Reject All' before interacting with the contact form."
+}
