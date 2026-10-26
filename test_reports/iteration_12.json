@@ -1,0 +1,26 @@
+{
+  "summary": "Verified Vercel Python dependency fix. Fresh uv venvs on Python 3.14.9 and 3.12.15 install /app/frontend/requirements.txt with --only-binary pydantic-core,pymongo,bcrypt successfully (pydantic 2.12.5 / pydantic-core 2.41.5, fastapi 0.121.3, starlette 0.50.0, pymongo 4.15.5, bcrypt 4.3.0). Imported /app/frontend/api/index.py (identical to backend/server.py) with VERCEL=1 and dummy env; TestClient: 17/17 checks pass on both versions (health, track/visit, contact valid 200 / invalid email 422, login, admin stats/visitors/contacts/me 200 with Bearer & 401 without, bad login 401, cron/digest 401 without auth, scheduler not started under VERCEL, bcrypt $2b$). No startup crash. beskarit_vtest dropped. Preview regression: health 200, admin login 200 with httpOnly Secure cookie, admin endpoints 200/401, cron 401.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "startup", "issue": "FastAPI emits DeprecationWarning 'on_event is deprecated, use lifespan' (non-fatal on 3.12 and 3.14). Optional: migrate to lifespan."},
+      {"endpoint": "tests", "issue": "Existing regression tests test_stats_spam_retention.py::test_stats_structure and ::test_contacts_include_score fail because they depend on pre-seeded data (spam block test-bot@x.com, contact with recaptcha_score 0.9) that is no longer in the preview DB. Test-data issue, not an app bug. 32/34 others pass."}
+    ]
+  },
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": ["/app/backend/tests/vercel_runtime_check.py", "/app/test_reports/pytest/pytest_results_iter12.xml"],
+  "action_items": [
+    "Optional: replace @app.on_event('startup') with a lifespan handler to drop the deprecation warning",
+    "Optional: make test_stats_spam_retention.py seed its own spam block / scored contact so it does not rely on existing data"
+  ],
+  "critical_code_review_comments": [
+    "One run of uv pip install on 3.14 aborted (core dump) once; immediate retries (including --no-cache) succeeded. It looks like a transient local uv crash, not a dependency problem.",
+    "frontend/api/index.py is a manual copy of backend/server.py. The two can drift apart; consider a build step or symlink."
+  ],
+  "updated_files": ["/app/backend/tests/vercel_runtime_check.py"],
+  "success_rate": {"backend": "100% (Vercel runtime checks 17/17 on 3.14 and 3.12; preview regression all pass)", "frontend": "not tested"},
+  "seed_data_creation": "Temporary beskarit_vtest DB (dropped). One TEST contact and one track visit were made only in the temp DB.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Run: uv venv -p 3.14 /tmp/v && uv pip install -p /tmp/v/bin/python --only-binary pydantic-core,pymongo,bcrypt -r /app/frontend/requirements.txt && /tmp/v/bin/python /app/backend/tests/vercel_runtime_check.py (it sets dummy env, uses DB beskarit_vtest and drops it)."
+}

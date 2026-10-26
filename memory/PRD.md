@@ -99,3 +99,4 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - Switched to reCAPTCHA Enterprise (project beskar-osint): frontend enterprise.js + grecaptcha.enterprise.execute(action contact_submit); backend REST createAssessment with RECAPTCHA_API_KEY + RECAPTCHA_SITE_KEY + RECAPTCHA_PROJECT_ID (skipped if any missing)
 - Admin: /api/admin/stats + charts (countries, sources, sections), Spam check tab (accepted/blocked/avg/unscored + blocked attempts from spam_blocks), score badges per message
 - Retention: cleanup_old_data() 365d (visitors, geo_cache, spam_blocks; strips visitor/ip from old contacts) at startup, daily 9:00 IST job, and Vercel cron /api/cron/digest
+- Vercel build fix: frontend/requirements.txt upgraded (fastapi 0.121.3, pydantic 2.12.5, pymongo 4.15.5, bcrypt 4.3.0, python-dotenv 1.2.1) for Python 3.14 wheels; verified installs on 3.14 & 3.12 (iteration_12)
