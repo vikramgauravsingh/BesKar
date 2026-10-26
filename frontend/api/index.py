@@ -22,6 +22,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from user_agents import parse as parse_ua
 
 logging.basicConfig(level=logging.INFO)
+logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Beskar API")
@@ -56,6 +57,7 @@ RECAPTCHA_SITE_KEY = os.environ.get("RECAPTCHA_SITE_KEY")
 RECAPTCHA_PROJECT_ID = os.environ.get("RECAPTCHA_PROJECT_ID")
 RECAPTCHA_MIN_SCORE = float(os.environ.get("RECAPTCHA_MIN_SCORE", "0.5"))
 RECAPTCHA_HOSTNAMES = {h.strip() for h in os.environ.get("RECAPTCHA_HOSTNAMES", "").split(",") if h.strip()}
+RECAPTCHA_API_REFERER = f"https://{os.environ.get('RECAPTCHA_HOSTNAMES', 'www.beskarit.com').split(',')[0].strip()}/"
 JWT_SECRET = os.environ["JWT_SECRET"]
 ADMIN_EMAIL = os.environ["ADMIN_EMAIL"].lower()
 ADMIN_PASSWORD = os.environ["ADMIN_PASSWORD"]
@@ -230,7 +232,7 @@ def verify_recaptcha(token: Optional[str], ip: str, user_agent: str, who: dict) 
              "userAgent": user_agent, "userIpAddress": ip}
     try:
         r = httpx.post(f"https://recaptchaenterprise.googleapis.com/v1/projects/{RECAPTCHA_PROJECT_ID}/assessments",
-                       params={"key": RECAPTCHA_API_KEY}, json={"event": event}, timeout=5)
+                       headers={"X-Goog-Api-Key": RECAPTCHA_API_KEY, "Referer": RECAPTCHA_API_REFERER}, json={"event": event}, timeout=5)
     except httpx.HTTPError:
         raise HTTPException(status_code=503, detail="Spam check is temporarily unavailable. Please try again.")
     if r.status_code != 200:

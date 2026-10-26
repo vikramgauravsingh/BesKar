@@ -100,3 +100,4 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - Admin: /api/admin/stats + charts (countries, sources, sections), Spam check tab (accepted/blocked/avg/unscored + blocked attempts from spam_blocks), score badges per message
 - Retention: cleanup_old_data() 365d (visitors, geo_cache, spam_blocks; strips visitor/ip from old contacts) at startup, daily 9:00 IST job, and Vercel cron /api/cron/digest
 - Vercel build fix: frontend/requirements.txt upgraded (fastapi 0.121.3, pydantic 2.12.5, pymongo 4.15.5, bcrypt 4.3.0, python-dotenv 1.2.1) for Python 3.14 wheels; verified installs on 3.14 & 3.12 (iteration_12)
+- reCAPTCHA Enterprise: API key is HTTP-referrer restricted -> server sends Referer https://<first RECAPTCHA_HOSTNAMES>/ (www.beskarit.com); key via X-Goog-Api-Key header; httpx logging silenced. Preview domain not in site key allowlist (BROWSER_ERROR) - pending user
