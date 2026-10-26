@@ -16,6 +16,7 @@ import sib_api_v3_sdk
 from bson import ObjectId
 from fastapi import FastAPI, HTTPException, Request, Response, Depends, Header
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr, Field
 from pymongo import MongoClient, DESCENDING
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -48,8 +49,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-SUPPORT_EMAIL = os.environ["SUPPORT_EMAIL"]
-SENDER_EMAIL = os.environ["SENDER_EMAIL"]
+REQUIRED_ENV = ["MONGO_URL", "DB_NAME", "SUPPORT_EMAIL", "SENDER_EMAIL", "JWT_SECRET", "ADMIN_EMAIL", "ADMIN_PASSWORD"]
+MISSING_ENV = [k for k in REQUIRED_ENV if not os.environ.get(k)]
+if MISSING_ENV:
+    logger.error(f"Missing required environment variables: {', '.join(MISSING_ENV)}")
+
+SUPPORT_EMAIL = os.environ.get("SUPPORT_EMAIL")
+SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
 SENDER_NAME = os.environ.get("SENDER_NAME", "Beskar")
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
 RECAPTCHA_API_KEY = os.environ.get("RECAPTCHA_API_KEY")
@@ -58,12 +64,12 @@ RECAPTCHA_PROJECT_ID = os.environ.get("RECAPTCHA_PROJECT_ID")
 RECAPTCHA_MIN_SCORE = float(os.environ.get("RECAPTCHA_MIN_SCORE", "0.5"))
 RECAPTCHA_HOSTNAMES = {h.strip() for h in os.environ.get("RECAPTCHA_HOSTNAMES", "").split(",") if h.strip()}
 RECAPTCHA_API_REFERER = f"https://{os.environ.get('RECAPTCHA_HOSTNAMES', 'www.beskarit.com').split(',')[0].strip()}/"
-JWT_SECRET = os.environ["JWT_SECRET"]
-ADMIN_EMAIL = os.environ["ADMIN_EMAIL"].lower()
-ADMIN_PASSWORD = os.environ["ADMIN_PASSWORD"]
+JWT_SECRET = os.environ.get("JWT_SECRET")
+ADMIN_EMAIL = (os.environ.get("ADMIN_EMAIL") or "").strip().lower()
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 CRON_SECRET = os.environ.get("CRON_SECRET")
 
-db = MongoClient(os.environ["MONGO_URL"])[os.environ["DB_NAME"]]
+db = MongoClient(os.environ.get("MONGO_URL"), serverSelectionTimeoutMS=8000)[os.environ.get("DB_NAME") or "unconfigured"]
 contacts = db["contacts"]
 visitors = db["visitors"]
 geo_cache = db["geo_cache"]
@@ -280,7 +286,17 @@ def submit_contact(form: ContactForm, request: Request):
 
 @app.get("/api/health")
 def health_check():
-    return {"status": "healthy", "message": "This is the way"}
+    db_ok = False
+    if not {"MONGO_URL", "DB_NAME"} & set(MISSING_ENV):
+        try:
+            db.command("ping")
+            db_ok = True
+        except Exception as e:
+            logger.error(f"Database ping failed: {type(e).__name__}: {e}")
+    ok = db_ok and not MISSING_ENV
+    return JSONResponse(status_code=200 if ok else 503, content={
+        "status": "healthy" if ok else "misconfigured", "message": "This is the way",
+        "missing_settings": MISSING_ENV, "database": "connected" if db_ok else "unreachable"})
 
 
 @app.get("/api/support-email")
@@ -298,26 +314,47 @@ def check_pw(p: str, h: str) -> bool:
     return bcrypt.checkpw(p.encode(), h.encode())
 
 
+_setup_done = False
+
+
 def ensure_setup():
-    admins.create_index("email", unique=True)
-    login_attempts.create_index("identifier")
-    visitors.create_index("visitor_id", unique=True)
-    visitors.create_index([("last_seen", DESCENDING)])
-    contacts.create_index([("created_at", DESCENDING)])
-    spam_blocks.create_index([("created_at", DESCENDING)])
-    existing = admins.find_one({"email": ADMIN_EMAIL})
-    if not existing:
-        admins.insert_one({"email": ADMIN_EMAIL, "password_hash": hash_pw(ADMIN_PASSWORD), "role": "admin", "created_at": now_iso()})
-    elif not check_pw(ADMIN_PASSWORD, existing["password_hash"]):
-        admins.update_one({"email": ADMIN_EMAIL}, {"$set": {"password_hash": hash_pw(ADMIN_PASSWORD)}})
+    global _setup_done
+    if _setup_done or MISSING_ENV:
+        return
+    try:
+        admins.create_index("email", unique=True)
+        login_attempts.create_index("identifier")
+        visitors.create_index("visitor_id", unique=True)
+        visitors.create_index([("last_seen", DESCENDING)])
+        contacts.create_index([("created_at", DESCENDING)])
+        spam_blocks.create_index([("created_at", DESCENDING)])
+        existing = admins.find_one({"email": ADMIN_EMAIL})
+        if not existing:
+            admins.insert_one({"email": ADMIN_EMAIL, "password_hash": hash_pw(ADMIN_PASSWORD), "role": "admin", "created_at": now_iso()})
+        elif not check_pw(ADMIN_PASSWORD, existing["password_hash"]):
+            admins.update_one({"email": ADMIN_EMAIL}, {"$set": {"password_hash": hash_pw(ADMIN_PASSWORD)}})
+        _setup_done = True
+    except Exception as e:
+        logger.error(f"Setup failed (database unreachable?): {type(e).__name__}: {e}")
 
 
-ensure_setup()
+@app.middleware("http")
+async def require_config(request: Request, call_next):
+    path = request.url.path
+    if path.startswith("/api/") and path != "/api/health":
+        if MISSING_ENV:
+            return JSONResponse(status_code=503, content={"detail": "Server is not fully configured yet. Please try again later."})
+        ensure_setup()
+    return await call_next(request)
 
 
 @app.on_event("startup")
 def startup():
-    cleanup_old_data()
+    ensure_setup()
+    try:
+        cleanup_old_data()
+    except Exception as e:
+        logger.error(f"Cleanup failed: {e}")
     start_scheduler()
 
 
