@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /admin
 
 # Sitemap
 Sitemap: https://www.beskarit.com/sitemap.xml

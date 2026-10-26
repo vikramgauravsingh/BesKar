@@ -107,6 +107,7 @@ const BeskarConsentBanner = ({ userId, onConsent }) => {
       'beskar_consent_' + BANNER_ID,
       JSON.stringify({ accepted, rejected, version: VERSION, ts: Date.now() })
     );
+    window.dispatchEvent(new Event('beskar:consent-changed'));
     setVisible(false);
     setShowCustomize(false);
     onConsent?.({ accepted, rejected, retention: data.retention_info });
@@ -256,6 +257,11 @@ const BeskarConsentBanner = ({ userId, onConsent }) => {
                   <strong style={{ fontSize: 13 }}>{p.name}</strong>
                   <br />
                   <small style={{ color: '#888' }}>Retention: {p.retention_days} days</small>
+                  {!p.mandatory && (
+                    <small style={{ display: 'block', color: '#888' }}>
+                      Includes visitor analytics: approximate location, IP, browser, referral source, language and pages viewed
+                    </small>
+                  )}
                 </div>
                 <input
                   data-testid={`consent-toggle-${p.id}`}

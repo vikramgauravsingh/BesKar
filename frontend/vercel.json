@@ -4,11 +4,17 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "destination": "/api/index"
     },
     {
       "source": "/((?!api).*)",
       "destination": "/index.html"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron/digest",
+      "schedule": "30 3 * * *"
     }
   ]
 }

@@ -43,6 +43,9 @@ import WhatsNew from './components/WhatsNew';
 import BeskarConsentBanner from './components/BeskarConsentBanner';
 import SEO from './components/SEO';
 import LegalPage from './components/LegalPage';
+import AdminPage from './components/AdminPage';
+import { initTracking, trackPage, getVisitorId } from './lib/tracker';
+import { loadRecaptcha, getRecaptchaToken } from './lib/recaptcha';
 import privacyPolicy from './legal/privacyPolicy.json';
 import termsOfUse from './legal/termsOfUse.json';
 import productsGraph from './seo/productsSchema';
@@ -1160,16 +1163,19 @@ const ContactSection = () => {
   const [status, setStatus] = useState({ type: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  useEffect(() => { loadRecaptcha().catch(() => {}); }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus({ type: '', message: '' });
 
     try {
+      const recaptcha_token = await getRecaptchaToken();
       const response = await fetch(`${BACKEND_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formState)
+        body: JSON.stringify({ ...formState, recaptcha_token, visitor_id: getVisitorId() })
       });
 
       const data = await response.json();
@@ -1178,7 +1184,7 @@ const ContactSection = () => {
         setStatus({ type: 'success', message: data.message || `Thank you for reaching out. Our team at ${SUPPORT_EMAIL} will be in touch soon.` });
         setFormState({ name: '', email: '', company: '', message: '' });
       } else {
-        setStatus({ type: 'error', message: data.detail || 'Something went wrong. Please try again.' });
+        setStatus({ type: 'error', message: typeof data.detail === 'string' ? data.detail : 'Please check the form and try again.' });
       }
     } catch (error) {
       setStatus({ type: 'error', message: `Unable to send message. Please email us directly at ${SUPPORT_EMAIL}` });
@@ -1325,6 +1331,11 @@ const ContactSection = () => {
                 {isSubmitting ? 'Sending...' : 'Send Message'}
                 <Send className="w-5 h-5" />
               </button>
+              <p className="text-xs text-slate-600" data-testid="recaptcha-notice">
+                Protected by reCAPTCHA. Google's{' '}
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-400">Privacy Policy</a> and{' '}
+                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-400">Terms of Service</a> apply.
+              </p>
             </form>
           </motion.div>
         </div>
@@ -1450,7 +1461,7 @@ const LEGAL_URLS = { privacy: '/Privacy-Policy', terms: '/Terms-Of-Use' };
 const LEGAL_PATHS = { '/privacy-policy': 'privacy', '/terms-of-use': 'terms' };
 
 // Main App Component
-function App() {
+function MainSite() {
   useSmoothScroll();
   const [currentPage, setPage] = useState(() => LEGAL_PATHS[window.location.pathname.toLowerCase()] || 'home');
   const setCurrentPage = (page) => {
@@ -1458,6 +1469,13 @@ function App() {
     if (window.location.pathname.toLowerCase() !== path) window.history.pushState({}, '', page === 'home' ? '/' : LEGAL_URLS[page]);
     setPage(page);
   };
+
+  useEffect(() => initTracking(), []);
+  const firstRender = useRef(true);
+  useEffect(() => {
+    if (firstRender.current) { firstRender.current = false; return; }
+    trackPage();
+  }, [currentPage]);
 
   useEffect(() => {
     const onPop = () => setPage(LEGAL_PATHS[window.location.pathname.toLowerCase()] || 'home');
@@ -1529,6 +1547,18 @@ function App() {
       </div>
     </HelmetProvider>
   );
+}
+
+function App() {
+  if (window.location.pathname.toLowerCase().replace(/\/$/, '') === '/admin') {
+    return (
+      <HelmetProvider>
+        <SEO title="Admin | Beskar" description="Beskar admin" path="/admin" />
+        <div className="grain"><AdminPage /></div>
+      </HelmetProvider>
+    );
+  }
+  return <MainSite />;
 }
 
 export default App;
