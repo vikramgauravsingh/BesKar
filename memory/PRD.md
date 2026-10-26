@@ -96,3 +96,4 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - Contact messages store visitor snapshot; emails via Brevo to SUPPORT_EMAIL (BREVO_API_KEY not set yet)
 - /admin (JWT cookie + bearer) visitor log + contacts, "Email log now", daily digest (APScheduler in non-Vercel)
 - Backlog: CORS explicit origins; visitor data retention cleanup
+- Switched to reCAPTCHA Enterprise (project beskar-osint): frontend enterprise.js + grecaptcha.enterprise.execute(action contact_submit); backend REST createAssessment with RECAPTCHA_API_KEY + RECAPTCHA_SITE_KEY + RECAPTCHA_PROJECT_ID (skipped if any missing)

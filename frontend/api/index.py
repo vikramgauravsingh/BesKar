@@ -51,7 +51,9 @@ SUPPORT_EMAIL = os.environ["SUPPORT_EMAIL"]
 SENDER_EMAIL = os.environ["SENDER_EMAIL"]
 SENDER_NAME = os.environ.get("SENDER_NAME", "Beskar")
 BREVO_API_KEY = os.environ.get("BREVO_API_KEY")
-RECAPTCHA_SECRET_KEY = os.environ.get("RECAPTCHA_SECRET_KEY")
+RECAPTCHA_API_KEY = os.environ.get("RECAPTCHA_API_KEY")
+RECAPTCHA_SITE_KEY = os.environ.get("RECAPTCHA_SITE_KEY")
+RECAPTCHA_PROJECT_ID = os.environ.get("RECAPTCHA_PROJECT_ID")
 RECAPTCHA_MIN_SCORE = float(os.environ.get("RECAPTCHA_MIN_SCORE", "0.5"))
 RECAPTCHA_HOSTNAMES = {h.strip() for h in os.environ.get("RECAPTCHA_HOSTNAMES", "").split(",") if h.strip()}
 JWT_SECRET = os.environ["JWT_SECRET"]
@@ -212,23 +214,30 @@ class ContactForm(BaseModel):
     visitor_id: Optional[str] = Field(default=None, max_length=64)
 
 
-def verify_recaptcha(token: Optional[str], ip: str) -> Optional[float]:
-    if not RECAPTCHA_SECRET_KEY:
-        logger.warning("RECAPTCHA_SECRET_KEY not configured - spam check skipped")
+def verify_recaptcha(token: Optional[str], ip: str, user_agent: str) -> Optional[float]:
+    if not (RECAPTCHA_API_KEY and RECAPTCHA_SITE_KEY and RECAPTCHA_PROJECT_ID):
+        logger.warning("reCAPTCHA Enterprise not configured - spam check skipped")
         return None
     if not token:
         raise HTTPException(status_code=400, detail="We couldn't verify you're human. Please refresh and try again.")
+    event = {"token": token, "siteKey": RECAPTCHA_SITE_KEY, "expectedAction": "contact_submit",
+             "userAgent": user_agent, "userIpAddress": ip}
     try:
-        with httpx.Client(timeout=5) as c:
-            r = c.post("https://www.google.com/recaptcha/api/siteverify",
-                             data={"secret": RECAPTCHA_SECRET_KEY, "response": token, "remoteip": ip})
-            v = r.json()
-    except Exception:
+        r = httpx.post(f"https://recaptchaenterprise.googleapis.com/v1/projects/{RECAPTCHA_PROJECT_ID}/assessments",
+                       params={"key": RECAPTCHA_API_KEY}, json={"event": event}, timeout=5)
+    except httpx.HTTPError:
         raise HTTPException(status_code=503, detail="Spam check is temporarily unavailable. Please try again.")
-    score = float(v.get("score", -1))
-    host_ok = not RECAPTCHA_HOSTNAMES or v.get("hostname") in RECAPTCHA_HOSTNAMES
-    if not v.get("success") or v.get("action") != "contact_submit" or not host_ok or score < RECAPTCHA_MIN_SCORE:
-        logger.info(f"reCAPTCHA rejected: success={v.get('success')} score={score} host={v.get('hostname')} errors={v.get('error-codes')}")
+    if r.status_code != 200:
+        logger.error(f"reCAPTCHA Enterprise error {r.status_code}: {r.text[:300]}")
+        raise HTTPException(status_code=503, detail="Spam check is temporarily unavailable. Please try again.")
+    a = r.json()
+    props, risk = a.get("tokenProperties") or {}, a.get("riskAnalysis") or {}
+    score = risk.get("score")
+    host_ok = not RECAPTCHA_HOSTNAMES or (props.get("hostname") or "").lower() in RECAPTCHA_HOSTNAMES
+    if not props.get("valid") or props.get("action") != "contact_submit" or not host_ok \
+            or not isinstance(score, (int, float)) or score < RECAPTCHA_MIN_SCORE:
+        logger.info(f"reCAPTCHA rejected: valid={props.get('valid')} reason={props.get('invalidReason')} "
+                    f"action={props.get('action')} host={props.get('hostname')} score={score} reasons={risk.get('reasons')}")
         raise HTTPException(status_code=400, detail="We couldn't verify you're human. Please try again.")
     return score
 
@@ -236,7 +245,7 @@ def verify_recaptcha(token: Optional[str], ip: str) -> Optional[float]:
 @app.post("/api/contact")
 def submit_contact(form: ContactForm, request: Request):
     ip = client_ip(request)
-    score = verify_recaptcha(form.recaptcha_token, ip)
+    score = verify_recaptcha(form.recaptcha_token, ip, request.headers.get("user-agent", "")[:500])
     visitor = visitors.find_one({"visitor_id": form.visitor_id}, {"_id": 0}) if form.visitor_id else None
     doc = {"name": form.name, "email": form.email, "company": form.company, "message": form.message,
            "created_at": now_iso(), "client_ip": ip, "recaptcha_score": score,
