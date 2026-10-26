@@ -212,15 +212,15 @@ class ContactForm(BaseModel):
     visitor_id: Optional[str] = Field(default=None, max_length=64)
 
 
-async def verify_recaptcha(token: Optional[str], ip: str) -> Optional[float]:
+def verify_recaptcha(token: Optional[str], ip: str) -> Optional[float]:
     if not RECAPTCHA_SECRET_KEY:
         logger.warning("RECAPTCHA_SECRET_KEY not configured - spam check skipped")
         return None
     if not token:
         raise HTTPException(status_code=400, detail="We couldn't verify you're human. Please refresh and try again.")
     try:
-        async with httpx.AsyncClient(timeout=5) as c:
-            r = await c.post("https://www.google.com/recaptcha/api/siteverify",
+        with httpx.Client(timeout=5) as c:
+            r = c.post("https://www.google.com/recaptcha/api/siteverify",
                              data={"secret": RECAPTCHA_SECRET_KEY, "response": token, "remoteip": ip})
             v = r.json()
     except Exception:
@@ -234,9 +234,9 @@ async def verify_recaptcha(token: Optional[str], ip: str) -> Optional[float]:
 
 
 @app.post("/api/contact")
-async def submit_contact(form: ContactForm, request: Request):
+def submit_contact(form: ContactForm, request: Request):
     ip = client_ip(request)
-    score = await verify_recaptcha(form.recaptcha_token, ip)
+    score = verify_recaptcha(form.recaptcha_token, ip)
     visitor = visitors.find_one({"visitor_id": form.visitor_id}, {"_id": 0}) if form.visitor_id else None
     doc = {"name": form.name, "email": form.email, "company": form.company, "message": form.message,
            "created_at": now_iso(), "client_ip": ip, "recaptcha_score": score,
@@ -276,8 +276,7 @@ def check_pw(p: str, h: str) -> bool:
     return bcrypt.checkpw(p.encode(), h.encode())
 
 
-@app.on_event("startup")
-def startup():
+def ensure_setup():
     admins.create_index("email", unique=True)
     login_attempts.create_index("identifier")
     visitors.create_index("visitor_id", unique=True)
@@ -288,6 +287,13 @@ def startup():
         admins.insert_one({"email": ADMIN_EMAIL, "password_hash": hash_pw(ADMIN_PASSWORD), "role": "admin", "created_at": now_iso()})
     elif not check_pw(ADMIN_PASSWORD, existing["password_hash"]):
         admins.update_one({"email": ADMIN_EMAIL}, {"$set": {"password_hash": hash_pw(ADMIN_PASSWORD)}})
+
+
+ensure_setup()
+
+
+@app.on_event("startup")
+def startup():
     start_scheduler()
 
 
@@ -318,7 +324,9 @@ def login(body: LoginBody, request: Request, response: Response):
     email = body.email.lower()
     ident = f"{client_ip(request)}:{email}"
     att = login_attempts.find_one({"identifier": ident})
-    if att and att.get("count", 0) >= 5 and datetime.fromisoformat(att["last"]) > datetime.now(timezone.utc) - timedelta(minutes=15):
+    if att and datetime.fromisoformat(att["last"]) <= datetime.now(timezone.utc) - timedelta(minutes=15):
+        login_attempts.delete_one({"identifier": ident})
+    elif att and att.get("count", 0) >= 5:
         raise HTTPException(status_code=429, detail="Too many failed attempts. Try again in 15 minutes.")
     user = admins.find_one({"email": email})
     if not user or not check_pw(body.password, user["password_hash"]):

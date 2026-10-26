@@ -88,3 +88,11 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - Fix: /Privacy-Policy and /Terms-Of-Use now in-app pages (LegalPage.js + src/legal/*.json from uploaded docx); footer/banner links relative; vercel.json SPA rewrite handles deep links. Tested iteration_9 100%.
 - Rebrand: 'Beskar IT' -> 'Beskar' across site text, SEO meta, schema, sitemap (LinkedIn URL slug unchanged)
 - Privacy Policy section 32 contact details filled (DPO Ankita Jha, privacy@beskarit.com, Bangalore office)
+
+## Update (Oct 2026) - reCAPTCHA v3 + consent-gated visitor tracking + admin log
+- Production is on Vercel: frontend/api/index.py is a COPY of backend/server.py (re-copy after backend edits); vercel.json rewrites /api/* -> /api/index; Vercel cron 03:30 UTC (9:00 IST) -> /api/cron/digest
+- reCAPTCHA v3 (action contact_submit, min score 0.5, hostname allowlist); skipped if RECAPTCHA_SECRET_KEY missing
+- Tracking only when optional "Marketing" consent purpose accepted: cookies beskar_vid/src/lang/tz; visitors collection (IP, geo via ip-api.com, browser/OS/device, domain, source/referrer/utm, language, tz, pages, sections)
+- Contact messages store visitor snapshot; emails via Brevo to SUPPORT_EMAIL (BREVO_API_KEY not set yet)
+- /admin (JWT cookie + bearer) visitor log + contacts, "Email log now", daily digest (APScheduler in non-Vercel)
+- Backlog: CORS explicit origins; visitor data retention cleanup

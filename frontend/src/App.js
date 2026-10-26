@@ -1331,11 +1331,11 @@ const ContactSection = () => {
                 {isSubmitting ? 'Sending...' : 'Send Message'}
                 <Send className="w-5 h-5" />
               </button>
-              <p className="text-xs text-slate-600" data-testid="recaptcha-notice">
+              {process.env.REACT_APP_RECAPTCHA_SITE_KEY && <p className="text-xs text-slate-400" data-testid="recaptcha-notice">
                 Protected by reCAPTCHA. Google's{' '}
                 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-400">Privacy Policy</a> and{' '}
                 <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-slate-400">Terms of Service</a> apply.
-              </p>
+              </p>}
             </form>
           </motion.div>
         </div>

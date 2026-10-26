@@ -36,8 +36,13 @@ const ensureCookies = () => {
   return { vid, utm };
 };
 
+let lastTracked = null;
+
 export const trackPage = () => {
   if (!hasTrackingConsent()) return;
+  const here = window.location.pathname + window.location.hash;
+  if (lastTracked === here) return;
+  lastTracked = here;
   const { vid, utm } = ensureCookies();
   post('visit', {
     visitor_id: vid,
@@ -75,7 +80,7 @@ export const watchSections = () => {
         flushTimer = setTimeout(flushSections, 2000);
       }
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0, rootMargin: '-35% 0px -35% 0px' });
   const scan = () => document.querySelectorAll('section[id]').forEach((s) => observer.observe(s));
   scan();
   setTimeout(scan, 3000);
@@ -86,6 +91,7 @@ const stopTracking = () => {
   if (vid) fetch(`${API}/api/track/${encodeURIComponent(vid)}`, { method: 'DELETE' }).catch(() => {});
   COOKIES.forEach(clearCookie);
   observer?.disconnect();
+  lastTracked = null;
   observer = null;
   seen.clear();
 };

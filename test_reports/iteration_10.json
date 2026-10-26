@@ -1,0 +1,41 @@
+{
+  "summary": "Tested reCAPTCHA (keys missing, so the check is skipped), consent-gated visitor tracking, contact form with a visitor snapshot, and the /admin visitor log, on both backend and frontend. Backend: 17/17 pytest tests passed. Frontend: every requested flow passed. One functional gap: sections taller than about 2.5x the viewport are never recorded as viewed. On desktop this is 'products'. On mobile it is 'products', 'services' and 'compliance'. 'compliance' was also missing on desktop for an unknown reason. Before consent and after Reject All there were no beskar_* cookies and no /api/track calls. Accept All set beskar_vid/src/lang/tz, fired POST /track/visit and then POST /track/sections. Manage Preference with Marketing unchecked removed all 4 cookies, called DELETE /api/track/{vid}, and the record is gone from the DB. The contact form succeeded (contact-status message shown), recaptcha-notice is visible, and the stored contact has client_ip and a visitor snapshot (geo, browser, source, sections). Admin: no nav or banner on /admin; wrong password shows admin-login-error; 6 tries with a fake email gives 'Too many failed attempts'; correct login shows the dashboard with 2 visitor rows and the contacts tab with visitor details; the digest button shows 'Email service is not set up yet' (expected); the session survives a refresh; logout works and stays logged out after a reload. /Privacy-Policy (32 h2) and /Terms-Of-Use (17 h2) render.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "DELETE /api/track/{visitor_id}", "issue": "Anyone who knows a visitor_id can delete that record without auth. The risk is low because IDs are random UUIDs. Acceptable as a self-service 'forget me' endpoint."},
+      {"endpoint": "POST /api/auth/login", "issue": "The lockout counter never resets after the 15-minute window. Once the window passes, a single further failure (count 6+, last=now) locks the user out again. Reset count when the window has expired."},
+      {"endpoint": "POST /api/contact (async def)", "issue": "Uses sync pymongo and the sync Brevo SDK inside an async handler, which blocks the event loop. Make it a sync def, or run these calls in a threadpool."},
+      {"endpoint": "CORS", "issue": "CORS_ORIGINS is not set, so allow_origins='*' is used together with allow_credentials=True. Set explicit origins."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Section tracking (tracker.js watchSections)", "issue": "IntersectionObserver threshold 0.4 is measured against the section's own height. A section taller than viewport/0.4 (2700px on a 1080 desktop, about 2110px on an 844 mobile) can never reach 40% visible, so it is never recorded. Desktop: products (2824px) was never recorded, and compliance was also missing in a full scroll. Mobile: products (5294), services (3976) and compliance (3255) would never record. Fix: use threshold 0 plus a check such as entry.intersectionRect.height >= 0.4 * window.innerHeight || entry.intersectionRatio >= 0.4, or use rootMargin '-40% 0px -40% 0px'.", "affected_selectors": ["section#products", "section#services", "section#compliance"]},
+      {"flow": "Page view count (dev only)", "issue": "On a page load with consent already given, 3 POST /track/visit calls fired (page_views +3). Cause: React.StrictMode double-runs effects; initTracking's apply runs twice, and the firstRender useRef guard on the currentPage effect fails on StrictMode's second run. Production builds should send only 1, but the guard is fragile. Use a module-level 'last tracked path' check instead.", "affected_selectors": []}
+    ],
+    "design_issues": [
+      {"screen": "Contact form", "issues": ["The recaptcha-notice text (text-slate-600 on a dark background) has low contrast. It also says 'Protected by reCAPTCHA' while no site key is configured."]}
+    ]
+  },
+  "test_report_links": ["/app/backend/tests/test_tracking_contact_admin.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "Fix the section tracking threshold so tall sections (products/services/compliance) are recorded, especially on mobile",
+    "Make the page-view dedupe robust (module-level last-path guard) instead of the firstRender ref",
+    "Reset login_attempts count when the 15-minute lockout window has expired",
+    "Set explicit CORS_ORIGINS"
+  ],
+  "critical_code_review_comments": [
+    "When consent is revoked, the visitor record is deleted, but visitor snapshots already copied into contacts stay. Consider whether this is intended under DPDPA.",
+    "App.js is 1564 lines. Split it into section components.",
+    "beskar_lang may contain values like 'en-US@posix' from headless browsers. This is harmless."
+  ],
+  "updated_files": ["/app/backend/tests/test_tracking_contact_admin.py"],
+  "success_rate": {"backend": "100%", "frontend": "92%"},
+  "test_credentials": "Admin support@beskarit.com / zMJlbbYHynU4ATOF (from /app/memory/test_credentials.md). The real admin was never locked out.",
+  "seed_data_creation": "None. TEST_ contacts/visitors, test visitors and test_lockout login_attempts were cleaned up. The pre-existing contact 'Test a@b.com' was left as is.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Run pytest /app/backend/tests/test_tracking_contact_admin.py (it cleans up after itself). reCAPTCHA and Brevo keys are absent, so recaptcha_score is null and email_sent/sent are false; this is expected. The test pod's egress IP 136.108.30.124 geolocates to North Charleston, US. To retest after a section-tracking fix: accept cookies, scroll the full page at 390x844, and check that 'sections' in the visitors collection includes products/services/compliance."
+}
