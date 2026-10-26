@@ -49,8 +49,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-REQUIRED_ENV = ["MONGO_URL", "DB_NAME", "SUPPORT_EMAIL", "SENDER_EMAIL", "JWT_SECRET", "ADMIN_EMAIL", "ADMIN_PASSWORD"]
-MISSING_ENV = [k for k in REQUIRED_ENV if not os.environ.get(k)]
+MONGO_URL_VALUE = os.environ.get("beskar_MONGODB_URI") or os.environ.get("MONGODB_URI") or os.environ.get("MONGO_URL")
+REQUIRED_ENV = ["DB_NAME", "SUPPORT_EMAIL", "SENDER_EMAIL", "JWT_SECRET", "ADMIN_EMAIL", "ADMIN_PASSWORD"]
+MISSING_ENV = ([] if MONGO_URL_VALUE else ["MONGO_URL"]) + [k for k in REQUIRED_ENV if not os.environ.get(k)]
 if MISSING_ENV:
     logger.error(f"Missing required environment variables: {', '.join(MISSING_ENV)}")
 
@@ -70,7 +71,7 @@ ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD")
 CRON_SECRET = os.environ.get("CRON_SECRET")
 
 try:
-    _mongo = MongoClient((os.environ.get("MONGO_URL") or "").strip().strip("\"'") or None, serverSelectionTimeoutMS=8000)
+    _mongo = MongoClient((MONGO_URL_VALUE or "").strip().strip("\"'") or None, serverSelectionTimeoutMS=8000)
 except Exception as e:
     logger.error(f"MONGO_URL is invalid: {type(e).__name__}: {e}")
     if "MONGO_URL" not in MISSING_ENV:

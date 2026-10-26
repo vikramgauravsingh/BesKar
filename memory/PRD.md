@@ -102,3 +102,4 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - Vercel build fix: frontend/requirements.txt upgraded (fastapi 0.121.3, pydantic 2.12.5, pymongo 4.15.5, bcrypt 4.3.0, python-dotenv 1.2.1) for Python 3.14 wheels; verified installs on 3.14 & 3.12 (iteration_12)
 - reCAPTCHA Enterprise: API key is HTTP-referrer restricted -> server sends Referer https://<first RECAPTCHA_HOSTNAMES>/ (www.beskarit.com); key via X-Goog-Api-Key header; httpx logging silenced. Preview domain not in site key allowlist (BROWSER_ERROR) - pending user
 - Vercel hardening: no import-time crash; /api/health reports missing_settings + database; 503 JSON when misconfigured; MONGO_URL quotes/spaces stripped (iteration_13/14)
+- Mongo URL fallback order: beskar_MONGODB_URI (Vercel Atlas integration) > MONGODB_URI > MONGO_URL
