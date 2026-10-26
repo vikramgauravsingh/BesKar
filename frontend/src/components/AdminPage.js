@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Insights, SpamSummary, BlockedList, ScoreBadge } from './AdminInsights';
 
 const API = process.env.REACT_APP_BACKEND_URL || '';
 
@@ -80,13 +81,13 @@ const VisitorsTable = ({ items }) => (
   </div>
 );
 
-const ContactsList = ({ items }) => (
+const ContactsList = ({ items, min }) => (
   <div className="space-y-4" data-testid="admin-contacts-list">
     {items.map((c) => (
       <div key={c.id} className="border border-slate-800 p-5" data-testid={`admin-contact-${c.id}`}>
         <div className="flex flex-wrap justify-between gap-2">
           <div className="text-white font-semibold">{c.name} <span className="text-slate-500 font-normal">· {c.email}{c.company ? ` · ${c.company}` : ''}</span></div>
-          <div className="text-xs text-slate-500">{fmtDate(c.created_at)}{c.recaptcha_score != null && ` · reCAPTCHA ${c.recaptcha_score}`}</div>
+          <div className="flex items-center gap-3 text-xs text-slate-500">{fmtDate(c.created_at)}<ScoreBadge score={c.recaptcha_score} min={min} /></div>
         </div>
         <p className="mt-3 text-slate-400 whitespace-pre-wrap">{c.message}</p>
         <div className="mt-3 text-xs text-slate-500">
@@ -101,11 +102,11 @@ const ContactsList = ({ items }) => (
 
 const Dashboard = ({ admin, onLogout }) => {
   const [tab, setTab] = useState('visitors');
-  const [data, setData] = useState({ visitors: [], total: 0, contacts: [] });
+  const [data, setData] = useState({ visitors: [], total: 0, contacts: [], stats: null });
   const [note, setNote] = useState('');
   const load = async () => {
-    const [v, c] = await Promise.all([api('/admin/visitors'), api('/admin/contacts')]);
-    setData({ visitors: v.visitors, total: v.total, contacts: c.contacts });
+    const [v, c, st] = await Promise.all([api('/admin/visitors'), api('/admin/contacts'), api('/admin/stats')]);
+    setData({ visitors: v.visitors, total: v.total, contacts: c.contacts, stats: st });
   };
   useEffect(() => { load().catch(() => onLogout()); }, []);
   const sendDigest = async () => {
@@ -127,6 +128,7 @@ const Dashboard = ({ admin, onLogout }) => {
         <div>
           <h1 className="font-heading text-3xl font-bold text-white">Visitor Log</h1>
           <p className="text-slate-500 text-sm" data-testid="admin-summary">{data.total} visitors · {data.contacts.length} messages · signed in as {admin.email}</p>
+          {data.stats && <p className="text-slate-600 text-xs mt-1" data-testid="admin-retention-note">Visitor records are deleted automatically after {data.stats.retention_days} days of inactivity.</p>}
         </div>
         <div className="flex gap-3">
           <button onClick={() => load()} className="px-4 py-2 text-sm border border-slate-700 text-slate-300 hover:text-white" data-testid="admin-refresh-btn">Refresh</button>
@@ -135,8 +137,16 @@ const Dashboard = ({ admin, onLogout }) => {
         </div>
       </div>
       {note && <p className="mb-4 text-sm text-beskar-cyan" data-testid="admin-digest-note">{note}</p>}
-      <div className="flex gap-2 mb-6">{tabBtn('visitors', 'Visitors')}{tabBtn('contacts', 'Contact messages')}</div>
-      {tab === 'visitors' ? <VisitorsTable items={data.visitors} /> : <ContactsList items={data.contacts} />}
+      {data.stats && <Insights stats={data.stats} />}
+      <div className="flex flex-wrap gap-2 mb-6">{tabBtn('visitors', 'Visitors')}{tabBtn('contacts', 'Contact messages')}{tabBtn('spam', 'Spam check')}</div>
+      {tab === 'visitors' && <VisitorsTable items={data.visitors} />}
+      {tab === 'contacts' && <ContactsList items={data.contacts} min={data.stats?.spam.min_score ?? 0.5} />}
+      {tab === 'spam' && data.stats && (
+        <>
+          <SpamSummary spam={data.stats.spam} />
+          <BlockedList blocks={data.stats.spam.blocks} />
+        </>
+      )}
     </div>
   );
 };

@@ -66,6 +66,7 @@ contacts = db["contacts"]
 visitors = db["visitors"]
 geo_cache = db["geo_cache"]
 admins = db["admins"]
+spam_blocks = db["spam_blocks"]
 login_attempts = db["login_attempts"]
 
 
@@ -214,11 +215,16 @@ class ContactForm(BaseModel):
     visitor_id: Optional[str] = Field(default=None, max_length=64)
 
 
-def verify_recaptcha(token: Optional[str], ip: str, user_agent: str) -> Optional[float]:
+def record_block(who: dict, reason: str, score=None, hostname=None):
+    spam_blocks.insert_one({"created_at": now_iso(), "reason": reason, "score": score, "hostname": hostname, **who})
+
+
+def verify_recaptcha(token: Optional[str], ip: str, user_agent: str, who: dict) -> Optional[float]:
     if not (RECAPTCHA_API_KEY and RECAPTCHA_SITE_KEY and RECAPTCHA_PROJECT_ID):
         logger.warning("reCAPTCHA Enterprise not configured - spam check skipped")
         return None
     if not token:
+        record_block(who, "Missing token")
         raise HTTPException(status_code=400, detail="We couldn't verify you're human. Please refresh and try again.")
     event = {"token": token, "siteKey": RECAPTCHA_SITE_KEY, "expectedAction": "contact_submit",
              "userAgent": user_agent, "userIpAddress": ip}
@@ -238,6 +244,10 @@ def verify_recaptcha(token: Optional[str], ip: str, user_agent: str) -> Optional
             or not isinstance(score, (int, float)) or score < RECAPTCHA_MIN_SCORE:
         logger.info(f"reCAPTCHA rejected: valid={props.get('valid')} reason={props.get('invalidReason')} "
                     f"action={props.get('action')} host={props.get('hostname')} score={score} reasons={risk.get('reasons')}")
+        reason = (f"Invalid token ({props.get('invalidReason')})" if not props.get("valid")
+                  else f"Wrong action ({props.get('action')})" if props.get("action") != "contact_submit"
+                  else f"Wrong website ({props.get('hostname')})" if not host_ok else "Low score")
+        record_block(who, reason, score if isinstance(score, (int, float)) else None, props.get("hostname"))
         raise HTTPException(status_code=400, detail="We couldn't verify you're human. Please try again.")
     return score
 
@@ -245,7 +255,8 @@ def verify_recaptcha(token: Optional[str], ip: str, user_agent: str) -> Optional
 @app.post("/api/contact")
 def submit_contact(form: ContactForm, request: Request):
     ip = client_ip(request)
-    score = verify_recaptcha(form.recaptcha_token, ip, request.headers.get("user-agent", "")[:500])
+    score = verify_recaptcha(form.recaptcha_token, ip, request.headers.get("user-agent", "")[:500],
+                             {"ip": ip, "name": form.name, "email": form.email})
     visitor = visitors.find_one({"visitor_id": form.visitor_id}, {"_id": 0}) if form.visitor_id else None
     doc = {"name": form.name, "email": form.email, "company": form.company, "message": form.message,
            "created_at": now_iso(), "client_ip": ip, "recaptcha_score": score,
@@ -303,6 +314,7 @@ ensure_setup()
 
 @app.on_event("startup")
 def startup():
+    cleanup_old_data()
     start_scheduler()
 
 
@@ -376,6 +388,47 @@ def list_contacts(limit: int = 200, admin: dict = Depends(current_admin)):
     return {"contacts": items}
 
 
+@app.get("/api/admin/stats")
+def admin_stats(admin: dict = Depends(current_admin)):
+    def top(field, unwind=False, limit=8):
+        pipe = ([{"$unwind": f"${field}"}] if unwind else []) + [
+            {"$match": {field: {"$nin": [None, ""]}}},
+            {"$group": {"_id": f"${field}", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}}, {"$limit": limit}]
+        return [{"label": d["_id"], "count": d["count"]} for d in visitors.aggregate(pipe)]
+    scores = [c["recaptcha_score"] for c in contacts.find({"recaptcha_score": {"$ne": None}}, {"recaptcha_score": 1})]
+    blocks = list(spam_blocks.find({}, {"_id": 0}).sort("created_at", DESCENDING).limit(200))
+    return {
+        "countries": top("geo.country"), "sources": top("source"), "sections": top("sections", unwind=True, limit=10),
+        "spam": {"accepted": contacts.count_documents({}), "blocked": spam_blocks.count_documents({}),
+                 "avg_score": round(sum(scores) / len(scores), 2) if scores else None,
+                 "unscored": contacts.count_documents({"recaptcha_score": None}),
+                 "min_score": RECAPTCHA_MIN_SCORE, "blocks": blocks},
+        "retention_days": RETENTION_DAYS,
+    }
+
+
+RETENTION_DAYS = 365
+
+
+def cleanup_old_data() -> dict:
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=RETENTION_DAYS)).isoformat()
+    result = {
+        "visitors": visitors.delete_many({"last_seen": {"$lt": cutoff}}).deleted_count,
+        "geo_cache": geo_cache.delete_many({"at": {"$lt": cutoff}}).deleted_count,
+        "spam_blocks": spam_blocks.delete_many({"created_at": {"$lt": cutoff}}).deleted_count,
+        "contact_snapshots": contacts.update_many({"created_at": {"$lt": cutoff}, "visitor": {"$ne": None}},
+                                                  {"$set": {"visitor": None}}).modified_count,
+    }
+    logger.info(f"Retention cleanup: {result}")
+    return result
+
+
+def daily_job():
+    cleanup_old_data()
+    send_digest()
+
+
 def send_digest(hours: int = 24) -> dict:
     since = (datetime.now(timezone.utc) - timedelta(hours=hours)).isoformat()
     recent = list(visitors.find({"last_seen": {"$gte": since}}, {"_id": 0}).sort("last_seen", DESCENDING).limit(500))
@@ -396,7 +449,7 @@ def admin_send_digest(admin: dict = Depends(current_admin)):
 def cron_digest(authorization: str = Header(default="")):
     if not CRON_SECRET or not secrets.compare_digest(authorization, f"Bearer {CRON_SECRET}"):
         raise HTTPException(status_code=401, detail="Unauthorized")
-    return send_digest()
+    return {"cleanup": cleanup_old_data(), **send_digest()}
 
 
 _scheduler = None
@@ -408,5 +461,5 @@ def start_scheduler():
         return
     from apscheduler.schedulers.background import BackgroundScheduler
     _scheduler = BackgroundScheduler(timezone="Asia/Kolkata")
-    _scheduler.add_job(send_digest, "cron", hour=9, minute=0)
+    _scheduler.add_job(daily_job, "cron", hour=9, minute=0)
     _scheduler.start()
