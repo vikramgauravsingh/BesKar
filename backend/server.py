@@ -302,6 +302,7 @@ def ensure_setup():
     visitors.create_index("visitor_id", unique=True)
     visitors.create_index([("last_seen", DESCENDING)])
     contacts.create_index([("created_at", DESCENDING)])
+    spam_blocks.create_index([("created_at", DESCENDING)])
     existing = admins.find_one({"email": ADMIN_EMAIL})
     if not existing:
         admins.insert_one({"email": ADMIN_EMAIL, "password_hash": hash_pw(ADMIN_PASSWORD), "role": "admin", "created_at": now_iso()})
@@ -417,8 +418,8 @@ def cleanup_old_data() -> dict:
         "visitors": visitors.delete_many({"last_seen": {"$lt": cutoff}}).deleted_count,
         "geo_cache": geo_cache.delete_many({"at": {"$lt": cutoff}}).deleted_count,
         "spam_blocks": spam_blocks.delete_many({"created_at": {"$lt": cutoff}}).deleted_count,
-        "contact_snapshots": contacts.update_many({"created_at": {"$lt": cutoff}, "visitor": {"$ne": None}},
-                                                  {"$set": {"visitor": None}}).modified_count,
+        "contact_snapshots": contacts.update_many({"created_at": {"$lt": cutoff}, "$or": [{"visitor": {"$ne": None}}, {"client_ip": {"$ne": None}}]},
+                                                  {"$set": {"visitor": None, "visitor_id": None, "client_ip": None}}).modified_count,
     }
     logger.info(f"Retention cleanup: {result}")
     return result

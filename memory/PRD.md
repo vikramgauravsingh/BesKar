@@ -97,3 +97,5 @@ Update website with new features and offerings from GitHub README (Nexus-and-OSI
 - /admin (JWT cookie + bearer) visitor log + contacts, "Email log now", daily digest (APScheduler in non-Vercel)
 - Backlog: CORS explicit origins; visitor data retention cleanup
 - Switched to reCAPTCHA Enterprise (project beskar-osint): frontend enterprise.js + grecaptcha.enterprise.execute(action contact_submit); backend REST createAssessment with RECAPTCHA_API_KEY + RECAPTCHA_SITE_KEY + RECAPTCHA_PROJECT_ID (skipped if any missing)
+- Admin: /api/admin/stats + charts (countries, sources, sections), Spam check tab (accepted/blocked/avg/unscored + blocked attempts from spam_blocks), score badges per message
+- Retention: cleanup_old_data() 365d (visitors, geo_cache, spam_blocks; strips visitor/ip from old contacts) at startup, daily 9:00 IST job, and Vercel cron /api/cron/digest

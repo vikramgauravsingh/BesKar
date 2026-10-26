@@ -1,0 +1,21 @@
+{
+  "summary": "Tested the three new features: spam score view, visitor charts and the 365-day auto data cleanup, plus a regression run. Backend: 34/34 pytest passed (17 existing regression tests plus 17 new). The new tests cover /api/admin/stats (401 without auth, structure, counts match the DB, retention_days=365, min_score 0.5, no _id). They also cover verify_recaptcha/record_block, monkeypatched with a mocked httpx.post. Missing token, invalid token, low score, wrong host and wrong action each give a 400 and a spam_blocks row with the right reason, score and hostname. A good score passes with no row, and a Google error gives 503. The cleanup tests check the cron 401 and that GET /api/cron/digest returns a cleanup key. Records older than 365 days are deleted from visitors, geo_cache and spam_blocks, and old contacts get visitor=None, while recent rows are untouched. A direct cleanup_old_data() call was tested the same way, and daily_job was checked to call cleanup and then the digest. The startup cleanup shows in the backend log ('Retention cleanup: {...}'). Frontend: after login the admin-charts block shows all 3 charts (countries India 4, sources app.emergent.sh 4, sections 'No data yet.'). admin-retention-note shows the 365-day text. The contacts tab shows score badges: 0.9 green, 0.6 amber, 0.3 red, and 'Not checked' for null (checked with temporary seed contacts, removed afterwards). The spam tab shows stat-accepted, stat-blocked, stat-avg-score, stat-unscored and the blocked table with the TEST Bot row. On mobile (390px) there is no horizontal overflow on any tab (scrollWidth 390). Logout works and there were no page errors.",
+  "backend_issues": {"critical": [], "minor": [
+    {"endpoint": "cleanup_old_data", "issue": "Contacts older than 365 days keep client_ip and visitor_id (only the visitor snapshot is cleared). If the cookie banner promises that tracking data is deleted after 365 days, consider also unsetting client_ip and visitor_id."},
+    {"endpoint": "spam_blocks", "issue": "There is no index on created_at, which is used for sorting in stats and by cleanup. Low priority."}
+  ]},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": [
+    {"screen": "Admin charts", "issues": ["The Most-viewed sections chart shows 'No data yet.' because none of the current 4 visitors has any sections recorded. Section tracking itself was flagged in iteration_10 (tall sections are never recorded). This is not a bug in the chart."]},
+    {"screen": "ScoreBadge", "issues": ["score.toFixed(1) can round a score below the minimum up to the minimum, e.g. 0.45 shows as 'Spam score 0.5' in red. Consider toFixed(2). Minor."]}
+  ]},
+  "test_report_links": ["/app/backend/tests/test_stats_spam_retention.py", "/app/backend/tests/test_tracking_contact_admin.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": ["Optional: clear client_ip and visitor_id on contacts older than 365 days so retention fully matches the cookie banner", "Optional: show the badge score with 2 decimals"],
+  "critical_code_review_comments": ["record_block and verify_recaptcha are correct; Google 5xx and network errors return 503 and are not recorded as blocks, which is reasonable", "Startup (on_event), daily_job and cron_digest all call cleanup_old_data", "Comparing ISO strings works because now_iso always uses the same UTC +00:00 format"],
+  "updated_files": ["/app/backend/tests/test_stats_spam_retention.py"],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "Admin: support@beskarit.com / zMJlbbYHynU4ATOF (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "Test seed data (TEST_RET*, TEST_BADGE*, test_unit_* spam_blocks) was cleaned up. The 'TEST Score' contact and 'TEST Bot' block from the main agent remain.",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "test_stats_spam_retention.py imports server directly (sys.path /app/backend) to unit-test verify_recaptcha with monkeypatched keys and to call cleanup_old_data. Running the cron test deletes any TEST_RET rows older than 365 days."
+}

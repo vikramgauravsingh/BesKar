@@ -36,7 +36,7 @@ const Stat = ({ label, value, testId, tone = 'text-white' }) => (
 export const ScoreBadge = ({ score, min }) => {
   if (score == null) return <span className="px-2 py-0.5 text-xs border border-slate-700 text-slate-500" data-testid="score-badge">Not checked</span>;
   const tone = score >= 0.7 ? 'border-emerald-500 text-emerald-400' : score >= min ? 'border-amber-500 text-amber-400' : 'border-red-500 text-red-400';
-  return <span className={`px-2 py-0.5 text-xs border font-mono ${tone}`} data-testid="score-badge">Spam score {score.toFixed(1)}</span>;
+  return <span className={`px-2 py-0.5 text-xs border font-mono ${tone}`} data-testid="score-badge">Spam score {score.toFixed(2)}</span>;
 };
 
 export const SpamSummary = ({ spam }) => (
